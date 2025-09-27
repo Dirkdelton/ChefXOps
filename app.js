@@ -1780,19 +1780,9 @@ const NavLink = ({ icon, label, active, onClick }) => (
 
 const SidebarLogo = () => (
     <div className="flex items-center justify-center w-full h-12 my-2">
-        <svg width="48" height="48" viewBox="0 0 52 52" fill="none" xmlns="http://www.w3.org/2000/svg" className="rounded-lg">
-            <rect width="52" height="52" rx="10" fill="#0A0A0A"/>
-            <rect width="52" height="52" rx="10" stroke="#BFA15C" strokeOpacity="0.3" strokeWidth="1"/>
-            <path d="M26 9L37 20.5L26 32L15 20.5L26 9Z" stroke="#FBBF24" strokeWidth="2" strokeLinejoin="round"/>
-            <g transform="rotate(25 26 26)">
-                <rect x="10" y="24.5" width="32" height="3" rx="1.5" fill="#4B5563"/>
-                <path d="M42 26C42 24.6193 43.1193 23.5 44.5 23.5H47L42 18.5V33.5L47 28.5H44.5C43.1193 28.5 42 27.3807 42 26Z" fill="#E5E7EB"/>
-            </g>
-             <g transform="rotate(-25 26 26)">
-                <rect x="10" y="24.5" width="32" height="3" rx="1.5" fill="#4B5563" transform="scale(-1, 1) translate(-52, 0)"/>
-                <path d="M42 26C42 24.6193 43.1193 23.5 44.5 23.5H47L42 18.5V33.5L47 28.5H44.5C43.1193 28.5 42 27.3807 42 26Z" fill="#E5E7EB" transform="scale(-1, 1) translate(-52, 0)"/>
-            </g>
-        </svg>
+        <div className="w-12 h-12 rounded-lg bg-glossy-black border border-gold-30 flex items-center justify-center font-serif text-2xl font-bold text-gold">
+            CXO
+        </div>
     </div>
 );
 
