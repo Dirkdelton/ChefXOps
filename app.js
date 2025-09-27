@@ -786,7 +786,7 @@ const LeadDetailModal = ({ lead, onClose }) => {
                         </a>
                         <div className="space-x-2">
                             <button className="bg-heather-gray-20 text-heather-gray-light font-bold py-2 px-4 rounded-lg hover:bg-heather-gray/30 transition-colors text-sm">Log Interaction</button>
-                            <button className="bg-gold text-glossy-black font-bold py-2 px-4 rounded-lg shadow-glow-yellow hover:opacity-90 transition-opacity">Send Proposal</button>
+                            <button className="bg-gradient-gold-yellow text-glossy-black font-bold py-2 px-4 rounded-lg shadow-glow-yellow hover:opacity-90 transition-opacity">Send Proposal</button>
                         </div>
                     </div>
                 </div>
@@ -1009,7 +1009,7 @@ const Leads = ({ leads, onLeadsGenerated, showToast }) => {
                                 </select>
                             </div>
                         </div>
-                        <button onClick={handleGenerateLeads} disabled={isLoading || !isApiConfigured} className="w-full mt-6 bg-gradient-to-r from-gold to-bright-yellow text-glossy-black font-bold py-3 px-4 rounded-lg shadow-glow-yellow hover:opacity-90 transition-opacity disabled:opacity-50 disabled:cursor-not-allowed">
+                        <button onClick={handleGenerateLeads} disabled={isLoading || !isApiConfigured} className="w-full mt-6 bg-gradient-gold-yellow text-glossy-black font-bold py-3 px-4 rounded-lg shadow-glow-yellow hover:opacity-90 transition-opacity disabled:opacity-50 disabled:cursor-not-allowed">
                             {isLoading ? 'Generating...' : 'Generate Leads'}
                         </button>
                     </div>
@@ -1224,7 +1224,7 @@ const MenuGenerator = () => {
                 <input id="mg-cuisine" type="text" value={cuisine} onChange={e => setCuisine(e.target.value)} placeholder="e.g., Italian, Pacific Northwest" className="w-full bg-charcoal border border-white-10 rounded-md p-2 mt-1 text-white focus:outline-none focus:ring-2 ring-gold" />
             </div>
           </div>
-          <button onClick={handleGenerate} disabled={isLoading || !isApiConfigured} className="w-full mt-6 bg-gradient-to-r from-gold to-bright-yellow text-glossy-black font-bold py-3 px-4 rounded-lg shadow-glow-yellow hover:opacity-90 transition-opacity disabled:opacity-50">
+          <button onClick={handleGenerate} disabled={isLoading || !isApiConfigured} className="w-full mt-6 bg-gradient-gold-yellow text-glossy-black font-bold py-3 px-4 rounded-lg shadow-glow-yellow hover:opacity-90 transition-opacity disabled:opacity-50">
             {isLoading ? 'Generating...' : 'Generate Menu'}
           </button>
         </div>
@@ -1288,7 +1288,7 @@ const EventPlanner = () => {
                         <input type="number" name="guests" placeholder="Number of Guests" value={details.guests} onChange={handleInputChange} className="w-full bg-charcoal border border-white-10 rounded-md p-2 text-white focus:outline-none focus:ring-2 ring-gold" />
                         <textarea name="notes" placeholder="Additional Notes (e.g., allergies, theme ideas)" value={details.notes} onChange={handleInputChange} rows="4" className="w-full bg-charcoal border border-white-10 rounded-md p-2 text-white focus:outline-none focus:ring-2 ring-gold" />
                     </div>
-                    <button onClick={handleGenerate} disabled={isLoading || !isApiConfigured} className="w-full mt-6 bg-gradient-to-r from-gold to-bright-yellow text-glossy-black font-bold py-3 px-4 rounded-lg shadow-glow-yellow hover:opacity-90 transition-opacity disabled:opacity-50">
+                    <button onClick={handleGenerate} disabled={isLoading || !isApiConfigured} className="w-full mt-6 bg-gradient-gold-yellow text-glossy-black font-bold py-3 px-4 rounded-lg shadow-glow-yellow hover:opacity-90 transition-opacity disabled:opacity-50">
                         {isLoading ? 'Planning...' : 'Generate Plan'}
                     </button>
                 </div>
@@ -1711,7 +1711,7 @@ const SocialMedia = ({ showToast }) => {
                     <button 
                         onClick={handlePost} 
                         disabled={isPosting || selectedPlatforms.length === 0 || (!generatedText && !uploadedMedia && !generatedImage)}
-                        className="w-full mt-4 bg-gradient-to-r from-gold to-bright-yellow text-glossy-black font-bold py-3 px-4 rounded-lg shadow-glow-yellow hover:opacity-90 transition-opacity disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center"
+                        className="w-full mt-4 bg-gradient-gold-yellow text-glossy-black font-bold py-3 px-4 rounded-lg shadow-glow-yellow hover:opacity-90 transition-opacity disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center"
                     >
                         {isPosting ? (
                             <>
@@ -1750,7 +1750,7 @@ const NavLink = ({ icon, label, active, onClick }) => (
     onClick={onClick}
     className={`flex items-center w-full px-4 py-3 text-left transition-colors duration-200 rounded-lg ${
       active
-        ? 'bg-gradient-to-r from-gold-20 to-gold-5 text-gold font-semibold shadow-inner'
+        ? 'bg-gradient-active-link text-gold font-semibold shadow-inner'
         : 'text-heather-gray hover:bg-white-5 hover:text-white'
     }`}
   >
@@ -1879,7 +1879,7 @@ const Settings = ({ showToast }) => {
 
 
                 <div className="border-t border-white-10 pt-6">
-                    <button onClick={handleSave} className="w-full bg-gradient-to-r from-gold to-bright-yellow text-glossy-black font-bold py-3 px-4 rounded-lg shadow-glow-yellow hover:opacity-90 transition-opacity">
+                    <button onClick={handleSave} className="w-full bg-gradient-gold-yellow text-glossy-black font-bold py-3 px-4 rounded-lg shadow-glow-yellow hover:opacity-90 transition-opacity">
                         Save All Settings
                     </button>
                 </div>
@@ -1928,7 +1928,7 @@ const Profile = ({ onSave }) => {
                     </div>
                 </div>
                  <div className="border-t border-white-10 pt-6">
-                    <button onClick={handleSave} className="w-full bg-gradient-to-r from-gold to-bright-yellow text-glossy-black font-bold py-3 px-4 rounded-lg shadow-glow-yellow hover:opacity-90 transition-opacity">
+                    <button onClick={handleSave} className="w-full bg-gradient-gold-yellow text-glossy-black font-bold py-3 px-4 rounded-lg shadow-glow-yellow hover:opacity-90 transition-opacity">
                         Save Profile
                     </button>
                 </div>
