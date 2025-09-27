@@ -1378,6 +1378,17 @@ const ExportCenter = () => {
 // --- END: From components/ExportCenter.js ---
 
 // --- START: From components/Integrations.js ---
+const defaultIntegrations = {
+    facebook: false,
+    instagram: false,
+    twitter: false,
+    linkedin: false,
+    tiktok: false,
+    dropbox: false,
+    outlookCalendar: false,
+    googleCalendar: false,
+};
+
 const IntegrationCard = ({ icon, name, description, isConnected, onToggle }) => {
     return (
         <div className={`bg-charcoal p-6 rounded-lg border ${isConnected ? 'border-gold-50' : 'border-white-10'} transition-colors flex items-center justify-between`}>
@@ -1399,17 +1410,6 @@ const IntegrationCard = ({ icon, name, description, isConnected, onToggle }) => 
 };
 
 const Integrations = ({showToast}) => {
-    const defaultIntegrations = {
-        facebook: false,
-        instagram: false,
-        twitter: false,
-        linkedin: false,
-        tiktok: false,
-        dropbox: false,
-        outlookCalendar: false,
-        googleCalendar: false,
-    };
-
     const [integrations, setIntegrations] = useState(() => {
         try {
             const allIntegrations = Object.keys(defaultIntegrations).reduce((acc, key) => {
