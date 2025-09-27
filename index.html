@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ChefXOps - Culinary Intelligence Platform</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Playfair+Display:wght@700&family=Dancing+Script:wght@700&display=swap" rel="stylesheet">
+    
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            fontFamily: {
+              sans: ['Montserrat', 'sans-serif'],
+              serif: ['Playfair Display', 'serif'],
+              script: ['Dancing Script', 'cursive'],
+            },
+            colors: {
+              'glossy-black': '#0A0A0A',
+              'card-black': '#1A1A1A',
+              'charcoal': '#111214',
+              'gold': '#BFA15C',
+              'bright-yellow': '#FBBF24',
+              'heather-gray': {
+                DEFAULT: '#9CA3AF',
+                light: '#D1D5DB',
+                dark: '#6B7280',
+              },
+            },
+            boxShadow: {
+              'glow-gold': '0 0 15px 0 rgba(191, 161, 92, 0.3)',
+              'glow-yellow': '0 0 15px 0 rgba(251, 191, 36, 0.4)',
+            }
+          }
+        }
+      }
+    </script>
+    
+    <style>
+      body {
+        font-family: 'Montserrat', sans-serif;
+        background-color: #0A0A0A;
+        background-image: radial-gradient(circle at top left, rgba(26, 26, 26, 0.5) 0%, transparent 30%),
+                          radial-gradient(circle at bottom right, rgba(26, 26, 26, 0.5) 0%, transparent 40%);
+      }
+      ::-webkit-scrollbar { width: 8px; height: 8px; }
+      ::-webkit-scrollbar-track { background: #1A1A1A; }
+      ::-webkit-scrollbar-thumb { background-color: #6B7280; border-radius: 10px; border: 2px solid #1A1A1A; }
+      ::-webkit-scrollbar-thumb:hover { background-color: #BFA15C; }
+      ::selection { background: rgba(191, 161, 92, 0.3); }
+      .fade-in { animation: fadeIn 0.3s ease-in-out; }
+      @keyframes fadeIn { from { opacity: 0; transform: translateY(-10px); } to { opacity: 1; transform: translateY(0); } }
+      .toast-in { animation: toastIn 0.5s ease-in-out forwards; }
+      @keyframes toastIn { from { opacity: 0; transform: translateY(-20px) translateX(100%); } to { opacity: 1; transform: translateY(0) translateX(0); } }
+    </style>
+
+    <script type="importmap">
+{
+  "imports": {
+    "react": "https://esm.sh/react@18.3.1",
+    "react-dom/client": "https://esm.sh/react-dom@18.3.1/client",
+    "@google/genai": "https://cdn.jsdelivr.net/npm/@google/genai@0.15.0/dist/index.mjs",
+    "zod": "https://esm.sh/zod@3.23.8",
+    "recharts": "https://esm.sh/recharts@2.12.7",
+    "@babel/standalone": "https://esm.sh/@babel/standalone@7.24.8",
+    "react-dom/": "https://aistudiocdn.com/react-dom@^19.1.1/"
+  }
+}
+</script>
+  </head>
+  <body class="bg-charcoal leading-relaxed">
+    <div id="root"></div>
+    <script>
+      window.mapApiLoaded = new Promise((resolve, reject) => {
+          window.initMap = () => {
+              console.log("Google Maps API has been successfully loaded.");
+              resolve();
+          };
+          window.mapApiError = () => {
+              console.error("Google Maps script failed to load. This may be due to an invalid API key or network issues.");
+              reject(new Error("Google Maps script failed to load."));
+          };
+      });
+    </script>
+    <script type="module">
+      const root = document.getElementById('root');
+
+      function showBootError(error) {
+          console.error('Failed to load the application:', error);
+          root.innerHTML = `<div style="padding: 2rem; color: #f87171; font-family: sans-serif;">
+            <h1 style="font-size: 1.5rem; font-weight: bold;">Application failed to start</h1>
+            <pre style="margin-top: 1rem; padding: 1rem; background-color: #1f2937; border-radius: 0.5rem; color: #f9fafb; white-space: pre-wrap;">${error.stack || error}</pre>
+          </div>`;
+      }
+
+      function showUpdateNotification(message, isError = false) {
+          const notificationDiv = document.createElement('div');
+          const bgColor = isError ? '#7f1d1d' : '#047857';
+          const borderColor = isError ? '#f87171' : '#34d399';
+          notificationDiv.style.cssText = `position: fixed; top: 1rem; right: 1rem; background-color: ${bgColor}; color: white; padding: 1rem; border-radius: 0.5rem; z-index: 1000; border: 1px solid ${borderColor}; box-shadow: 0 10px 15px -3px rgba(0,0,0,0.1), 0 4px 6px -2px rgba(0,0,0,0.05);`;
+          notificationDiv.textContent = message;
+          document.body.appendChild(notificationDiv);
+          setTimeout(() => {
+              notificationDiv.remove();
+          }, 8000);
+      }
+
+      try {
+        const Babel = (await import('@babel/standalone')).default;
+        
+        const UPDATE_URL_KEY = 'chefxops_update_url';
+        const remoteUrl = localStorage.getItem(UPDATE_URL_KEY);
+        let sourceUrl = './app.js';
+        let fromRemote = false;
+
+        if (remoteUrl && remoteUrl.trim() !== '') {
+          try {
+            new URL(remoteUrl);
+            sourceUrl = remoteUrl;
+            fromRemote = true;
+            console.log(`Attempting to load application from remote source: ${remoteUrl}`);
+          } catch (e) {
+            console.warn(`Invalid remote update URL found in localStorage: "${remoteUrl}". Falling back to local version.`);
+            showUpdateNotification('Invalid remote update URL found. Using local version.', true);
+          }
+        }
+
+        let response;
+        try {
+          response = await fetch(sourceUrl);
+          if (!response.ok) {
+            if (fromRemote) {
+              console.error(`Failed to fetch from remote source: ${sourceUrl}. Status: ${response.status}. Falling back to local version.`);
+              showUpdateNotification(`Failed to load from remote URL. Loading local version.`, true);
+              sourceUrl = './app.js';
+              response = await fetch(sourceUrl);
+            }
+            if(!response.ok) {
+               throw new Error(`HTTP error! status: ${response.status} for URL ${sourceUrl}`);
+            }
+          } else if (fromRemote) {
+            showUpdateNotification('Application loaded from remote source.', false);
+          }
+        } catch (fetchError) {
+            if (fromRemote) {
+                console.error(`Network error fetching from remote source: ${sourceUrl}. Falling back to local version.`, fetchError);
+                showUpdateNotification(`Could not connect to remote URL. Loading local version.`, true);
+                sourceUrl = './app.js';
+                response = await fetch(sourceUrl);
+                if (!response.ok) {
+                   throw new Error(`HTTP error! status: ${response.status} for local fallback URL ${sourceUrl}`);
+                }
+            } else {
+                throw fetchError;
+            }
+        }
+
+        const source = await response.text();
+        const { code } = Babel.transform(source, {
+          presets: ['react'],
+          filename: 'app.js'
+        });
+        const blob = new Blob([code], { type: 'application/javascript' });
+        const url = URL.createObjectURL(blob);
+        await import(url);
+      } catch (error) {
+        showBootError(error);
+      }
+    </script>
+  </body>
+</html>

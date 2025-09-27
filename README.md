@@ -1,37 +1,87 @@
-# ChefXOps
-🚀 ChefXOps Lead Farming Engine — Cross-platform business growth toolkit for chefs, caterers, and foodservice professionals. Features AI-powered proposal generation, lead discovery, and professional exports.
-🍴 ChefXOps Lead Farming Engine
+# ChefXOps - Culinary Intelligence Platform by SpitfireXmedia
 
-ChefXOps is a cross-platform business growth and lead generation engine designed for chefs, caterers, and foodservice professionals who want to book more clients, close deals faster, and scale their operations.
+## Introduction
 
-Built with modern web technologies and AI integration, ChefXOps automates the most time-consuming parts of growing a catering business: finding leads, crafting personalized proposals, and presenting them professionally.
+Welcome to ChefXOps! This guide provides a simple, one-time setup to run and configure the application. The process involves running a local server (for full functionality) and configuring your API keys through the application's user-friendly settings panel.
 
-✨ Key Features
+---
 
-Lead Generation Engine → Google Maps API + SQLite database to discover and organize local businesses (restaurants, wineries, corporate offices, venues).
+## Part 1: First-Time Setup - Running the Application
 
-AI Offer Generator → Create tailored catering proposals in seconds using OpenAI integration.
+This process starts a local web server, which is required for the application's AI and Map features to function correctly.
 
-Professional Exports → Instant branded PDFs and CSVs for client-ready materials.
+### For Windows:
 
-Lead Management UI → React + Tailwind interface with search, filter, sorting, and manual lead entry.
+1.  **Open Command Prompt**:
+    *   Click the **Start Menu**, type `cmd`, and select **"Command Prompt"**.
 
-Cross-Platform → Works on Windows (Electron) and Android (React Native/Expo) with a shared codebase.
+2.  **Navigate to the `ChefXOps` Folder**:
+    *   In the Command Prompt, type `cd ` (note the space).
+    *   **Drag and drop the `ChefXOps` folder** from your desktop into the window. The path will appear.
+    *   Press **Enter**.
 
-🎯 Who It’s For
+3.  **Start the Server**:
+    *   Type `python -m http.server 8887` and press **Enter**.
+    *   *Note: If you get an error, install Python from [python.org](https://www.python.org/downloads/), ensuring "Add Python to PATH" is checked during installation.*
 
-Independent chefs & caterers looking to expand their client base.
+4.  **Launch the App**:
+    *   Open **Google Chrome**.
+    *   In the address bar, go to `http://127.0.0.1:8887`.
 
-Event venues, wineries, golf clubs seeking professional catering partnerships.
+### For Mac:
 
-Culinary entrepreneurs and schools teaching foodservice business growth.
+1.  **Open Terminal**:
+    *   Go to "Applications" > "Utilities" and open **"Terminal"**.
 
-🚀 Why ChefXOps?
+2.  **Navigate to the `ChefXOps` Folder**:
+    *   In Terminal, type `cd ` (note the space).
+    *   **Drag and drop the `ChefXOps` folder** from your desktop into the window.
+    *   Press **Enter**.
 
-Traditional lead hunting is slow and scattered. ChefXOps brings everything into one streamlined workflow:
-Lead Discovery → Offer Generation → Export → Client Win.
+3.  **Start the Server**:
+    *   Type `python3 -m http.server 8887` and press **Enter**.
 
-Whether you’re a solo chef or running a catering company, ChefXOps helps you look professional, save time, and close more deals.
-More Info @ https://bit.ly/3K8S7rL
+4.  **Launch the App**:
+    *   Open **Google Chrome**.
+    *   In the address bar, go to `http://127.0.0.1:8887`.
 
+---
 
+## Part 2: Initial Configuration (CRITICAL)
+
+Once the application is running, you must configure it with your Google Cloud API keys.
+
+1.  **Go to Settings**:
+    *   You will see a warning banner at the top prompting you for an API Key.
+    *   Click the **Settings** icon (the gear) in the bottom-left sidebar.
+
+2.  **Enter API Credentials**:
+    *   In the "API Configuration" section, paste your **Google Cloud API Key** into the first field.
+    *   Paste your **Google Maps Map ID** into the second field.
+
+3.  **Save and Refresh**:
+    *   Click the **"Save All Settings"** button.
+    *   **Refresh your browser tab.** The warning banner will disappear, and all AI and Map features will be fully functional.
+
+---
+
+## Part 3: Personalization
+
+Make the application your own by updating your business and personal details.
+
+1.  **Go to My Profile**:
+    *   Click on your name and business name at the bottom of the sidebar.
+2.  **Update Your Information**:
+    *   Fill in your name, business name, and a URL for your profile picture.
+    *   Click **"Save Changes"**. Your details will now appear throughout the app.
+
+---
+
+## Part 4: Enabling Remote Updates (Optional)
+
+This allows the application to be updated remotely by an administrator without sending you new files.
+
+1.  **Go to Settings**: Navigate to the "Settings" page.
+2.  **Find Remote Updates Section**: Scroll down to "Remote Application Updates".
+3.  **Enter Update URL**: Paste the URL provided by your administrator (e.g., a link to a new `app.js` file).
+4.  **Save and Restart**: Click **"Save All Settings"** and completely restart the application. It will now load from the new URL. To revert to the original version, simply clear this field and save again.
