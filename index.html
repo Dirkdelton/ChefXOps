@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -10,65 +9,43 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Playfair+Display:wght@700&family=Dancing+Script:wght@700&display=swap" rel="stylesheet">
     
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            fontFamily: {
+              sans: ['Montserrat', 'sans-serif'],
+              serif: ['Playfair Display', 'serif'],
+              script: ['Dancing Script', 'cursive'],
+            },
+            colors: {
+              'glossy-black': '#0A0A0A',
+              'card-black': '#1A1A1A',
+              'charcoal': '#111214',
+              'gold': '#BFA15C',
+              'bright-yellow': '#FBBF24',
+              'heather-gray': {
+                DEFAULT: '#9CA3AF',
+                light: '#D1D5DB',
+                dark: '#6B7280',
+              },
+            },
+            boxShadow: {
+              'glow-gold': '0 0 15px 0 rgba(191, 161, 92, 0.3)',
+              'glow-yellow': '0 0 15px 0 rgba(251, 191, 36, 0.4)',
+            }
+          }
+        }
+      }
+    </script>
+    
     <style>
-      /* Base Styles & Fonts */
       body {
         font-family: 'Montserrat', sans-serif;
         background-color: #0A0A0A;
         background-image: radial-gradient(circle at top left, rgba(26, 26, 26, 0.5) 0%, transparent 30%),
                           radial-gradient(circle at bottom right, rgba(26, 26, 26, 0.5) 0%, transparent 40%);
       }
-      .font-sans { font-family: 'Montserrat', sans-serif; }
-      .font-serif { font-family: 'Playfair Display', serif; }
-      .font-script { font-family: 'Dancing Script', cursive; }
-
-      /* Custom Colors */
-      .bg-glossy-black { background-color: #0A0A0A; }
-      .bg-card-black { background-color: #1A1A1A; }
-      .bg-charcoal { background-color: #111214; }
-      .text-gold { color: #BFA15C; }
-      .border-gold { border-color: #BFA15C; }
-      .text-bright-yellow { color: #FBBF24; }
-      .text-heather-gray { color: #9CA3AF; }
-      .text-heather-gray-light { color: #D1D5DB; }
-      .text-heather-gray-dark { color: #6B7280; }
-      .placeholder-heather-gray-dark::placeholder { color: #6B7280; }
-
-      /* Custom Opacity Classes (for reliability) */
-      .border-white-10 { border-color: rgba(255, 255, 255, 0.1); }
-      .border-gold-50 { border-color: rgba(191, 161, 92, 0.5); }
-      .border-gold-30 { border-color: rgba(191, 161, 92, 0.3); }
-      .border-gold-20 { border-color: rgba(191, 161, 92, 0.2); }
-      .bg-gold-20 { background-color: rgba(191, 161, 92, 0.2); }
-      .bg-gold-5 { background-color: rgba(191, 161, 92, 0.05); }
-      .bg-bright-yellow-20 { background-color: rgba(251, 191, 36, 0.2); }
-      .bg-heather-gray-20 { background-color: rgba(156, 163, 175, 0.2); }
-      .bg-green-500-20 { background-color: rgba(34, 197, 94, 0.2); }
-      .bg-red-900-50 { background-color: rgba(127, 29, 29, 0.5); }
-      .text-white-70 { color: rgba(255, 255, 255, 0.7); }
-      .hover\:bg-white-5:hover { background-color: rgba(255, 255, 255, 0.05); }
-
-      /* Custom Gradients */
-      .bg-gradient-gold-yellow {
-        background-image: linear-gradient(to right, #BFA15C, #FBBF24);
-      }
-      .bg-gradient-active-link {
-        background-image: linear-gradient(to right, rgba(191, 161, 92, 0.2), rgba(191, 161, 92, 0.05));
-      }
-
-      /* Custom Shadows */
-      .shadow-glow-gold { box-shadow: 0 0 15px 0 rgba(191, 161, 92, 0.3); }
-      .shadow-glow-yellow { box-shadow: 0 0 15px 0 rgba(251, 191, 36, 0.4); }
-
-      /* Custom Components */
-      .ring-gold:focus {
-        --tw-ring-color: #BFA15C;
-        --tw-ring-offset-shadow: var(--tw-ring-inset) 0 0 0 var(--tw-ring-offset-width) var(--tw-ring-offset-color);
-        --tw-ring-shadow: var(--tw-ring-inset) 0 0 0 calc(2px + var(--tw-ring-offset-width)) var(--tw-ring-color);
-        box-shadow: var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow, 0 0 #0000);
-      }
-      
-      /* Scrollbar & Animations */
       ::-webkit-scrollbar { width: 8px; height: 8px; }
       ::-webkit-scrollbar-track { background: #1A1A1A; }
       ::-webkit-scrollbar-thumb { background-color: #6B7280; border-radius: 10px; border: 2px solid #1A1A1A; }
@@ -81,22 +58,121 @@
     </style>
 
     <script type="importmap">
-    {
-      "imports": {
-        "react": "https://esm.sh/react@18.3.1",
-        "react-dom/client": "https://esm.sh/react-dom@18.3.1/client",
-        "@google/genai": "https://cdn.jsdelivr.net/npm/@google/genai@0.15.0/dist/index.mjs",
-        "zod": "https://esm.sh/zod@3.23.8",
-        "recharts": "https://esm.sh/recharts@2.12.7",
-        "@babel/standalone": "https://esm.sh/@babel/standalone@7.24.8",
-        "react-dom/": "https://aistudiocdn.com/react-dom@^19.1.1/"
-      }
-    }
-    </script>
+{
+  "imports": {
+    "react": "https://esm.sh/react@18.3.1",
+    "react-dom/client": "https://esm.sh/react-dom@18.3.1/client",
+    "@google/genai": "https://cdn.jsdelivr.net/npm/@google/genai@0.15.0/dist/index.mjs",
+    "zod": "https://esm.sh/zod@3.23.8",
+    "recharts": "https://esm.sh/recharts@2.12.7",
+    "@babel/standalone": "https://esm.sh/@babel/standalone@7.24.8",
+    "react-dom/": "https://aistudiocdn.com/react-dom@^19.1.1/"
+  }
+}
+</script>
   </head>
   <body class="bg-charcoal leading-relaxed">
     <div id="root"></div>
-    <script src="https://esm.sh/@babel/standalone@7.24.8"></script>
-    <script type="text/babel" data-type="module" src="./app.js"></script>
+    <script>
+      window.mapApiLoaded = new Promise((resolve, reject) => {
+          window.initMap = () => {
+              console.log("Google Maps API has been successfully loaded.");
+              resolve();
+          };
+          window.mapApiError = () => {
+              console.error("Google Maps script failed to load. This may be due to an invalid API key or network issues.");
+              reject(new Error("Google Maps script failed to load."));
+          };
+      });
+    </script>
+    <script type="module">
+      const root = document.getElementById('root');
+
+      function showBootError(error) {
+          console.error('Failed to load the application:', error);
+          root.innerHTML = `<div style="padding: 2rem; color: #f87171; font-family: sans-serif;">
+            <h1 style="font-size: 1.5rem; font-weight: bold;">Application failed to start</h1>
+            <p style="margin-top: 1rem; color: #d1d5db;">This is often caused by a problem with the deployed files on the server.</p>
+            <pre style="margin-top: 1rem; padding: 1rem; background-color: #1f2937; border-radius: 0.5rem; color: #f9fafb; white-space: pre-wrap; word-break: break-all;">${error.stack || error}</pre>
+          </div>`;
+      }
+
+      function showUpdateNotification(message, isError = false) {
+          const notificationDiv = document.createElement('div');
+          const bgColor = isError ? '#7f1d1d' : '#047857';
+          const borderColor = isError ? '#f87171' : '#34d399';
+          notificationDiv.style.cssText = `position: fixed; top: 1rem; right: 1rem; background-color: ${bgColor}; color: white; padding: 1rem; border-radius: 0.5rem; z-index: 1000; border: 1px solid ${borderColor}; box-shadow: 0 10px 15px -3px rgba(0,0,0,0.1), 0 4px 6px -2px rgba(0,0,0,0.05);`;
+          notificationDiv.textContent = message;
+          document.body.appendChild(notificationDiv);
+          setTimeout(() => {
+              notificationDiv.remove();
+          }, 8000);
+      }
+      
+      async function fetchWithFallback(primaryUrl, fallbackUrl) {
+        const cacheBuster = `?v=${new Date().getTime()}`;
+        try {
+            const response = await fetch(primaryUrl + cacheBuster);
+            if (!response.ok) throw new Error(`Status ${response.status}`);
+            console.log(`Successfully fetched primary source: ${primaryUrl}`);
+            return { response, url: primaryUrl };
+        } catch (e) {
+            console.warn(`Could not load from ${primaryUrl}, trying fallback ${fallbackUrl}.`);
+            const response = await fetch(fallbackUrl + cacheBuster);
+            if (!response.ok) throw new Error(`HTTP error on fallback: status ${response.status} for URL ${fallbackUrl}`);
+            console.log(`Successfully fetched fallback source: ${fallbackUrl}`);
+            return { response, url: fallbackUrl };
+        }
+      }
+
+      try {
+        const Babel = (await import('@babel/standalone')).default;
+        
+        const UPDATE_URL_KEY = 'chefxops_update_url';
+        const remoteUrlRaw = localStorage.getItem(UPDATE_URL_KEY);
+        let response, loadedUrl;
+
+        if (remoteUrlRaw && remoteUrlRaw.trim() !== '') {
+            let remoteUrl = remoteUrlRaw.trim();
+            const primaryRemote = remoteUrl.endsWith('.js') ? remoteUrl.replace('.js', '.tsx') : (remoteUrl.endsWith('/') ? remoteUrl + 'index.tsx' : remoteUrl);
+            const fallbackRemote = primaryRemote.replace('.tsx', '.js');
+
+            try {
+                const result = await fetchWithFallback(primaryRemote, fallbackRemote);
+                response = result.response;
+                loadedUrl = result.url;
+                showUpdateNotification(`Application loaded from remote source: ${loadedUrl.split('/').pop()}`, false);
+            } catch (remoteError) {
+                showUpdateNotification(`Failed to load from remote URL. Falling back to local version.`, true);
+                console.error(`Remote fetch failed: ${remoteError}. Falling back to local.`);
+                const localResult = await fetchWithFallback('./index.tsx', './app.js');
+                response = localResult.response;
+                loadedUrl = localResult.url;
+            }
+        } else {
+            const localResult = await fetchWithFallback('./index.tsx', './app.js');
+            response = localResult.response;
+            loadedUrl = localResult.url;
+        }
+
+        const source = await response.text();
+        
+        if (source.trim().startsWith('<')) {
+            throw new Error(`Failed to load script from "${loadedUrl}". The server returned an HTML page instead of JavaScript. This usually means the file is missing or not deployed correctly.`);
+        }
+
+        const { code } = Babel.transform(source, {
+          presets: ['react', ['typescript', { allExtensions: true, isTSX: true }]],
+          filename: loadedUrl
+        });
+        
+        const blob = new Blob([code], { type: 'application/javascript' });
+        const url = URL.createObjectURL(blob);
+        await import(url);
+
+      } catch (error) {
+        showBootError(error);
+      }
+    </script>
   </body>
 </html>
