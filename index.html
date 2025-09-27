@@ -113,19 +113,26 @@
         const Babel = (await import('@babel/standalone')).default;
         
         const UPDATE_URL_KEY = 'chefxops_update_url';
-        const remoteUrl = localStorage.getItem(UPDATE_URL_KEY);
+        const remoteUrlRaw = localStorage.getItem(UPDATE_URL_KEY);
         let sourceUrl = './app.js';
         let fromRemote = false;
         const cacheBuster = `?v=${new Date().getTime()}`;
 
-        if (remoteUrl && remoteUrl.trim() !== '') {
+        if (remoteUrlRaw && remoteUrlRaw.trim() !== '') {
+          let remoteUrl = remoteUrlRaw.trim();
+          // Auto-correct URL if user enters base path instead of full script path
+          if (!remoteUrl.endsWith('.js')) {
+            console.log("Remote URL does not end with .js, attempting to auto-correct by appending /app.js");
+            remoteUrl = (remoteUrl.endsWith('/') ? remoteUrl : remoteUrl + '/') + 'app.js';
+          }
+
           try {
             new URL(remoteUrl);
             sourceUrl = remoteUrl;
             fromRemote = true;
-            console.log(`Attempting to load application from remote source: ${remoteUrl}`);
+            console.log(`Attempting to load application from corrected remote source: ${remoteUrl}`);
           } catch (e) {
-            console.warn(`Invalid remote update URL found in localStorage: "${remoteUrl}". Falling back to local version.`);
+            console.warn(`Invalid remote update URL found in localStorage: "${remoteUrlRaw}". Falling back to local version.`);
             showUpdateNotification('Invalid remote update URL found. Using local version.', true);
           }
         }
