@@ -1778,76 +1778,22 @@ const NavLink = ({ icon, label, active, onClick }) => (
   </button>
 );
 
-const HighFidelityLogo = () => (
-    <svg width="48" height="48" viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg" className="rounded-lg">
-        {/*
-            JSX Compliant SVG Logo
-            - All comments are in JSX format: {/* ... */}
-            - All kebab-case attributes are converted to camelCase (e.g., stroke-width -> strokeWidth)
-        */}
-        <defs>
-            <pattern id="pattern-black" patternUnits="userSpaceOnUse" width="50" height="50" patternTransform="scale(1) rotate(45)">
-                <path d="M 0 50 L 50 0 M -10 20 L 20 -10 M 40 60 L 60 40" stroke="rgba(255, 255, 255, 0.02)" strokeWidth="1"></path>
-            </pattern>
-            <linearGradient id="bladeGradient" x1="0%" y1="0%" x2="0%" y2="100%">
-                <stop offset="0%" stopColor="#FFFFFF" />
-                <stop offset="100%" stopColor="#D1D5DB" />
-            </linearGradient>
-            <linearGradient id="handleGradient" x1="0%" y1="0%" x2="0%" y2="100%">
-                <stop offset="0%" stopColor="#111827" />
-                <stop offset="100%" stopColor="#000000" />
-            </linearGradient>
-            <filter id="glow">
-                <feGaussianBlur stdDeviation="2.5" result="coloredBlur" />
-                <feMerge>
-                    <feMergeNode in="coloredBlur" />
-                    <feMergeNode in="SourceGraphic" />
-                </feMerge>
-            </filter>
-        </defs>
-        <rect width="1024" height="1024" rx="150" fill="#0A0A0A" />
-        <rect width="1024" height="1024" rx="150" fill="url(#pattern-black)" />
-        {/* Laurels */}
-        <g transform="translate(512, 512) scale(1.2)">
-            <path d="M 0 -350 C -200 -300, -350 -100, -350 100 C -350 300, -200 400, 0 450" fill="none" stroke="#BFA15C" strokeWidth="40" strokeLinecap="round" />
-            <path d="M 0 -350 C 200 -300, 350 -100, 350 100 C 350 300, 200 400, 0 450" fill="none" stroke="#BFA15C" strokeWidth="40" strokeLinecap="round" />
-            {[...Array(8)].map((_, i) => (
-                <g key={`laurel-left-${i}`}>
-                    <path d={`M ${-15 - i*40} ${-300 + i*80} C ${-60 - i*20} ${-280 + i*80}, ${-80 - i*10} ${-220 + i*80}, ${-50 - i*30} ${-200 + i*80}`} fill="none" stroke="#BFA15C" strokeWidth="30" strokeLinecap="round" />
-                </g>
-            ))}
-            {[...Array(8)].map((_, i) => (
-                <g key={`laurel-right-${i}`}>
-                    <path d={`M ${15 + i*40} ${-300 + i*80} C ${60 + i*20} ${-280 + i*80}, ${80 + i*10} ${-220 + i*80}, ${50 + i*30} ${-200 + i*80}`} fill="none" stroke="#BFA15C" strokeWidth="30" strokeLinecap="round" />
-                </g>
-            ))}
-        </g>
-        {/* Knives */}
-        <g transform="translate(512, 512) rotate(-20) translate(-512, -512)">
-            <path d="M 200 512 L 800 512 L 900 450 L 800 390 L 200 390 Q 150 450, 200 512 Z" fill="url(#handleGradient)" />
-            <circle cx="250" cy="450" r="20" fill="#E5E7EB" />
-            <circle cx="350" cy="450" r="20" fill="#E5E7EB" />
-            <circle cx="450" cy="450" r="20" fill="#E5E7EB" />
-            <path d="M 500 390 L 950 100 L 980 150 L 500 512 L 500 390 Z" fill="url(#bladeGradient)" stroke="#9CA3AF" strokeWidth="5" />
-            <text x="650" y="300" fontFamily="Montserrat" fontSize="40" fill="#374151" transform="rotate(-35, 650, 300)">CHEFS 2023</text>
-        </g>
-        <g transform="translate(512, 512) rotate(20) translate(-512, -512) scale(1, -1) translate(0, -1024)">
-            <path d="M 200 512 L 800 512 L 900 450 L 800 390 L 200 390 Q 150 450, 200 512 Z" fill="url(#handleGradient)" />
-            <circle cx="250" cy="450" r="20" fill="#E5E7EB" />
-            <circle cx="350" cy="450" r="20" fill="#E5E7EB" />
-            <circle cx="450" cy="450" r="20" fill="#E5E7EB" />
-            <path d="M 500 390 L 950 100 L 980 150 L 500 512 L 500 390 Z" fill="url(#bladeGradient)" stroke="#9CA3AF" strokeWidth="5" />
-        </g>
-        {/* Diamond */}
-        <g transform="translate(512, 200)">
-            <path d="M -80 0 L 0 -100 L 80 0 L 0 100 Z" fill="#FBBF24" />
-            <path d="M -80 0 L 0 -100 L 0 0 Z" fill="rgba(255,255,255,0.3)" />
-            <path d="M 80 0 L 0 -100 L 0 0 Z" fill="rgba(0,0,0,0.2)" />
-            <path d="M -80 0 L 0 100 L 0 0 Z" fill="rgba(0,0,0,0.2)" />
-            <path d="M 80 0 L 0 100 L 0 0 Z" fill="rgba(255,255,255,0.1)" />
-            <path d="M 5 -90 L 15 -80 L 0 -100 Z" fill="#FFFFFF" filter="url(#glow)" />
-        </g>
-    </svg>
+const SidebarLogo = () => (
+    <div className="flex items-center justify-center w-full h-12 my-2">
+        <svg width="48" height="48" viewBox="0 0 52 52" fill="none" xmlns="http://www.w3.org/2000/svg" className="rounded-lg">
+            <rect width="52" height="52" rx="10" fill="#0A0A0A"/>
+            <rect width="52" height="52" rx="10" stroke="#BFA15C" strokeOpacity="0.3" strokeWidth="1"/>
+            <path d="M26 9L37 20.5L26 32L15 20.5L26 9Z" stroke="#FBBF24" strokeWidth="2" strokeLinejoin="round"/>
+            <g transform="rotate(25 26 26)">
+                <rect x="10" y="24.5" width="32" height="3" rx="1.5" fill="#4B5563"/>
+                <path d="M42 26C42 24.6193 43.1193 23.5 44.5 23.5H47L42 18.5V33.5L47 28.5H44.5C43.1193 28.5 42 27.3807 42 26Z" fill="#E5E7EB"/>
+            </g>
+             <g transform="rotate(-25 26 26)">
+                <rect x="10" y="24.5" width="32" height="3" rx="1.5" fill="#4B5563" transform="scale(-1, 1) translate(-52, 0)"/>
+                <path d="M42 26C42 24.6193 43.1193 23.5 44.5 23.5H47L42 18.5V33.5L47 28.5H44.5C43.1193 28.5 42 27.3807 42 26Z" fill="#E5E7EB" transform="scale(-1, 1) translate(-52, 0)"/>
+            </g>
+        </svg>
+    </div>
 );
 
 
@@ -1871,7 +1817,7 @@ const Sidebar = ({ activePage, setActivePage }) => {
     return (
         <div className="bg-glossy-black w-72 flex flex-col p-4 border-r border-white-10">
             <div className="flex items-center justify-center space-x-3 px-2 py-2 mb-6">
-                <HighFidelityLogo />
+                <SidebarLogo />
             </div>
             <nav className="flex-1 space-y-1.5 overflow-y-auto pr-2">
                 {navItems.map(item => (
