@@ -116,6 +116,7 @@
         const remoteUrl = localStorage.getItem(UPDATE_URL_KEY);
         let sourceUrl = './app.js';
         let fromRemote = false;
+        const cacheBuster = `?v=${new Date().getTime()}`;
 
         if (remoteUrl && remoteUrl.trim() !== '') {
           try {
@@ -131,13 +132,13 @@
 
         let response;
         try {
-          response = await fetch(sourceUrl);
+          response = await fetch(sourceUrl + cacheBuster);
           if (!response.ok) {
             if (fromRemote) {
               console.error(`Failed to fetch from remote source: ${sourceUrl}. Status: ${response.status}. Falling back to local version.`);
               showUpdateNotification(`Failed to load from remote URL. Loading local version.`, true);
               sourceUrl = './app.js';
-              response = await fetch(sourceUrl);
+              response = await fetch(sourceUrl + cacheBuster);
             }
             if(!response.ok) {
                throw new Error(`HTTP error! status: ${response.status} for URL ${sourceUrl}`);
@@ -150,7 +151,7 @@
                 console.error(`Network error fetching from remote source: ${sourceUrl}. Falling back to local version.`, fetchError);
                 showUpdateNotification(`Could not connect to remote URL. Loading local version.`, true);
                 sourceUrl = './app.js';
-                response = await fetch(sourceUrl);
+                response = await fetch(sourceUrl + cacheBuster);
                 if (!response.ok) {
                    throw new Error(`HTTP error! status: ${response.status} for local fallback URL ${sourceUrl}`);
                 }
