@@ -299,7 +299,7 @@ const SpeakerIcon = (props) => (
 
 const SettingsIcon = (props) => (
     <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" {...props}>
-      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" />
+      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066 2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" />
       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
     </svg>
 );
@@ -553,7 +553,7 @@ const ToastNotification = ({ message, type, onClose }) => {
             <div className={`flex items-center p-4 rounded-lg shadow-2xl border ${borderColor} ${bgColor} text-white max-w-sm backdrop-blur-sm`}>
                 <Icon className={`w-6 h-6 mr-3 ${isSuccess ? 'text-white' : 'text-white'}`} />
                 <span className="font-semibold">{message}</span>
-                <button onClick={onClose} className="ml-4 text-white/70 hover:text-white">&times;</button>
+                <button onClick={onClose} className="ml-4 text-white-70 hover:text-white">&times;</button>
             </div>
         </div>
     );
@@ -627,7 +627,7 @@ class ErrorBoundary extends React.Component {
 }
 
 const StatCard = ({ title, value, subtext, icon }) => (
-  <div className="bg-card-black p-6 rounded-lg border border-white/10 shadow-lg relative overflow-hidden group transition-all duration-300 ease-in-out hover:border-gold hover:shadow-glow-gold hover:-translate-y-1">
+  <div className="bg-card-black p-6 rounded-lg border border-white-10 shadow-lg relative overflow-hidden group transition-all duration-300 ease-in-out hover:border-gold hover:shadow-glow-gold hover:-translate-y-1">
     <div className="absolute -right-8 -bottom-8 text-white/5 opacity-80 group-hover:opacity-10 group-hover:scale-110 transition-all duration-300 ease-in-out">
       {icon}
     </div>
@@ -639,10 +639,10 @@ const StatCard = ({ title, value, subtext, icon }) => (
 
 const StatusPill = ({ status }) => {
     const statusClasses = {
-        'New': 'bg-heather-gray/20 text-heather-gray-light',
-        'Contacted': 'bg-bright-yellow/20 text-bright-yellow',
-        'Proposal Sent': 'bg-gold/20 text-gold',
-        'Closed': 'bg-green-500/20 text-green-400',
+        'New': 'bg-heather-gray-20 text-heather-gray-light',
+        'Contacted': 'bg-bright-yellow-20 text-bright-yellow',
+        'Proposal Sent': 'bg-gold-20 text-gold',
+        'Closed': 'bg-green-500-20 text-green-400',
     };
     const baseClasses = "px-2.5 py-0.5 text-xs font-semibold rounded-full inline-block";
     return <span className={`${baseClasses} ${statusClasses[status] || ''}`}>{status}</span>;
@@ -668,7 +668,7 @@ const Dashboard = ({ leads, events }) => {
         <StatCard title="Upcoming Events" value={upcomingEventsCount.toString()} subtext="Scheduled and confirmed" icon={<EventsIconSolid className="w-28 h-28" />} />
       </div>
       <div className="grid grid-cols-1 lg:grid-cols-5 gap-6 mb-6">
-        <div className="lg:col-span-3 bg-card-black p-6 rounded-lg border border-white/10 shadow-lg">
+        <div className="lg:col-span-3 bg-card-black p-6 rounded-lg border border-white-10 shadow-lg">
           <h2 className="text-xl font-semibold text-white mb-4">Monthly Revenue Overview</h2>
           <div style={{ width: '100%', height: 300 }}>
             <ErrorBoundary>
@@ -676,14 +676,14 @@ const Dashboard = ({ leads, events }) => {
             </ErrorBoundary>
           </div>
         </div>
-        <div className="lg:col-span-2 bg-card-black p-6 rounded-lg border border-white/10 shadow-lg flex flex-col">
+        <div className="lg:col-span-2 bg-card-black p-6 rounded-lg border border-white-10 shadow-lg flex flex-col">
             <h2 className="text-xl font-semibold text-white mb-4">Activity Feed</h2>
             <div className="flex-1 space-y-4 overflow-y-auto">
                 <div>
                     <h3 className="text-sm font-semibold text-heather-gray mb-2">UPCOMING EVENTS</h3>
                     <ul className="space-y-2">
                         {upcomingEvents.map(event => (
-                            <li key={event.id} className="flex items-center space-x-3 text-sm p-2 rounded-md transition-colors hover:bg-white/[.03]">
+                            <li key={event.id} className="flex items-center space-x-3 text-sm p-2 rounded-md transition-colors hover:bg-white-5">
                                 <div className="p-2 bg-charcoal rounded-md"><EventIcon className="w-5 h-5 text-gold"/></div>
                                 <div className="flex-1">
                                     <p className="font-semibold text-gray-200">{event.name}</p>
@@ -694,11 +694,11 @@ const Dashboard = ({ leads, events }) => {
                         ))}
                     </ul>
                 </div>
-                 <div className="border-t border-white/10 pt-4">
+                 <div className="border-t border-white-10 pt-4">
                     <h3 className="text-sm font-semibold text-heather-gray mb-2">RECENT LEADS</h3>
                      <ul className="space-y-2">
                         {recentLeads.map(lead => (
-                            <li key={lead.id} className="flex items-center justify-between text-sm p-2 rounded-md transition-colors hover:bg-white/[.03]">
+                            <li key={lead.id} className="flex items-center justify-between text-sm p-2 rounded-md transition-colors hover:bg-white-5">
                                 <div className="flex-1 overflow-hidden">
                                     <p className="font-semibold text-gray-200 truncate">{lead.businessName}</p>
                                     <p className="text-xs text-heather-gray">${lead.revenuePotential.toLocaleString()}</p>
@@ -712,7 +712,7 @@ const Dashboard = ({ leads, events }) => {
             </div>
         </div>
       </div>
-      <div className="bg-card-black p-6 rounded-lg border border-white/10 shadow-lg">
+      <div className="bg-card-black p-6 rounded-lg border border-white-10 shadow-lg">
         <h2 className="text-xl font-semibold text-white mb-4">Lead Conversion Funnel</h2>
         <div className="flex flex-col md:flex-row items-center justify-around space-y-4 md:space-y-0 md:space-x-4">
             <div className="text-center">
@@ -747,7 +747,7 @@ const LeadDetailModal = ({ lead, onClose }) => {
     
     return (
         <div className="fixed inset-0 bg-black/70 z-40 flex items-center justify-center p-4 backdrop-blur-sm" onClick={onClose}>
-            <div className="bg-card-black rounded-lg border border-gold/50 shadow-glow-gold w-full max-w-2xl relative fade-in" onClick={e => e.stopPropagation()}>
+            <div className="bg-card-black rounded-lg border border-gold-50 shadow-glow-gold w-full max-w-2xl relative fade-in" onClick={e => e.stopPropagation()}>
                 <button onClick={onClose} className="absolute top-4 right-4 text-heather-gray hover:text-white transition-colors">
                     <XIcon />
                 </button>
@@ -755,7 +755,7 @@ const LeadDetailModal = ({ lead, onClose }) => {
                     <h2 className="text-3xl font-serif font-bold text-gold mb-2">{lead.businessName}</h2>
                     <p className="text-sm text-heather-gray mb-4">{lead.address}</p>
                     
-                    <div className="bg-charcoal p-4 rounded-md border-l-4 border-gold/50 mb-6">
+                    <div className="bg-charcoal p-4 rounded-md border-l-4 border-gold-50 mb-6">
                         <h4 className="font-semibold text-gold mb-1">Lead Intel</h4>
                         <p className="text-sm text-heather-gray-light">{lead.companyDescription}</p>
                     </div>
@@ -780,12 +780,12 @@ const LeadDetailModal = ({ lead, onClose }) => {
                         </div>
                     </div>
                     
-                    <div className="border-t border-white/10 mt-6 pt-6 flex justify-between items-center">
+                    <div className="border-t border-white-10 mt-6 pt-6 flex justify-between items-center">
                          <a href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(lead.address)}`} target="_blank" rel="noopener noreferrer" className="text-sm text-gold font-semibold hover:underline">
                             Open in Google Maps
                         </a>
                         <div className="space-x-2">
-                            <button className="bg-heather-gray/20 text-heather-gray-light font-bold py-2 px-4 rounded-lg hover:bg-heather-gray/30 transition-colors text-sm">Log Interaction</button>
+                            <button className="bg-heather-gray-20 text-heather-gray-light font-bold py-2 px-4 rounded-lg hover:bg-heather-gray/30 transition-colors text-sm">Log Interaction</button>
                             <button className="bg-gold text-glossy-black font-bold py-2 px-4 rounded-lg shadow-glow-yellow hover:opacity-90 transition-opacity">Send Proposal</button>
                         </div>
                     </div>
@@ -989,22 +989,22 @@ const Leads = ({ leads, onLeadsGenerated, showToast }) => {
             <LeadDetailModal lead={selectedLead} onClose={() => setSelectedLead(null)} />
             <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
                 <div className="lg:col-span-1 space-y-6">
-                    <div className="bg-card-black p-6 rounded-lg border border-white/10">
+                    <div className="bg-card-black p-6 rounded-lg border border-white-10">
                         <h3 className="text-lg font-semibold text-white mb-4">Lead Criteria</h3>
                         <div className="space-y-4">
                             <div>
                                 <label className="text-sm font-medium text-heather-gray" htmlFor="location">Location</label>
-                                <input id="location" type="text" value={location} onChange={e => setLocation(e.target.value)} className="w-full bg-charcoal border border-white/10 rounded-md p-2 mt-1 text-white focus:outline-none focus:ring-2 focus:ring-gold" />
+                                <input id="location" type="text" value={location} onChange={e => setLocation(e.target.value)} className="w-full bg-charcoal border border-white-10 rounded-md p-2 mt-1 text-white focus:outline-none focus:ring-2 ring-gold" />
                             </div>
                             <div>
                                 <label className="text-sm font-medium text-heather-gray" htmlFor="clientType">Client Type</label>
-                                <select id="clientType" value={clientType} onChange={e => setClientType(e.target.value)} className="w-full bg-charcoal border border-white/10 rounded-md p-2 mt-1 text-white focus:outline-none focus:ring-2 focus:ring-gold">
+                                <select id="clientType" value={clientType} onChange={e => setClientType(e.target.value)} className="w-full bg-charcoal border border-white-10 rounded-md p-2 mt-1 text-white focus:outline-none focus:ring-2 ring-gold">
                                     {Object.values(ClientType).map(c => <option key={c} value={c}>{c}</option>)}
                                 </select>
                             </div>
                              <div>
                                 <label className="text-sm font-medium text-heather-gray" htmlFor="serviceType">Service Type</label>
-                                <select id="serviceType" value={serviceType} onChange={e => setServiceType(e.target.value)} className="w-full bg-charcoal border border-white/10 rounded-md p-2 mt-1 text-white focus:outline-none focus:ring-2 focus:ring-gold">
+                                <select id="serviceType" value={serviceType} onChange={e => setServiceType(e.target.value)} className="w-full bg-charcoal border border-white-10 rounded-md p-2 mt-1 text-white focus:outline-none focus:ring-2 ring-gold">
                                     {Object.values(ServiceType).map(s => <option key={s} value={s}>{s}</option>)}
                                 </select>
                             </div>
@@ -1014,7 +1014,7 @@ const Leads = ({ leads, onLeadsGenerated, showToast }) => {
                         </button>
                     </div>
                 </div>
-                <div className="lg:col-span-2 bg-card-black rounded-lg border border-white/10 h-[70vh] overflow-hidden flex items-center justify-center">
+                <div className="lg:col-span-2 bg-card-black rounded-lg border border-white-10 h-[70vh] overflow-hidden flex items-center justify-center">
                     {isLoading ? <Spinner text={isGeocoding ? 'Verifying locations...' : 'Generating leads with AI...'} /> :
                      mapError ? <div className="text-center p-4"><p className="text-red-400 font-semibold">{mapError}</p></div> :
                      <div ref={mapContainer} className="w-full h-full"></div>
@@ -1065,11 +1065,11 @@ const AIAssistant = () => {
     return (
         <div>
             <PageHeader title="Onboard Culinary Agent" subtitle="Your AI partner for culinary expertise and business strategy." />
-            <div className="bg-card-black rounded-lg border border-white/10 shadow-lg h-[75vh] flex flex-col">
+            <div className="bg-card-black rounded-lg border border-white-10 shadow-lg h-[75vh] flex flex-col">
                 <div ref={chatContainerRef} className="flex-1 p-6 space-y-4 overflow-y-auto">
                     {history.map((msg, index) => (
                         <div key={index} className={`flex items-start gap-4 ${msg.role === 'user' ? 'justify-end' : ''}`}>
-                             {msg.role === 'ai' && <div className="w-8 h-8 rounded-full bg-gold/20 flex items-center justify-center flex-shrink-0"><AiAssistantIcon className="w-5 h-5 text-gold"/></div>}
+                             {msg.role === 'ai' && <div className="w-8 h-8 rounded-full bg-gold-20 flex items-center justify-center flex-shrink-0"><AiAssistantIcon className="w-5 h-5 text-gold"/></div>}
                              <div className={`max-w-xl p-4 rounded-lg ${msg.role === 'user' ? 'bg-charcoal text-white' : 'bg-glossy-black text-heather-gray-light'}`}>
                                 <p className="whitespace-pre-wrap">{msg.text}</p>
                              </div>
@@ -1077,21 +1077,21 @@ const AIAssistant = () => {
                     ))}
                     {isLoading && (
                         <div className="flex items-start gap-4">
-                            <div className="w-8 h-8 rounded-full bg-gold/20 flex items-center justify-center flex-shrink-0"><AiAssistantIcon className="w-5 h-5 text-gold"/></div>
+                            <div className="w-8 h-8 rounded-full bg-gold-20 flex items-center justify-center flex-shrink-0"><AiAssistantIcon className="w-5 h-5 text-gold"/></div>
                             <div className="max-w-xl p-4 rounded-lg bg-glossy-black">
                                 <Spinner text="Thinking..." />
                             </div>
                         </div>
                     )}
                 </div>
-                <div className="p-4 border-t border-white/10">
+                <div className="p-4 border-t border-white-10">
                     <form onSubmit={handleSubmit} className="flex items-center space-x-4">
                         <input
                             type="text"
                             value={input}
                             onChange={e => setInput(e.target.value)}
                             placeholder="Ask about pairings, marketing, or business plans..."
-                            className="flex-1 bg-charcoal border border-white/10 rounded-lg p-3 text-white placeholder-heather-gray-dark focus:outline-none focus:ring-2 focus:ring-gold"
+                            className="flex-1 bg-charcoal border border-white-10 rounded-lg p-3 text-white placeholder-heather-gray-dark focus:outline-none focus:ring-2 ring-gold"
                             disabled={isLoading || !isApiConfigured}
                         />
                         <button type="submit" disabled={isLoading || !isApiConfigured} className="bg-gold text-glossy-black rounded-lg p-3 disabled:opacity-50">
@@ -1136,12 +1136,12 @@ const KnowledgeBase = () => {
                     value={searchTerm}
                     onChange={handleSearch}
                     placeholder="Search for a technique, ingredient, or book title..."
-                    className="w-full bg-card-black border border-white/10 rounded-lg p-4 text-white placeholder-heather-gray-dark focus:outline-none focus:ring-2 focus:ring-gold"
+                    className="w-full bg-card-black border border-white-10 rounded-lg p-4 text-white placeholder-heather-gray-dark focus:outline-none focus:ring-2 ring-gold"
                 />
             </div>
             <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 gap-6">
                 {filteredCookbooks.map(book => (
-                    <div key={book.id} className="bg-card-black rounded-lg border border-white/10 p-4 text-center group transition-all duration-300 hover:-translate-y-2 hover:shadow-glow-gold">
+                    <div key={book.id} className="bg-card-black rounded-lg border border-white-10 p-4 text-center group transition-all duration-300 hover:-translate-y-2 hover:shadow-glow-gold">
                         <img src={book.coverImageUrl} alt={book.title} className="w-full h-auto rounded-md shadow-lg mb-4 aspect-[2/3] object-cover" />
                         <h3 className="font-semibold text-white text-sm">{book.title}</h3>
                         <p className="text-xs text-heather-gray">{book.author}</p>
@@ -1185,7 +1185,7 @@ const MenuGenerator = () => {
   };
 
   const MenuCard = ({ title, course }) => (
-    <div className="bg-charcoal p-6 rounded-lg border border-white/10">
+    <div className="bg-charcoal p-6 rounded-lg border border-white-10">
         <h4 className="text-sm font-semibold text-gold tracking-widest uppercase mb-2">{title}</h4>
         <h3 className="text-xl font-semibold text-white mb-1">{course.name}</h3>
         <p className="text-heather-gray text-sm">{course.description}</p>
@@ -1196,32 +1196,32 @@ const MenuGenerator = () => {
     <div>
       <PageHeader title="Menu Generator" subtitle="Craft bespoke menus with AI assistance." />
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-        <div className="md:col-span-1 bg-card-black p-6 rounded-lg border border-white/10">
+        <div className="md:col-span-1 bg-card-black p-6 rounded-lg border border-white-10">
           <h3 className="text-lg font-semibold text-white mb-4">Menu Parameters</h3>
           <div className="space-y-4">
             <div>
                 <label className="text-sm font-medium text-heather-gray" htmlFor="mg-serviceType">Service Type</label>
-                <select id="mg-serviceType" value={serviceType} onChange={e => setServiceType(e.target.value)} className="w-full bg-charcoal border border-white/10 rounded-md p-2 mt-1 text-white focus:outline-none focus:ring-2 focus:ring-gold">
+                <select id="mg-serviceType" value={serviceType} onChange={e => setServiceType(e.target.value)} className="w-full bg-charcoal border border-white-10 rounded-md p-2 mt-1 text-white focus:outline-none focus:ring-2 ring-gold">
                     {Object.values(ServiceType).map(s => <option key={s} value={s}>{s}</option>)}
                 </select>
             </div>
             <div>
                 <label className="text-sm font-medium text-heather-gray" htmlFor="mg-clientType">Client Type</label>
-                <select id="mg-clientType" value={clientType} onChange={e => setClientType(e.target.value)} className="w-full bg-charcoal border border-white/10 rounded-md p-2 mt-1 text-white focus:outline-none focus:ring-2 focus:ring-gold">
+                <select id="mg-clientType" value={clientType} onChange={e => setClientType(e.target.value)} className="w-full bg-charcoal border border-white-10 rounded-md p-2 mt-1 text-white focus:outline-none focus:ring-2 ring-gold">
                     {Object.values(ClientType).map(c => <option key={c} value={c}>{c}</option>)}
                 </select>
             </div>
             <div>
                 <label className="text-sm font-medium text-heather-gray" htmlFor="mg-covers">Est. Covers</label>
-                <input id="mg-covers" type="number" value={covers} onChange={e => setCovers(e.target.value)} className="w-full bg-charcoal border border-white/10 rounded-md p-2 mt-1 text-white focus:outline-none focus:ring-2 focus:ring-gold" />
+                <input id="mg-covers" type="number" value={covers} onChange={e => setCovers(e.target.value)} className="w-full bg-charcoal border border-white-10 rounded-md p-2 mt-1 text-white focus:outline-none focus:ring-2 ring-gold" />
             </div>
             <div>
                 <label className="text-sm font-medium text-heather-gray" htmlFor="mg-dietary">Dietary Restrictions</label>
-                <input id="mg-dietary" type="text" value={dietary} onChange={e => setDietary(e.target.value)} placeholder="e.g., gluten-free, vegan" className="w-full bg-charcoal border border-white/10 rounded-md p-2 mt-1 text-white focus:outline-none focus:ring-2 focus:ring-gold" />
+                <input id="mg-dietary" type="text" value={dietary} onChange={e => setDietary(e.target.value)} placeholder="e.g., gluten-free, vegan" className="w-full bg-charcoal border border-white-10 rounded-md p-2 mt-1 text-white focus:outline-none focus:ring-2 ring-gold" />
             </div>
             <div>
                 <label className="text-sm font-medium text-heather-gray" htmlFor="mg-cuisine">Cuisine Style</label>
-                <input id="mg-cuisine" type="text" value={cuisine} onChange={e => setCuisine(e.target.value)} placeholder="e.g., Italian, Pacific Northwest" className="w-full bg-charcoal border border-white/10 rounded-md p-2 mt-1 text-white focus:outline-none focus:ring-2 focus:ring-gold" />
+                <input id="mg-cuisine" type="text" value={cuisine} onChange={e => setCuisine(e.target.value)} placeholder="e.g., Italian, Pacific Northwest" className="w-full bg-charcoal border border-white-10 rounded-md p-2 mt-1 text-white focus:outline-none focus:ring-2 ring-gold" />
             </div>
           </div>
           <button onClick={handleGenerate} disabled={isLoading || !isApiConfigured} className="w-full mt-6 bg-gradient-to-r from-gold to-bright-yellow text-glossy-black font-bold py-3 px-4 rounded-lg shadow-glow-yellow hover:opacity-90 transition-opacity disabled:opacity-50">
@@ -1232,7 +1232,7 @@ const MenuGenerator = () => {
             {isLoading && <Spinner text="Crafting your menu..." />}
             {error && <p className="text-red-500">{error}</p>}
             {menu && (
-                <div className="bg-card-black p-6 rounded-lg border border-white/10 fade-in">
+                <div className="bg-card-black p-6 rounded-lg border border-white-10 fade-in">
                     <h2 className="text-3xl font-serif font-bold text-center text-gold mb-6">{menu.menuTitle}</h2>
                     <div className="space-y-4">
                         <MenuCard title="Appetizer" course={menu.appetizer} />
@@ -1279,14 +1279,14 @@ const EventPlanner = () => {
         <div>
             <PageHeader title="Event Planner" subtitle="Generate comprehensive event plans in seconds." />
             <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-                <div className="lg:col-span-1 bg-card-black p-6 rounded-lg border border-white/10">
+                <div className="lg:col-span-1 bg-card-black p-6 rounded-lg border border-white-10">
                     <h3 className="text-lg font-semibold text-white mb-4">Event Details</h3>
                     <div className="space-y-4">
-                        <input type="text" name="eventName" placeholder="Event Name (e.g., 'Smith Wedding')" value={details.eventName} onChange={handleInputChange} className="w-full bg-charcoal border border-white/10 rounded-md p-2 text-white focus:outline-none focus:ring-2 focus:ring-gold" />
-                        <input type="text" name="clientName" placeholder="Client Name" value={details.clientName} onChange={handleInputChange} className="w-full bg-charcoal border border-white/10 rounded-md p-2 text-white focus:outline-none focus:ring-2 focus:ring-gold" />
-                        <input type="date" name="date" value={details.date} onChange={handleInputChange} className="w-full bg-charcoal border border-white/10 rounded-md p-2 text-white focus:outline-none focus:ring-2 focus:ring-gold" />
-                        <input type="number" name="guests" placeholder="Number of Guests" value={details.guests} onChange={handleInputChange} className="w-full bg-charcoal border border-white/10 rounded-md p-2 text-white focus:outline-none focus:ring-2 focus:ring-gold" />
-                        <textarea name="notes" placeholder="Additional Notes (e.g., allergies, theme ideas)" value={details.notes} onChange={handleInputChange} rows="4" className="w-full bg-charcoal border border-white/10 rounded-md p-2 text-white focus:outline-none focus:ring-2 focus:ring-gold" />
+                        <input type="text" name="eventName" placeholder="Event Name (e.g., 'Smith Wedding')" value={details.eventName} onChange={handleInputChange} className="w-full bg-charcoal border border-white-10 rounded-md p-2 text-white focus:outline-none focus:ring-2 ring-gold" />
+                        <input type="text" name="clientName" placeholder="Client Name" value={details.clientName} onChange={handleInputChange} className="w-full bg-charcoal border border-white-10 rounded-md p-2 text-white focus:outline-none focus:ring-2 ring-gold" />
+                        <input type="date" name="date" value={details.date} onChange={handleInputChange} className="w-full bg-charcoal border border-white-10 rounded-md p-2 text-white focus:outline-none focus:ring-2 ring-gold" />
+                        <input type="number" name="guests" placeholder="Number of Guests" value={details.guests} onChange={handleInputChange} className="w-full bg-charcoal border border-white-10 rounded-md p-2 text-white focus:outline-none focus:ring-2 ring-gold" />
+                        <textarea name="notes" placeholder="Additional Notes (e.g., allergies, theme ideas)" value={details.notes} onChange={handleInputChange} rows="4" className="w-full bg-charcoal border border-white-10 rounded-md p-2 text-white focus:outline-none focus:ring-2 ring-gold" />
                     </div>
                     <button onClick={handleGenerate} disabled={isLoading || !isApiConfigured} className="w-full mt-6 bg-gradient-to-r from-gold to-bright-yellow text-glossy-black font-bold py-3 px-4 rounded-lg shadow-glow-yellow hover:opacity-90 transition-opacity disabled:opacity-50">
                         {isLoading ? 'Planning...' : 'Generate Plan'}
@@ -1296,12 +1296,12 @@ const EventPlanner = () => {
                     {isLoading && <Spinner text="Generating your event plan..." />}
                     {error && <p className="text-red-500">{error}</p>}
                     {plan && (
-                        <div className="bg-card-black p-6 rounded-lg border border-white/10 space-y-6 fade-in">
+                        <div className="bg-card-black p-6 rounded-lg border border-white-10 space-y-6 fade-in">
                             <h2 className="text-3xl font-serif font-bold text-gold text-center">{plan.eventName}</h2>
                             
                             {/* Theme Section */}
                             <div>
-                                <h3 className="text-xl font-semibold text-white mb-3 border-b-2 border-gold/30 pb-2">Event Theme</h3>
+                                <h3 className="text-xl font-semibold text-white mb-3 border-b-2 border-gold-30 pb-2">Event Theme</h3>
                                 <div className="bg-charcoal p-4 rounded-md">
                                     <h4 className="text-lg font-bold text-gold">{plan.theme.title}</h4>
                                     <p className="text-heather-gray-light">{plan.theme.description}</p>
@@ -1310,7 +1310,7 @@ const EventPlanner = () => {
 
                             {/* Menu Section */}
                             <div>
-                                <h3 className="text-xl font-semibold text-white mb-3 border-b-2 border-gold/30 pb-2">Proposed Menu</h3>
+                                <h3 className="text-xl font-semibold text-white mb-3 border-b-2 border-gold-30 pb-2">Proposed Menu</h3>
                                 <div className="space-y-3">
                                     <div className="p-4 bg-charcoal rounded-md">
                                         <p className="text-sm font-semibold text-gold tracking-widest uppercase">Appetizer</p>
@@ -1329,7 +1329,7 @@ const EventPlanner = () => {
                             
                             {/* Staffing Section */}
                             <div>
-                                <h3 className="text-xl font-semibold text-white mb-3 border-b-2 border-gold/30 pb-2">Staffing Plan</h3>
+                                <h3 className="text-xl font-semibold text-white mb-3 border-b-2 border-gold-30 pb-2">Staffing Plan</h3>
                                 <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
                                     {plan.staffing.map(staff => (
                                         <div key={staff.role} className="p-4 bg-charcoal rounded-md text-center">
@@ -1342,7 +1342,7 @@ const EventPlanner = () => {
 
                             {/* Timeline Section */}
                             <div>
-                                <h3 className="text-xl font-semibold text-white mb-3 border-b-2 border-gold/30 pb-2">Prep Timeline</h3>
+                                <h3 className="text-xl font-semibold text-white mb-3 border-b-2 border-gold-30 pb-2">Prep Timeline</h3>
                                 <div className="space-y-4">
                                     {plan.timeline.map(time => (
                                         <div key={time.timeFrame} className="flex items-start space-x-4">
@@ -1368,7 +1368,7 @@ const ExportCenter = () => {
     return (
         <div>
             <PageHeader title="Export Center" subtitle="Download your menus, plans, and reports." />
-             <div className="text-center p-20 bg-card-black rounded-lg border-2 border-dashed border-white/10">
+             <div className="text-center p-20 bg-card-black rounded-lg border-2 border-dashed border-white-10">
                 <h2 className="text-2xl font-semibold text-white">Coming Soon</h2>
                 <p className="text-heather-gray mt-2">This feature is under development. Soon you'll be able to export your generated content as PDFs and other formats.</p>
             </div>
@@ -1380,7 +1380,7 @@ const ExportCenter = () => {
 // --- START: From components/Integrations.js ---
 const IntegrationCard = ({ icon, name, description, isConnected, onToggle }) => {
     return (
-        <div className={`bg-charcoal p-6 rounded-lg border ${isConnected ? 'border-gold/50' : 'border-white/10'} transition-colors flex items-center justify-between`}>
+        <div className={`bg-charcoal p-6 rounded-lg border ${isConnected ? 'border-gold-50' : 'border-white-10'} transition-colors flex items-center justify-between`}>
             <div className="flex items-center space-x-4">
                 <div className="text-gold">{icon}</div>
                 <div>
@@ -1390,7 +1390,7 @@ const IntegrationCard = ({ icon, name, description, isConnected, onToggle }) => 
             </div>
             <button
                 onClick={onToggle}
-                className={`px-4 py-2 rounded-md font-semibold text-sm transition-colors ${isConnected ? 'bg-heather-gray/20 text-heather-gray-light hover:bg-red-900/50 hover:text-white' : 'bg-gold/20 text-gold hover:bg-gold/30'}`}
+                className={`px-4 py-2 rounded-md font-semibold text-sm transition-colors ${isConnected ? 'bg-heather-gray-20 text-heather-gray-light hover:bg-red-900-50 hover:text-white' : 'bg-gold-20 text-gold hover:bg-gold-30'}`}
             >
                 {isConnected ? 'Disconnect' : 'Connect'}
             </button>
@@ -1427,7 +1427,7 @@ const Integrations = ({showToast}) => {
 
             <div className="space-y-8">
                 <div>
-                    <h2 className="text-xl font-bold text-gold mb-4 border-b border-gold/20 pb-2">Social Media</h2>
+                    <h2 className="text-xl font-bold text-gold mb-4 border-b border-gold-20 pb-2">Social Media</h2>
                     <div className="space-y-4">
                         <IntegrationCard icon={<FacebookIcon className="w-8 h-8" />} name="Facebook" description="Post content directly to your Facebook page." isConnected={integrations.facebook} onToggle={() => toggleIntegration('facebook', 'Facebook')} />
                         <IntegrationCard icon={<InstagramIcon className="w-8 h-8" />} name="Instagram" description="Share images and videos with your followers." isConnected={integrations.instagram} onToggle={() => toggleIntegration('instagram', 'Instagram')} />
@@ -1438,7 +1438,7 @@ const Integrations = ({showToast}) => {
                 </div>
 
                 <div>
-                    <h2 className="text-xl font-bold text-gold mb-4 border-b border-gold/20 pb-2">Productivity &amp; Cloud Storage</h2>
+                    <h2 className="text-xl font-bold text-gold mb-4 border-b border-gold-20 pb-2">Productivity &amp; Cloud Storage</h2>
                     <div className="space-y-4">
                         <IntegrationCard icon={<DropboxIcon className="w-8 h-8" />} name="Dropbox" description="Access your stored images and videos for social media posts." isConnected={integrations.dropbox} onToggle={() => toggleIntegration('dropbox', 'Dropbox')} />
                         <IntegrationCard icon={<OutlookIcon className="w-8 h-8" />} name="Outlook Calendar" description="Sync your event schedule." isConnected={integrations.outlookCalendar} onToggle={() => toggleIntegration('outlookCalendar', 'Outlook Calendar')} />
@@ -1456,7 +1456,7 @@ const ChefTools = () => {
     return (
         <div>
             <PageHeader title="Chef Tools" subtitle="Essential utilities for the modern chef." />
-             <div className="text-center p-20 bg-card-black rounded-lg border-2 border-dashed border-white/10">
+             <div className="text-center p-20 bg-card-black rounded-lg border-2 border-dashed border-white-10">
                 <h2 className="text-2xl font-semibold text-white">Coming Soon</h2>
                 <p className="text-heather-gray mt-2">A suite of tools including unit converters, costing calculators, and more will be available here.</p>
             </div>
@@ -1488,8 +1488,8 @@ const DropboxPickerModal = ({ isOpen, onClose, onSelect }) => {
 
     return (
         <div className="fixed inset-0 bg-black/70 z-40 flex items-center justify-center p-4 backdrop-blur-sm" onClick={onClose}>
-            <div className="bg-card-black rounded-lg border border-gold/50 shadow-glow-gold w-full max-w-4xl h-[80vh] flex flex-col relative fade-in" onClick={e => e.stopPropagation()}>
-                <div className="p-4 border-b border-white/10 flex items-center justify-between">
+            <div className="bg-card-black rounded-lg border border-gold-50 shadow-glow-gold w-full max-w-4xl h-[80vh] flex flex-col relative fade-in" onClick={e => e.stopPropagation()}>
+                <div className="p-4 border-b border-white-10 flex items-center justify-between">
                     <h2 className="text-xl font-semibold text-white flex items-center"><DropboxIcon className="w-6 h-6 mr-2 text-blue-400" /> Select from Dropbox</h2>
                     <button onClick={onClose} className="text-heather-gray hover:text-white transition-colors">
                         <XIcon />
@@ -1631,10 +1631,10 @@ const SocialMedia = ({ showToast }) => {
             <PageHeader title="Social Media Assistant" subtitle="Generate and distribute engaging content for your online platforms." />
             <DropboxPickerModal isOpen={isDropboxPickerOpen} onClose={() => setIsDropboxPickerOpen(false)} onSelect={setUploadedMedia} />
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-                <div className="bg-card-black p-6 rounded-lg border border-white/10 space-y-4">
+                <div className="bg-card-black p-6 rounded-lg border border-white-10 space-y-4">
                     <div>
                         <label className="text-sm font-medium text-heather-gray" htmlFor="sm-topic">1. Post Topic</label>
-                        <input id="sm-topic" type="text" value={topic} onChange={e => setTopic(e.target.value)} placeholder="e.g., Behind the scenes of a wedding catering" className="w-full bg-charcoal border border-white/10 rounded-md p-2 mt-1 text-white focus:outline-none focus:ring-2 focus:ring-gold" />
+                        <input id="sm-topic" type="text" value={topic} onChange={e => setTopic(e.target.value)} placeholder="e.g., Behind the scenes of a wedding catering" className="w-full bg-charcoal border border-white-10 rounded-md p-2 mt-1 text-white focus:outline-none focus:ring-2 ring-gold" />
                     </div>
                     <div>
                         <label className="text-sm font-medium text-heather-gray">2. Select Platforms</label>
@@ -1645,8 +1645,8 @@ const SocialMedia = ({ showToast }) => {
                                     onClick={() => handlePlatformToggle(p)} 
                                     className={`p-3 rounded-lg transition-all duration-200 ease-in-out border-2 transform ${
                                         selectedPlatforms.includes(p) 
-                                            ? 'bg-gold/20 border-gold scale-110 shadow-md' 
-                                            : 'bg-charcoal border-transparent text-heather-gray hover:bg-white/10 hover:scale-105'
+                                            ? 'bg-gold-20 border-gold scale-110 shadow-md' 
+                                            : 'bg-charcoal border-transparent text-heather-gray hover:bg-white-10 hover:scale-105'
                                     }`}
                                 >
                                     {platformIcons[p]}
@@ -1657,10 +1657,10 @@ const SocialMedia = ({ showToast }) => {
                     <div>
                         <label className="text-sm font-medium text-heather-gray">3. Generate Content</label>
                         <div className="flex flex-col sm:flex-row space-y-2 sm:space-y-0 sm:space-x-2 mt-2">
-                            <button onClick={handleGenerateContent} disabled={isLoadingText || !topic.trim() || !isApiConfigured} className="flex-1 bg-heather-gray/20 text-heather-gray-light font-bold py-3 px-4 rounded-lg hover:bg-heather-gray/30 transition-colors disabled:opacity-50">
+                            <button onClick={handleGenerateContent} disabled={isLoadingText || !topic.trim() || !isApiConfigured} className="flex-1 bg-heather-gray-20 text-heather-gray-light font-bold py-3 px-4 rounded-lg hover:bg-heather-gray/30 transition-colors disabled:opacity-50">
                                 {isLoadingText ? 'Generating Text...' : 'Generate Post Text'}
                             </button>
-                            <button onClick={handleGenerateImage} disabled={isLoadingImage || !topic.trim() || !isApiConfigured} className="flex-1 bg-heather-gray/20 text-heather-gray-light font-bold py-3 px-4 rounded-lg hover:bg-heather-gray/30 transition-colors disabled:opacity-50">
+                            <button onClick={handleGenerateImage} disabled={isLoadingImage || !topic.trim() || !isApiConfigured} className="flex-1 bg-heather-gray-20 text-heather-gray-light font-bold py-3 px-4 rounded-lg hover:bg-heather-gray/30 transition-colors disabled:opacity-50">
                                  {isLoadingImage ? 'Generating Image...' : 'Generate AI Image'}
                             </button>
                         </div>
@@ -1669,20 +1669,20 @@ const SocialMedia = ({ showToast }) => {
                         <p className="text-center text-xs text-heather-gray-dark my-2">OR USE YOUR OWN MEDIA</p>
                         <div className="flex flex-col sm:flex-row space-y-2 sm:space-y-0 sm:space-x-2">
                            <input type="file" ref={fileInputRef} onChange={handleLocalMediaUpload} accept="image/*,video/*" className="hidden" />
-                           <button onClick={() => fileInputRef.current.click()} className="flex-1 flex items-center justify-center gap-2 bg-charcoal text-heather-gray-light font-bold py-3 px-4 rounded-lg hover:bg-white/10 transition-colors">
+                           <button onClick={() => fileInputRef.current.click()} className="flex-1 flex items-center justify-center gap-2 bg-charcoal text-heather-gray-light font-bold py-3 px-4 rounded-lg hover:bg-white-10 transition-colors">
                                 <UploadIcon/> Upload from Device
                            </button>
-                           <button onClick={() => setIsDropboxPickerOpen(true)} disabled={!isDropboxConnected} className="flex-1 flex items-center justify-center gap-2 bg-charcoal text-heather-gray-light font-bold py-3 px-4 rounded-lg hover:bg-white/10 transition-colors disabled:opacity-50 disabled:cursor-not-allowed" title={!isDropboxConnected ? "Connect Dropbox in Integrations" : ""}>
+                           <button onClick={() => setIsDropboxPickerOpen(true)} disabled={!isDropboxConnected} className="flex-1 flex items-center justify-center gap-2 bg-charcoal text-heather-gray-light font-bold py-3 px-4 rounded-lg hover:bg-white-10 transition-colors disabled:opacity-50 disabled:cursor-not-allowed" title={!isDropboxConnected ? "Connect Dropbox in Integrations" : ""}>
                                 <DropboxIcon/> Select from Dropbox
                            </button>
                         </div>
                     </div>
                 </div>
-                <div className="bg-card-black p-6 rounded-lg border border-white/10 flex flex-col">
+                <div className="bg-card-black p-6 rounded-lg border border-white-10 flex flex-col">
                     <h3 className="text-lg font-semibold text-white mb-4">Post Preview</h3>
                     <div className="bg-charcoal rounded-lg p-4 flex-1 flex flex-col">
                         <div className="flex items-center mb-3">
-                            <div className="w-10 h-10 rounded-full bg-gold/20 flex items-center justify-center"><UserIcon className="w-6 h-6 text-gold"/></div>
+                            <div className="w-10 h-10 rounded-full bg-gold-20 flex items-center justify-center"><UserIcon className="w-6 h-6 text-gold"/></div>
                             <span className="ml-3 font-semibold text-white">Your Business Name</span>
                         </div>
                         <div className="text-white text-sm mb-4 min-h-[80px] flex-1 overflow-y-auto pr-2">
@@ -1735,7 +1735,7 @@ const Invoicing = () => {
     return (
         <div>
             <PageHeader title="Invoicing" subtitle="Create, send, and track client invoices." />
-             <div className="text-center p-20 bg-card-black rounded-lg border-2 border-dashed border-white/10">
+             <div className="text-center p-20 bg-card-black rounded-lg border-2 border-dashed border-white-10">
                 <h2 className="text-2xl font-semibold text-white">Coming Soon</h2>
                 <p className="text-heather-gray mt-2">A full-featured invoicing system is in the works to help you manage your billing seamlessly.</p>
             </div>
@@ -1750,8 +1750,8 @@ const NavLink = ({ icon, label, active, onClick }) => (
     onClick={onClick}
     className={`flex items-center w-full px-4 py-3 text-left transition-colors duration-200 rounded-lg ${
       active
-        ? 'bg-gradient-to-r from-gold/20 to-gold/5 text-gold font-semibold shadow-inner'
-        : 'text-heather-gray hover:bg-white/5 hover:text-white'
+        ? 'bg-gradient-to-r from-gold-20 to-gold-5 text-gold font-semibold shadow-inner'
+        : 'text-heather-gray hover:bg-white-5 hover:text-white'
     }`}
   >
     {React.cloneElement(icon, { className: 'h-6 w-6 mr-4 flex-shrink-0' })}
@@ -1777,82 +1777,15 @@ const Sidebar = ({ activePage, setActivePage }) => {
     ];
     
     return (
-        <div className="bg-glossy-black w-72 flex flex-col p-4 border-r border-white/10">
+        <div className="bg-glossy-black w-72 flex flex-col p-4 border-r border-white-10">
             <div className="flex items-center space-x-3 px-2 py-2 mb-6">
+                {/* Reverted to a simple, stable logo to prevent rendering issues */}
                 <svg width="48" height="48" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-                    <defs>
-                        <linearGradient id="bladeGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-                            <stop offset="0%" style={{stopColor: '#E5E7EB'}} />
-                            <stop offset="50%" style={{stopColor: '#D1D5DB'}} />
-                            <stop offset="100%" style={{stopColor: '#9CA3AF'}} />
-                        </linearGradient>
-                        <linearGradient id="goldGradient" x1="0%" y1="0%" x2="0%" y2="100%">
-                            <stop offset="0%" style={{stopColor: '#FBBF24'}} />
-                            <stop offset="100%" style={{stopColor: '#BFA15C'}} />
-                        </linearGradient>
-                        <filter id="glow" x="-50%" y="-50%" width="200%" height="200%">
-                            <feGaussianBlur stdDeviation="3" result="coloredBlur" />
-                            <feMerge>
-                                <feMergeNode in="coloredBlur" />
-                                <feMergeNode in="SourceGraphic" />
-                            </feMerge>
-                        </filter>
-                         <pattern id="bgPattern" patternUnits="userSpaceOnUse" width="20" height="20">
-                            <path d="M 5 5 C 7.5 7.5, 12.5 7.5, 15 5 M 5 15 C 7.5 12.5, 12.5 12.5, 15 15" stroke="#1F2937" strokeWidth="0.5" fill="none" opacity="0.1"/>
-                        </pattern>
-                    </defs>
-                    
-                    {/* <!-- Background --> */}
                     <rect width="100" height="100" rx="20" fill="#111214"/>
-                    <rect width="100" height="100" rx="20" fill="url(#bgPattern)"/>
-
-                    {/* <!-- Laurel Wreath --> */}
-                    <g transform="translate(50,50)" filter="url(#glow)">
-                        <path d="M 0,45 A 40,40 0 0,1 -35,-15 C -20,-25 0,-25 0,-45 C 0,-25 20,-25 35,-15 A 40,40 0 0,1 0,45" fill="none" stroke="url(#goldGradient)" strokeWidth="5" strokeLinecap="round" />
-                        <g stroke="url(#goldGradient)" strokeWidth="2.5" strokeLinecap="round">
-                            {[...Array(7)].map((_, i) => (
-                                <g key={i} transform={`rotate(${-90 + i * 22}) translate(0, -40)`}>
-                                    <path d="M 0,0 L -8,-8" />
-                                    <path d="M 0,0 L 8,-8" />
-                                </g>
-                            ))}
-                             {[...Array(7)].map((_, i) => (
-                                <g key={i} transform={`rotate(${90 - i * 22}) translate(0, -40)`}>
-                                    <path d="M 0,0 L -8,-8" />
-                                    <path d="M 0,0 L 8,-8" />
-                                </g>
-                            ))}
-                        </g>
-                    </g>
-                    
-                    {/* <!-- Knives --> */}
-                    <g transform="translate(50, 50)">
-                        {/* <!-- Knife 1 (bottom) --> */}
-                        <g transform="rotate(-45) translate(0, 5)">
-                            <path d="M -7,2 L -7,-30 C -7,-38 0,-40 5,-45 L 35,-15 C 40,-10 38,-7 30,-7 L 7,-7 L 7,2 Z" fill="#111827" />
-                            <path d="M -5,0 L -5,-28 C -5,-35 0,-37 4,-42 L 30,-16 C 35,-12 35,-10 28,-10 L 5,-10 L 5,0 Z" fill="url(#bladeGradient)" />
-                            <circle cx="-2" cy="-5" r="2" fill="#D1D5DB" />
-                            <circle cx="-2" cy="-15" r="2" fill="#D1D5DB" />
-                            <circle cx="-2" cy="-25" r="2" fill="#D1D5DB" />
-                        </g>
-                        {/* <!-- Knife 2 (top) --> */}
-                        <g transform="rotate(45) translate(0, 5) scale(1, -1)">
-                            <path d="M -7,2 L -7,-30 C -7,-38 0,-40 5,-45 L 35,-15 C 40,-10 38,-7 30,-7 L 7,-7 L 7,2 Z" fill="#111827" />
-                            <path d="M -5,0 L -5,-28 C -5,-35 0,-37 4,-42 L 30,-16 C 35,-12 35,-10 28,-10 L 5,-10 L 5,0 Z" fill="url(#bladeGradient)" />
-                            <circle cx="-2" cy="-5" r="2" fill="#D1D5DB" />
-                            <circle cx="-2" cy="-15" r="2" fill="#D1D5DB" />
-                            <circle cx="-2" cy="-25" r="2" fill="#D1D5DB" />
-                        </g>
-                    </g>
-
-                     {/* <!-- Diamond --> */}
-                    <g transform="translate(50, 20)">
-                        <path d="M 0,-5 L 8,5 L -8,5 Z" fill="url(#goldGradient)" />
-                        <path d="M 0,-5 L 4,5 L 0,8 L -4,5 Z" fill="#FBBF24" opacity="0.7"/>
-                        <path d="M 0,-5 L -8,5 L -4,5 L 0, -1 Z" fill="#BFA15C" opacity="0.7"/>
-                        <path d="M 0,-5 L 8,5 L 4,5 L 0, -1 Z" fill="#BFA15C" opacity="0.7"/>
-                        {/* <!-- Sparkle --> */}
-                        <path d="M 0,-6 L 1,-4 L 3,-5 L 1,-3 L 2,-1 L 0,0 L -2,-1 L -1,-3 L -3,-5 L -1,-4 Z" fill="#FFFFFF" filter="url(#glow)"/>
+                    <path d="M50 15 L58 25 L50 35 L42 25 Z" fill="#FBBF24"/>
+                    <g transform="translate(0, 5)">
+                        <path d="M35 80 Q50 45, 65 80" stroke="#BFA15C" fill="transparent" strokeWidth="5"/>
+                        <path d="M30 80 Q50 50, 70 80" stroke="#BFA15C" fill="transparent" strokeWidth="5" strokeDasharray="5,5"/>
                     </g>
                 </svg>
                 <h1 className="text-2xl font-bold text-white tracking-wider">ChefXOps</h1>
@@ -1868,15 +1801,15 @@ const Sidebar = ({ activePage, setActivePage }) => {
                     />
                 ))}
             </nav>
-            <div className="mt-auto pt-4 border-t border-white/10">
+            <div className="mt-auto pt-4 border-t border-white-10">
                 <NavLink
                     icon={<SettingsIcon />}
                     label="Settings"
                     active={activePage === 'settings'}
                     onClick={() => setActivePage('settings')}
                 />
-                 <button onClick={() => setActivePage('profile')} className="w-full flex items-center space-x-3 p-3 mt-2 rounded-lg hover:bg-white/5 transition-colors">
-                    <img src={profile.imageUrl} alt="Chef" className="w-10 h-10 rounded-full object-cover border-2 border-gold/50" />
+                 <button onClick={() => setActivePage('profile')} className="w-full flex items-center space-x-3 p-3 mt-2 rounded-lg hover:bg-white-5 transition-colors">
+                    <img src={profile.imageUrl} alt="Chef" className="w-10 h-10 rounded-full object-cover border-2 border-gold-50" />
                     <div className="text-left flex-1">
                         <p className="font-semibold text-white text-sm">{profile.chefName}</p>
                         <p className="text-xs text-heather-gray-dark">{profile.businessName}</p>
@@ -1905,7 +1838,7 @@ const Settings = ({ showToast }) => {
     return (
         <div>
             <PageHeader title="Settings" subtitle="Configure your application and API keys." />
-            <div className="bg-card-black p-6 rounded-lg border border-white/10 max-w-3xl mx-auto space-y-8">
+            <div className="bg-card-black p-6 rounded-lg border border-white-10 max-w-3xl mx-auto space-y-8">
                 
                 {/* API Configuration Section */}
                 <div>
@@ -1914,11 +1847,11 @@ const Settings = ({ showToast }) => {
                     <div className="space-y-4">
                         <div>
                             <label className="text-sm font-medium text-heather-gray" htmlFor="api-key">Google Cloud API Key</label>
-                            <input id="api-key" type="password" value={localApiKey} onChange={e => setLocalApiKey(e.target.value)} placeholder="Enter your Google Cloud API Key" className="w-full bg-charcoal border border-white/10 rounded-md p-2 mt-1 text-white focus:outline-none focus:ring-2 focus:ring-gold" />
+                            <input id="api-key" type="password" value={localApiKey} onChange={e => setLocalApiKey(e.target.value)} placeholder="Enter your Google Cloud API Key" className="w-full bg-charcoal border border-white-10 rounded-md p-2 mt-1 text-white focus:outline-none focus:ring-2 ring-gold" />
                         </div>
                         <div>
                             <label className="text-sm font-medium text-heather-gray" htmlFor="map-id">Google Maps Map ID</label>
-                            <input id="map-id" type="text" value={localMapId} onChange={e => setLocalMapId(e.target.value)} placeholder="Enter your Google Maps ID" className="w-full bg-charcoal border border-white/10 rounded-md p-2 mt-1 text-white focus:outline-none focus:ring-2 focus:ring-gold" />
+                            <input id="map-id" type="text" value={localMapId} onChange={e => setLocalMapId(e.target.value)} placeholder="Enter your Google Maps ID" className="w-full bg-charcoal border border-white-10 rounded-md p-2 mt-1 text-white focus:outline-none focus:ring-2 ring-gold" />
                         </div>
                     </div>
                 </div>
@@ -1929,7 +1862,7 @@ const Settings = ({ showToast }) => {
                     <p className="text-sm text-heather-gray-dark mb-4">Configure a URL to receive live updates for the application.</p>
                      <div>
                         <label className="text-sm font-medium text-heather-gray" htmlFor="update-url">Update Server URL</label>
-                        <input id="update-url" type="text" value={updateUrl} onChange={e => setUpdateUrl(e.target.value)} placeholder="https://your-host.com/app.js" className="w-full bg-charcoal border border-white/10 rounded-md p-2 mt-1 text-white focus:outline-none focus:ring-2 focus:ring-gold" />
+                        <input id="update-url" type="text" value={updateUrl} onChange={e => setUpdateUrl(e.target.value)} placeholder="https://your-host.com/app.js" className="w-full bg-charcoal border border-white-10 rounded-md p-2 mt-1 text-white focus:outline-none focus:ring-2 ring-gold" />
                     </div>
                 </div>
 
@@ -1939,13 +1872,13 @@ const Settings = ({ showToast }) => {
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" className="w-5 h-5 mr-2 text-gold"><path fillRule="evenodd" d="M10 1a.75.75 0 0 1 .75.75v1.5a.75.75 0 0 1-1.5 0v-1.5A.75.75 0 0 1 10 1ZM10 15a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5Zm0 1.5a4 4 0 1 0 0-8 4 4 0 0 0 0 8ZM8.05 5.05a.75.75 0 0 1 0 1.06l-.72.72a.75.75 0 0 1-1.06-1.06l.72-.72a.75.75 0 0 1 1.06 0Zm-2.47 5.95a.75.75 0 0 1 1.06 0l.72.72a.75.75 0 1 1-1.06 1.06l-.72-.72a.75.75 0 0 1 0-1.06Zm8.94-4.89a.75.75 0 0 1 1.06 0l.72.72a.75.75 0 0 1-1.06 1.06l-.72-.72a.75.75 0 0 1 0-1.06ZM14.45 12a.75.75 0 0 1 0 1.06l-.72.72a.75.75 0 0 1-1.06-1.06l.72-.72a.75.75 0 0 1 1.06 0ZM17 9.25a.75.75 0 0 1 1.5 0v1.5a.75.75 0 0 1-1.5 0v-1.5ZM2.75 11a.75.75 0 0 1 0-1.5h-1.5a.75.75 0 0 1 0-3h1.5a.75.75 0 0 1 0-1.5h-1.5A.75.75 0 0 1 1 5.75v8.5c0 .414.336.75.75.75h1.5a.75.75 0 0 1 0-1.5h-1.5a.75.75 0 0 1 0-3h1.5Zm12.5 4.5a.75.75 0 0 1 1.5 0v1.5a.75.75 0 0 1-1.5 0v-1.5Z" clipRule="evenodd" /></svg>
                         Data & Privacy
                     </h3>
-                    <div className="mt-4 bg-charcoal p-4 rounded-md border border-white/10 text-sm text-heather-gray">
+                    <div className="mt-4 bg-charcoal p-4 rounded-md border border-white-10 text-sm text-heather-gray">
                         <p>Your API keys, profile information, and other settings are stored securely and privately in your browser's local storage. This data never leaves your device and is not uploaded to any server.</p>
                     </div>
                 </div>
 
 
-                <div className="border-t border-white/10 pt-6">
+                <div className="border-t border-white-10 pt-6">
                     <button onClick={handleSave} className="w-full bg-gradient-to-r from-gold to-bright-yellow text-glossy-black font-bold py-3 px-4 rounded-lg shadow-glow-yellow hover:opacity-90 transition-opacity">
                         Save All Settings
                     </button>
@@ -1973,12 +1906,12 @@ const Profile = ({ onSave }) => {
     return (
         <div>
             <PageHeader title="My Profile" subtitle="Manage your personal and business information." />
-            <div className="bg-card-black p-6 rounded-lg border border-white/10 max-w-3xl mx-auto space-y-8">
+            <div className="bg-card-black p-6 rounded-lg border border-white-10 max-w-3xl mx-auto space-y-8">
                 <div className="flex items-center space-x-6">
-                    <img src={localProfile.imageUrl} alt="Chef" className="w-24 h-24 rounded-full object-cover border-4 border-gold/50" />
+                    <img src={localProfile.imageUrl} alt="Chef" className="w-24 h-24 rounded-full object-cover border-4 border-gold-50" />
                     <div className="flex-1">
                          <label className="text-sm font-medium text-heather-gray" htmlFor="imageUrl">Profile Picture URL</label>
-                         <input id="imageUrl" name="imageUrl" type="text" value={localProfile.imageUrl} onChange={handleChange} placeholder="https://..." className="w-full bg-charcoal border border-white/10 rounded-md p-2 mt-1 text-white focus:outline-none focus:ring-2 focus:ring-gold" />
+                         <input id="imageUrl" name="imageUrl" type="text" value={localProfile.imageUrl} onChange={handleChange} placeholder="https://..." className="w-full bg-charcoal border border-white-10 rounded-md p-2 mt-1 text-white focus:outline-none focus:ring-2 ring-gold" />
                     </div>
                 </div>
                  <div>
@@ -1986,15 +1919,15 @@ const Profile = ({ onSave }) => {
                     <div className="space-y-4">
                         <div>
                             <label className="text-sm font-medium text-heather-gray" htmlFor="chefName">Your Name</label>
-                            <input id="chefName" name="chefName" type="text" value={localProfile.chefName} onChange={handleChange} placeholder="e.g., John Doe" className="w-full bg-charcoal border border-white/10 rounded-md p-2 mt-1 text-white focus:outline-none focus:ring-2 focus:ring-gold" />
+                            <input id="chefName" name="chefName" type="text" value={localProfile.chefName} onChange={handleChange} placeholder="e.g., John Doe" className="w-full bg-charcoal border border-white-10 rounded-md p-2 mt-1 text-white focus:outline-none focus:ring-2 ring-gold" />
                         </div>
                          <div>
                             <label className="text-sm font-medium text-heather-gray" htmlFor="businessName">Business Name</label>
-                            <input id="businessName" name="businessName" type="text" value={localProfile.businessName} onChange={handleChange} placeholder="e.g., Culinary Creations Inc." className="w-full bg-charcoal border border-white/10 rounded-md p-2 mt-1 text-white focus:outline-none focus:ring-2 focus:ring-gold" />
+                            <input id="businessName" name="businessName" type="text" value={localProfile.businessName} onChange={handleChange} placeholder="e.g., Culinary Creations Inc." className="w-full bg-charcoal border border-white-10 rounded-md p-2 mt-1 text-white focus:outline-none focus:ring-2 ring-gold" />
                         </div>
                     </div>
                 </div>
-                 <div className="border-t border-white/10 pt-6">
+                 <div className="border-t border-white-10 pt-6">
                     <button onClick={handleSave} className="w-full bg-gradient-to-r from-gold to-bright-yellow text-glossy-black font-bold py-3 px-4 rounded-lg shadow-glow-yellow hover:opacity-90 transition-opacity">
                         Save Profile
                     </button>
@@ -2118,7 +2051,7 @@ const App = () => {
                 <Sidebar activePage={activePage} setActivePage={setActivePage} />
                 <main className="flex-1 p-8 overflow-y-auto">
                     {!isApiConfigured && (
-                        <div className="bg-red-900/50 border border-red-700 text-red-200 px-4 py-3 rounded-lg mb-6 flex justify-between items-center">
+                        <div className="bg-red-900-50 border border-red-700 text-red-200 px-4 py-3 rounded-lg mb-6 flex justify-between items-center">
                             <p><strong>Action Required:</strong> Please configure your Google API Key in the Settings to enable AI and Map features.</p>
                             <button onClick={() => setActivePage('settings')} className="bg-red-700 text-white font-bold py-1 px-3 rounded hover:bg-red-600">Go to Settings</button>
                         </div>
