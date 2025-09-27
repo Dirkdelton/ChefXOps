@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect, useMemo, useRef, Suspense, createContext, useContext } from 'react';
 import ReactDOM from 'react-dom/client';
 import { GoogleGenAI, Type } from '@google/genai';
@@ -28,10 +29,10 @@ const ClientType = {
 
 // --- START: From data/mockData.js ---
 const initialLeads = [
-    { id: 1, businessName: 'Innovate Corp', serviceType: 'Catering', clientType: 'Corporate', estCovers: 150, revenuePotential: 12000, contactName: 'Jane Doe', contactEmail: 'jane@innovate.com', status: 'Proposal Sent', lat: 49.8880, lng: -119.4960, address: '123 Innovation Dr, Kelowna, BC' },
-    { id: 2, businessName: 'The Orchard Winery', serviceType: 'Private Chef', clientType: 'Winery', estCovers: 20, revenuePotential: 4500, contactName: 'John Smith', contactEmail: 'john@orchard.com', status: 'Contacted', lat: 49.9010, lng: -119.5100, address: '456 Vineyard Rd, Kelowna, BC' },
-    { id: 3, businessName: 'Lakeside Wedding Venue', serviceType: 'Catering', clientType: 'Wedding', estCovers: 120, revenuePotential: 15000, contactName: 'Emily White', contactEmail: 'emily@lakeside.com', status: 'Closed', lat: 49.8750, lng: -119.4850, address: '789 Waterfront Ave, Kelowna, BC' },
-    { id: 4, businessName: 'Tech Growth Conference', serviceType: 'Catering', clientType: 'Corporate', estCovers: 500, revenuePotential: 40000, contactName: 'Michael Brown', contactEmail: 'mbrown@techconf.com', status: 'New', lat: 49.8800, lng: -119.4900, address: '101 Tech Hub, Kelowna, BC' },
+    { id: 1, businessName: 'Innovate Corp', serviceType: 'Catering', clientType: 'Corporate', estCovers: 150, revenuePotential: 12000, contactName: 'Jane Doe', contactEmail: 'jane@innovate.com', status: 'Proposal Sent', lat: 49.8880, lng: -119.4960, address: '123 Innovation Dr, Kelowna, BC', companyDescription: "A fast-growing tech company known for hosting large quarterly staff events and client appreciation dinners." },
+    { id: 2, businessName: 'The Orchard Winery', serviceType: 'Private Chef', clientType: 'Winery', estCovers: 20, revenuePotential: 4500, contactName: 'John Smith', contactEmail: 'john@orchard.com', status: 'Contacted', lat: 49.9010, lng: -119.5100, address: '456 Vineyard Rd, Kelowna, BC', companyDescription: "A boutique winery specializing in premium vintages that offers exclusive, high-end private chef experiences for its members." },
+    { id: 3, businessName: 'Lakeside Wedding Venue', serviceType: 'Catering', clientType: 'Wedding', estCovers: 120, revenuePotential: 15000, contactName: 'Emily White', contactEmail: 'emily@lakeside.com', status: 'Closed', lat: 49.8750, lng: -119.4850, address: '789 Waterfront Ave, Kelowna, BC', companyDescription: "A popular and highly-rated wedding venue with a preferred list of caterers they recommend to their clients." },
+    { id: 4, businessName: 'Tech Growth Conference', serviceType: 'Catering', clientType: 'Corporate', estCovers: 500, revenuePotential: 40000, contactName: 'Michael Brown', contactEmail: 'mbrown@techconf.com', status: 'New', lat: 49.8800, lng: -119.4900, address: '101 Tech Hub, Kelowna, BC', companyDescription: "An annual technology conference that requires large-scale catering for breakfasts, lunches, and evening networking events." },
 ];
 
 const initialEvents = [
@@ -263,6 +264,12 @@ const XCircleIcon = (props) => (
     </svg>
 );
 
+const XIcon = (props) => (
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-6 h-6" {...props}>
+        <path fillRule="evenodd" d="M5.47 5.47a.75.75 0 0 1 1.06 0L12 10.94l5.47-5.47a.75.75 0 1 1 1.06 1.06L13.06 12l5.47 5.47a.75.75 0 1 1-1.06 1.06L12 13.06l-5.47 5.47a.75.75 0 0 1-1.06-1.06L10.94 12 5.47 6.53a.75.75 0 0 1 0-1.06Z" clipRule="evenodd" />
+    </svg>
+);
+
 
 const MicrophoneIcon = (props) => (
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-6 h-6" {...props}>
@@ -350,13 +357,14 @@ const generateLeads = (ai, location, clientType, serviceType) => {
                 serviceType: { type: Type.STRING },
                 clientType: { type: Type.STRING },
                 contactEmail: { type: Type.STRING },
+                companyDescription: { type: Type.STRING, description: "A brief, insightful description of the company and why it's a good lead." },
             },
-            required: ["businessName", "address", "lat", "lng", "revenuePotential", "contactName", "status", "serviceType", "clientType", "contactEmail"]
+            required: ["businessName", "address", "lat", "lng", "revenuePotential", "contactName", "status", "serviceType", "clientType", "contactEmail", "companyDescription"]
         },
     };
     return safeApiCall((ai) => ai.models.generateContent({
         model: "gemini-2.5-flash",
-        contents: `Find 5 potential high-value business leads for a professional chef offering ${serviceType} services to ${clientType} clients in ${location}. For each lead, provide a realistic business name, a plausible local address with approximate latitude/longitude, a potential contact person's name, a valid-looking but fake email, an estimated revenue potential, and set the status to "New". Ensure the response is a clean JSON array of objects.`,
+        contents: `Find 5 potential high-value business leads for a professional chef offering ${serviceType} services to ${clientType} clients in ${location}. For each lead, provide a realistic business name, a plausible local address with approximate latitude/longitude, a potential contact person's name, a valid-looking but fake email, an estimated revenue potential, and a concise, insightful company description explaining why they are a good target (e.g., 'A luxury car dealership known for hosting exclusive client appreciation events.'). Set the status to "New". Ensure the response is a clean JSON array of objects.`,
         config: {
             responseMimeType: "application/json",
             responseSchema: schema
@@ -703,6 +711,59 @@ const Dashboard = ({ leads, events }) => {
 // --- END: From components/Dashboard.js ---
 
 // --- START: From components/Leads.js ---
+const LeadDetailModal = ({ lead, onClose }) => {
+    if (!lead) return null;
+    
+    return (
+        <div className="fixed inset-0 bg-black/70 z-40 flex items-center justify-center p-4 backdrop-blur-sm" onClick={onClose}>
+            <div className="bg-card-black rounded-lg border border-gold/50 shadow-glow-gold w-full max-w-2xl relative fade-in" onClick={e => e.stopPropagation()}>
+                <button onClick={onClose} className="absolute top-4 right-4 text-heather-gray hover:text-white transition-colors">
+                    <XIcon />
+                </button>
+                <div className="p-8">
+                    <h2 className="text-3xl font-serif font-bold text-gold mb-2">{lead.businessName}</h2>
+                    <p className="text-sm text-heather-gray mb-4">{lead.address}</p>
+                    
+                    <div className="bg-charcoal p-4 rounded-md border-l-4 border-gold/50 mb-6">
+                        <h4 className="font-semibold text-gold mb-1">Lead Intel</h4>
+                        <p className="text-sm text-heather-gray-light">{lead.companyDescription}</p>
+                    </div>
+
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6 text-sm">
+                        <div>
+                            <p className="text-heather-gray-dark font-semibold mb-1">Contact</p>
+                            <p className="text-white">{lead.contactName}</p>
+                            <a href={`mailto:${lead.contactEmail}`} className="text-gold hover:underline">{lead.contactEmail}</a>
+                        </div>
+                        <div>
+                            <p className="text-heather-gray-dark font-semibold mb-1">Status</p>
+                            <StatusPill status={lead.status} />
+                        </div>
+                        <div>
+                            <p className="text-heather-gray-dark font-semibold mb-1">Revenue Potential</p>
+                            <p className="text-2xl font-bold text-white">${lead.revenuePotential.toLocaleString()}</p>
+                        </div>
+                        <div>
+                            <p className="text-heather-gray-dark font-semibold mb-1">Service & Client</p>
+                            <p className="text-white">{lead.serviceType} / {lead.clientType}</p>
+                        </div>
+                    </div>
+                    
+                    <div className="border-t border-white/10 mt-6 pt-6 flex justify-between items-center">
+                         <a href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(lead.address)}`} target="_blank" rel="noopener noreferrer" className="text-sm text-gold font-semibold hover:underline">
+                            Open in Google Maps
+                        </a>
+                        <div className="space-x-2">
+                            <button className="bg-heather-gray/20 text-heather-gray-light font-bold py-2 px-4 rounded-lg hover:bg-heather-gray/30 transition-colors text-sm">Log Interaction</button>
+                            <button className="bg-gold text-glossy-black font-bold py-2 px-4 rounded-lg shadow-glow-yellow hover:opacity-90 transition-opacity">Send Proposal</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    );
+};
+
 const Leads = ({ leads, onLeadsGenerated, showToast }) => {
     const { ai, apiKey, isApiConfigured } = useContext(ApiContext);
     const [location, setLocation] = useState('Kelowna, BC');
@@ -716,6 +777,8 @@ const Leads = ({ leads, onLeadsGenerated, showToast }) => {
     const mapContainer = useRef(null);
     const [map, setMap] = useState(null);
     const markersRef = useRef([]);
+    const nearbyMarkersRef = useRef([]);
+    const infoWindowRef = useRef(null);
 
     // Effect for initializing the map
     useEffect(() => {
@@ -734,8 +797,10 @@ const Leads = ({ leads, onLeadsGenerated, showToast }) => {
                         zoom: 12,
                         mapId: localStorage.getItem('chefxops_map_id') || '',
                         disableDefaultUI: true,
+                        zoomControl: true,
                     });
                     setMap(mapInstance);
+                    infoWindowRef.current = new window.google.maps.InfoWindow();
                 }
             } catch (e) {
                 console.error("Error initializing Google Map:", e);
@@ -747,12 +812,49 @@ const Leads = ({ leads, onLeadsGenerated, showToast }) => {
 
     }, [map, isApiConfigured]);
 
+    const handleSearchNearby = (lead) => {
+        if (!map || !window.google) return;
+        
+        const service = new window.google.maps.places.PlacesService(map);
+        const request = {
+            location: { lat: lead.lat, lng: lead.lng },
+            radius: '5000', // 5km radius
+            type: [lead.clientType.toLowerCase().replace('_', ' ')] // Simple mapping
+        };
+
+        service.nearbySearch(request, (results, status) => {
+            if (status === window.google.maps.places.PlacesServiceStatus.OK) {
+                // Clear previous nearby markers
+                nearbyMarkersRef.current.forEach(marker => marker.setMap(null));
+                nearbyMarkersRef.current = [];
+
+                results.forEach(place => {
+                    if (place.geometry && place.geometry.location) {
+                        const marker = new window.google.maps.Marker({
+                            position: place.geometry.location,
+                            map: map,
+                            title: place.name,
+                            icon: {
+                                url: "http://maps.google.com/mapfiles/ms/icons/yellow-dot.png"
+                            }
+                        });
+                        nearbyMarkersRef.current.push(marker);
+                    }
+                });
+                showToast(`Found ${results.length} similar places nearby.`, 'success');
+            } else {
+                showToast(`Could not perform nearby search.`, 'error');
+            }
+        });
+    };
 
     // Effect for updating markers
     useEffect(() => {
         if (map && window.google) {
             markersRef.current.forEach(marker => marker.setMap(null));
             markersRef.current = [];
+            
+            window.google.maps.event.clearInstanceListeners(window);
 
             leads.forEach(lead => {
                 if (typeof lead.lat === 'number' && typeof lead.lng === 'number') {
@@ -763,10 +865,36 @@ const Leads = ({ leads, onLeadsGenerated, showToast }) => {
                     });
 
                     marker.addListener('click', () => {
-                        setSelectedLead(lead);
+                         const contentString = `
+                            <div style="color: #333; font-family: Montserrat, sans-serif; max-width: 250px;">
+                                <h1 style="font-size: 1.1em; font-weight: 700; margin: 0 0 5px 0; color: #BFA15C;">${lead.businessName}</h1>
+                                <p style="font-size: 0.9em; margin: 0 0 10px 0;">${lead.contactName} - Est. $${lead.revenuePotential.toLocaleString()}</p>
+                                <button id="viewDetails-${lead.id}" style="background-color: #BFA15C; color: #0A0A0A; border: none; padding: 5px 10px; border-radius: 4px; cursor: pointer; font-weight: 600; margin-right: 5px;">View Details</button>
+                                <button id="searchNearby-${lead.id}" style="background-color: #f0f0f0; color: #333; border: 1px solid #ccc; padding: 5px 10px; border-radius: 4px; cursor: pointer;">Search Nearby</button>
+                            </div>`;
+                        
+                        infoWindowRef.current.setContent(contentString);
+                        infoWindowRef.current.open(map, marker);
                     });
                     
                     markersRef.current.push(marker);
+                }
+            });
+            
+            window.google.maps.event.addListener(infoWindowRef.current, 'domready', () => {
+                const currentLeadId = infoWindowRef.current.getContent().match(/id="viewDetails-(\d+)"/)[1];
+                const currentLead = leads.find(l => l.id == currentLeadId);
+                
+                if(currentLead){
+                    const viewDetailsBtn = document.getElementById(`viewDetails-${currentLead.id}`);
+                    const searchNearbyBtn = document.getElementById(`searchNearby-${currentLead.id}`);
+
+                    if(viewDetailsBtn){
+                         viewDetailsBtn.onclick = () => setSelectedLead(currentLead);
+                    }
+                    if(searchNearbyBtn){
+                        searchNearbyBtn.onclick = () => handleSearchNearby(currentLead);
+                    }
                 }
             });
         }
@@ -782,11 +910,14 @@ const Leads = ({ leads, onLeadsGenerated, showToast }) => {
             
             setIsGeocoding(true);
             const geocodedLeads = await Promise.all(results.map(async (lead) => {
+                // Skip geocoding if lat/lng are already present from AI
+                if (lead.lat && lead.lng) return lead;
+                
                 const coordinates = await geocodeAddress(lead.address, apiKey);
                 return {
                     ...lead,
-                    lat: coordinates ? coordinates.lat : lead.lat,
-                    lng: coordinates ? coordinates.lng : lead.lng,
+                    lat: coordinates ? coordinates.lat : null,
+                    lng: coordinates ? coordinates.lng : null,
                 };
             }));
             
@@ -804,6 +935,7 @@ const Leads = ({ leads, onLeadsGenerated, showToast }) => {
     return (
         <div>
             <PageHeader title="Lead Generation" subtitle="AI-powered engine to discover new business opportunities." />
+            <LeadDetailModal lead={selectedLead} onClose={() => setSelectedLead(null)} />
             <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
                 <div className="lg:col-span-1 space-y-6">
                     <div className="bg-card-black p-6 rounded-lg border border-white/10">
@@ -830,23 +962,8 @@ const Leads = ({ leads, onLeadsGenerated, showToast }) => {
                             {isLoading ? 'Generating...' : 'Generate Leads'}
                         </button>
                     </div>
-                    {selectedLead && (
-                         <div className="bg-card-black p-6 rounded-lg border border-gold/50 shadow-glow-gold fade-in">
-                            <h3 className="text-lg font-bold text-gold mb-2">{selectedLead.businessName}</h3>
-                            <p className="text-sm text-heather-gray">{selectedLead.address}</p>
-                            <div className="border-t border-white/10 my-4"></div>
-                            <div className="space-y-2 text-sm">
-                                <p><strong className="text-heather-gray-light">Contact:</strong> {selectedLead.contactName}</p>
-                                <p><strong className="text-heather-gray-light">Potential:</strong> ${selectedLead.revenuePotential.toLocaleString()}</p>
-                                <div className="flex items-center justify-between">
-                                    <strong className="text-heather-gray-light">Status:</strong>
-                                    <StatusPill status={selectedLead.status} />
-                                </div>
-                            </div>
-                         </div>
-                    )}
                 </div>
-                <div className="lg:col-span-2 bg-card-black rounded-lg border border-white/10 h-[60vh] overflow-hidden flex items-center justify-center">
+                <div className="lg:col-span-2 bg-card-black rounded-lg border border-white/10 h-[70vh] overflow-hidden flex items-center justify-center">
                     {isLoading ? <Spinner text={isGeocoding ? 'Verifying locations...' : 'Generating leads with AI...'} /> :
                      mapError ? <div className="text-center p-4"><p className="text-red-400 font-semibold">{mapError}</p></div> :
                      <div ref={mapContainer} className="w-full h-full"></div>
@@ -1737,7 +1854,7 @@ const App = () => {
 
         const script = document.createElement('script');
         script.id = 'google-maps-script';
-        script.src = `https://maps.googleapis.com/maps/api/js?key=${apiKey}&callback=initMap${mapId ? `&map_ids=${mapId}`: ''}`;
+        script.src = `https://maps.googleapis.com/maps/api/js?key=${apiKey}&callback=initMap&libraries=places${mapId ? `&map_ids=${mapId}`: ''}`;
         script.async = true;
         script.defer = true;
         script.onerror = window.mapApiError;
