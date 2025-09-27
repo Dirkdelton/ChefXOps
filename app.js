@@ -1399,17 +1399,29 @@ const IntegrationCard = ({ icon, name, description, isConnected, onToggle }) => 
 };
 
 const Integrations = ({showToast}) => {
-    const [integrations, setIntegrations] = useState({
-        // Social
-        facebook: JSON.parse(localStorage.getItem('chefxops_integration_facebook') || 'false'),
-        instagram: JSON.parse(localStorage.getItem('chefxops_integration_instagram') || 'false'),
-        twitter: JSON.parse(localStorage.getItem('chefxops_integration_twitter') || 'false'),
-        linkedin: JSON.parse(localStorage.getItem('chefxops_integration_linkedin') || 'false'),
-        tiktok: JSON.parse(localStorage.getItem('chefxops_integration_tiktok') || 'false'),
-        // Productivity
-        dropbox: JSON.parse(localStorage.getItem('chefxops_integration_dropbox') || 'false'),
-        outlookCalendar: JSON.parse(localStorage.getItem('chefxops_integration_outlook_calendar') || 'false'),
-        googleCalendar: JSON.parse(localStorage.getItem('chefxops_integration_google_calendar') || 'false'),
+    const defaultIntegrations = {
+        facebook: false,
+        instagram: false,
+        twitter: false,
+        linkedin: false,
+        tiktok: false,
+        dropbox: false,
+        outlookCalendar: false,
+        googleCalendar: false,
+    };
+
+    const [integrations, setIntegrations] = useState(() => {
+        try {
+            const allIntegrations = Object.keys(defaultIntegrations).reduce((acc, key) => {
+                const item = localStorage.getItem(`chefxops_integration_${key}`);
+                acc[key] = item ? JSON.parse(item) : false;
+                return acc;
+            }, {});
+            return allIntegrations;
+        } catch (e) {
+            console.error("Failed to parse integrations from localStorage", e);
+            return defaultIntegrations;
+        }
     });
     
     const toggleIntegration = (key, name) => {
@@ -1534,7 +1546,14 @@ const SocialMedia = ({ showToast }) => {
     const fileInputRef = useRef(null);
     const [isDropboxPickerOpen, setIsDropboxPickerOpen] = useState(false);
 
-    const isDropboxConnected = useMemo(() => JSON.parse(localStorage.getItem('chefxops_integration_dropbox') || 'false'), []);
+    const isDropboxConnected = useMemo(() => {
+        try {
+            return JSON.parse(localStorage.getItem('chefxops_integration_dropbox') || 'false');
+        } catch {
+            return false;
+        }
+    }, []);
+
 
     const handleGenerateContent = async () => {
         setIsLoadingText(true);
@@ -1759,6 +1778,79 @@ const NavLink = ({ icon, label, active, onClick }) => (
   </button>
 );
 
+const HighFidelityLogo = () => (
+    <svg width="48" height="48" viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg" className="rounded-lg">
+        {/*
+            JSX Compliant SVG Logo
+            - All comments are in JSX format: {/* ... */}
+            - All kebab-case attributes are converted to camelCase (e.g., stroke-width -> strokeWidth)
+        */}
+        <defs>
+            <pattern id="pattern-black" patternUnits="userSpaceOnUse" width="50" height="50" patternTransform="scale(1) rotate(45)">
+                <path d="M 0 50 L 50 0 M -10 20 L 20 -10 M 40 60 L 60 40" stroke="rgba(255, 255, 255, 0.02)" strokeWidth="1"></path>
+            </pattern>
+            <linearGradient id="bladeGradient" x1="0%" y1="0%" x2="0%" y2="100%">
+                <stop offset="0%" stopColor="#FFFFFF" />
+                <stop offset="100%" stopColor="#D1D5DB" />
+            </linearGradient>
+            <linearGradient id="handleGradient" x1="0%" y1="0%" x2="0%" y2="100%">
+                <stop offset="0%" stopColor="#111827" />
+                <stop offset="100%" stopColor="#000000" />
+            </linearGradient>
+            <filter id="glow">
+                <feGaussianBlur stdDeviation="2.5" result="coloredBlur" />
+                <feMerge>
+                    <feMergeNode in="coloredBlur" />
+                    <feMergeNode in="SourceGraphic" />
+                </feMerge>
+            </filter>
+        </defs>
+        <rect width="1024" height="1024" rx="150" fill="#0A0A0A" />
+        <rect width="1024" height="1024" rx="150" fill="url(#pattern-black)" />
+        {/* Laurels */}
+        <g transform="translate(512, 512) scale(1.2)">
+            <path d="M 0 -350 C -200 -300, -350 -100, -350 100 C -350 300, -200 400, 0 450" fill="none" stroke="#BFA15C" strokeWidth="40" strokeLinecap="round" />
+            <path d="M 0 -350 C 200 -300, 350 -100, 350 100 C 350 300, 200 400, 0 450" fill="none" stroke="#BFA15C" strokeWidth="40" strokeLinecap="round" />
+            {[...Array(8)].map((_, i) => (
+                <g key={`laurel-left-${i}`}>
+                    <path d={`M ${-15 - i*40} ${-300 + i*80} C ${-60 - i*20} ${-280 + i*80}, ${-80 - i*10} ${-220 + i*80}, ${-50 - i*30} ${-200 + i*80}`} fill="none" stroke="#BFA15C" strokeWidth="30" strokeLinecap="round" />
+                </g>
+            ))}
+            {[...Array(8)].map((_, i) => (
+                <g key={`laurel-right-${i}`}>
+                    <path d={`M ${15 + i*40} ${-300 + i*80} C ${60 + i*20} ${-280 + i*80}, ${80 + i*10} ${-220 + i*80}, ${50 + i*30} ${-200 + i*80}`} fill="none" stroke="#BFA15C" strokeWidth="30" strokeLinecap="round" />
+                </g>
+            ))}
+        </g>
+        {/* Knives */}
+        <g transform="translate(512, 512) rotate(-20) translate(-512, -512)">
+            <path d="M 200 512 L 800 512 L 900 450 L 800 390 L 200 390 Q 150 450, 200 512 Z" fill="url(#handleGradient)" />
+            <circle cx="250" cy="450" r="20" fill="#E5E7EB" />
+            <circle cx="350" cy="450" r="20" fill="#E5E7EB" />
+            <circle cx="450" cy="450" r="20" fill="#E5E7EB" />
+            <path d="M 500 390 L 950 100 L 980 150 L 500 512 L 500 390 Z" fill="url(#bladeGradient)" stroke="#9CA3AF" strokeWidth="5" />
+            <text x="650" y="300" fontFamily="Montserrat" fontSize="40" fill="#374151" transform="rotate(-35, 650, 300)">CHEFS 2023</text>
+        </g>
+        <g transform="translate(512, 512) rotate(20) translate(-512, -512) scale(1, -1) translate(0, -1024)">
+            <path d="M 200 512 L 800 512 L 900 450 L 800 390 L 200 390 Q 150 450, 200 512 Z" fill="url(#handleGradient)" />
+            <circle cx="250" cy="450" r="20" fill="#E5E7EB" />
+            <circle cx="350" cy="450" r="20" fill="#E5E7EB" />
+            <circle cx="450" cy="450" r="20" fill="#E5E7EB" />
+            <path d="M 500 390 L 950 100 L 980 150 L 500 512 L 500 390 Z" fill="url(#bladeGradient)" stroke="#9CA3AF" strokeWidth="5" />
+        </g>
+        {/* Diamond */}
+        <g transform="translate(512, 200)">
+            <path d="M -80 0 L 0 -100 L 80 0 L 0 100 Z" fill="#FBBF24" />
+            <path d="M -80 0 L 0 -100 L 0 0 Z" fill="rgba(255,255,255,0.3)" />
+            <path d="M 80 0 L 0 -100 L 0 0 Z" fill="rgba(0,0,0,0.2)" />
+            <path d="M -80 0 L 0 100 L 0 0 Z" fill="rgba(0,0,0,0.2)" />
+            <path d="M 80 0 L 0 100 L 0 0 Z" fill="rgba(255,255,255,0.1)" />
+            <path d="M 5 -90 L 15 -80 L 0 -100 Z" fill="#FFFFFF" filter="url(#glow)" />
+        </g>
+    </svg>
+);
+
+
 const Sidebar = ({ activePage, setActivePage }) => {
     const { profile } = useContext(ProfileContext);
 
@@ -1778,17 +1870,8 @@ const Sidebar = ({ activePage, setActivePage }) => {
     
     return (
         <div className="bg-glossy-black w-72 flex flex-col p-4 border-r border-white-10">
-            <div className="flex items-center space-x-3 px-2 py-2 mb-6">
-                {/* Reverted to a simple, stable logo to prevent rendering issues */}
-                <svg width="48" height="48" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-                    <rect width="100" height="100" rx="20" fill="#111214"/>
-                    <path d="M50 15 L58 25 L50 35 L42 25 Z" fill="#FBBF24"/>
-                    <g transform="translate(0, 5)">
-                        <path d="M35 80 Q50 45, 65 80" stroke="#BFA15C" fill="transparent" strokeWidth="5"/>
-                        <path d="M30 80 Q50 50, 70 80" stroke="#BFA15C" fill="transparent" strokeWidth="5" strokeDasharray="5,5"/>
-                    </g>
-                </svg>
-                <h1 className="text-2xl font-bold text-white tracking-wider">ChefXOps</h1>
+            <div className="flex items-center justify-center space-x-3 px-2 py-2 mb-6">
+                <HighFidelityLogo />
             </div>
             <nav className="flex-1 space-y-1.5 overflow-y-auto pr-2">
                 {navItems.map(item => (
@@ -1942,6 +2025,12 @@ const Profile = ({ onSave }) => {
 
 // --- START: Main App Component ---
 const App = () => {
+    const defaultProfile = {
+        chefName: "Dirk Delton",
+        businessName: "SpitfireXmedia",
+        imageUrl: "https://images.unsplash.com/photo-1581382575275-97901c2635b7?q=80&w=1887&auto=format&fit=crop&ixlib-rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+    };
+
     // --- State Management ---
     const [activePage, setActivePage] = useState('dashboard');
     const [leads, setLeads] = useState(initialLeads);
@@ -1949,14 +2038,17 @@ const App = () => {
     const [toast, setToast] = useState(null);
     const [apiKey, setApiKey] = useState(() => localStorage.getItem('chefxops_api_key'));
     const [mapId, setMapId] = useState(() => localStorage.getItem('chefxops_map_id'));
+    
     const [profile, setProfile] = useState(() => {
-        const savedProfile = localStorage.getItem('chefxops_profile');
-        return savedProfile ? JSON.parse(savedProfile) : {
-            chefName: "Dirk Delton",
-            businessName: "SpitfireXmedia",
-            imageUrl: "https://images.unsplash.com/photo-1581382575275-97901c2635b7?q=80&w=1887&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-        };
+        try {
+            const savedProfile = localStorage.getItem('chefxops_profile');
+            return savedProfile ? JSON.parse(savedProfile) : defaultProfile;
+        } catch (e) {
+            console.error("Failed to parse profile from localStorage, using default.", e);
+            return defaultProfile;
+        }
     });
+
 
     // --- API & Context Setup ---
     const ai = useMemo(() => {
@@ -2001,7 +2093,11 @@ const App = () => {
     }, [mapId]);
 
     useEffect(() => {
-        localStorage.setItem('chefxops_profile', JSON.stringify(profile));
+        try {
+            localStorage.setItem('chefxops_profile', JSON.stringify(profile));
+        } catch (e) {
+            console.error("Failed to save profile to localStorage", e);
+        }
     }, [profile]);
 
 
