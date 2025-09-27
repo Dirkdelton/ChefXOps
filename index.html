@@ -92,7 +92,8 @@
           console.error('Failed to load the application:', error);
           root.innerHTML = `<div style="padding: 2rem; color: #f87171; font-family: sans-serif;">
             <h1 style="font-size: 1.5rem; font-weight: bold;">Application failed to start</h1>
-            <pre style="margin-top: 1rem; padding: 1rem; background-color: #1f2937; border-radius: 0.5rem; color: #f9fafb; white-space: pre-wrap;">${error.stack || error}</pre>
+            <p style="margin-top: 1rem; color: #d1d5db;">This is often caused by a problem with the deployed files on the server.</p>
+            <pre style="margin-top: 1rem; padding: 1rem; background-color: #1f2937; border-radius: 0.5rem; color: #f9fafb; white-space: pre-wrap; word-break: break-all;">${error.stack || error}</pre>
           </div>`;
       }
 
@@ -159,6 +160,11 @@
         }
 
         const source = await response.text();
+        
+        if (source.trim().startsWith('<')) {
+            throw new Error(`Failed to load script from "${sourceUrl}". The server returned an HTML page instead of JavaScript. This usually means the file is missing or not deployed correctly. Please check your hosting configuration.`);
+        }
+
         const { code } = Babel.transform(source, {
           presets: ['react'],
           filename: 'app.js'
