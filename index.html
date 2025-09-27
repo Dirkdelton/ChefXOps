@@ -998,8 +998,6 @@
                     markersRef.current.forEach(marker => marker.setMap(null));
                     markersRef.current = [];
                     
-                    window.google.maps.event.clearInstanceListeners(window);
-
                     leads.forEach(lead => {
                         if (typeof lead.lat === 'number' && typeof lead.lng === 'number') {
                             const marker = new window.google.maps.Marker({
