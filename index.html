@@ -1779,80 +1779,19 @@ const Sidebar = ({ activePage, setActivePage }) => {
     return (
         <div className="bg-glossy-black w-72 flex flex-col p-4 border-r border-white/10">
             <div className="flex items-center space-x-3 px-2 py-2 mb-6">
-                <svg width="48" height="48" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-                    <defs>
-                        <linearGradient id="bladeGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-                            <stop offset="0%" style={{stopColor: '#E5E7EB'}} />
-                            <stop offset="50%" style={{stopColor: '#D1D5DB'}} />
-                            <stop offset="100%" style={{stopColor: '#9CA3AF'}} />
-                        </linearGradient>
-                        <linearGradient id="goldGradient" x1="0%" y1="0%" x2="0%" y2="100%">
-                            <stop offset="0%" style={{stopColor: '#FBBF24'}} />
-                            <stop offset="100%" style={{stopColor: '#BFA15C'}} />
-                        </linearGradient>
-                        <filter id="glow" x="-50%" y="-50%" width="200%" height="200%">
-                            <feGaussianBlur stdDeviation="3" result="coloredBlur" />
-                            <feMerge>
-                                <feMergeNode in="coloredBlur" />
-                                <feMergeNode in="SourceGraphic" />
-                            </feMerge>
-                        </filter>
-                         <pattern id="bgPattern" patternUnits="userSpaceOnUse" width="20" height="20">
-                            <path d="M 5 5 C 7.5 7.5, 12.5 7.5, 15 5 M 5 15 C 7.5 12.5, 12.5 12.5, 15 15" stroke="#1F2937" strokeWidth="0.5" fill="none" opacity="0.1"/>
-                        </pattern>
-                    </defs>
-                    
-                    {/* Background */}
+                 <svg width="48" height="48" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
                     <rect width="100" height="100" rx="20" fill="#111214"/>
-                    <rect width="100" height="100" rx="20" fill="url(#bgPattern)"/>
-
-                    {/* Laurel Wreath */}
-                    <g transform="translate(50,50)" filter="url(#glow)">
-                        <path d="M 0,45 A 40,40 0 0,1 -35,-15 C -20,-25 0,-25 0,-45 C 0,-25 20,-25 35,-15 A 40,40 0 0,1 0,45" fill="none" stroke="url(#goldGradient)" strokeWidth="5" strokeLinecap="round" />
-                        <g stroke="url(#goldGradient)" strokeWidth="2.5" strokeLinecap="round">
-                            {[...Array(7)].map((_, i) => (
-                                <g key={i} transform={`rotate(${-90 + i * 22}) translate(0, -40)`}>
-                                    <path d="M 0,0 L -8,-8" />
-                                    <path d="M 0,0 L 8,-8" />
-                                </g>
-                            ))}
-                             {[...Array(7)].map((_, i) => (
-                                <g key={i} transform={`rotate(${90 - i * 22}) translate(0, -40)`}>
-                                    <path d="M 0,0 L -8,-8" />
-                                    <path d="M 0,0 L 8,-8" />
-                                </g>
-                            ))}
-                        </g>
+                    {/* Diamond */}
+                    <path d="M50 15 L58 25 L50 35 L42 25 Z" fill="#FBBF24"/>
+                    {/* Knife 1 */}
+                    <g transform="rotate(-45 50 60)">
+                        <rect x="47" y="35" width="6" height="50" rx="3" fill="#9CA3AF"/>
+                        <rect x="45" y="85" width="10" height="15" rx="3" fill="#1F2937"/>
                     </g>
-                    
-                    {/* Knives */}
-                    <g transform="translate(50, 50)">
-                        {/* Knife 1 (bottom) */}
-                        <g transform="rotate(-45) translate(0, 5)">
-                            <path d="M -7,2 L -7,-30 C -7,-38 0,-40 5,-45 L 35,-15 C 40,-10 38,-7 30,-7 L 7,-7 L 7,2 Z" fill="#111827" />
-                            <path d="M -5,0 L -5,-28 C -5,-35 0,-37 4,-42 L 30,-16 C 35,-12 35,-10 28,-10 L 5,-10 L 5,0 Z" fill="url(#bladeGradient)" />
-                            <circle cx="-2" cy="-5" r="2" fill="#D1D5DB" />
-                            <circle cx="-2" cy="-15" r="2" fill="#D1D5DB" />
-                            <circle cx="-2" cy="-25" r="2" fill="#D1D5DB" />
-                        </g>
-                        {/* Knife 2 (top) */}
-                        <g transform="rotate(45) translate(0, 5) scale(1, -1)">
-                            <path d="M -7,2 L -7,-30 C -7,-38 0,-40 5,-45 L 35,-15 C 40,-10 38,-7 30,-7 L 7,-7 L 7,2 Z" fill="#111827" />
-                            <path d="M -5,0 L -5,-28 C -5,-35 0,-37 4,-42 L 30,-16 C 35,-12 35,-10 28,-10 L 5,-10 L 5,0 Z" fill="url(#bladeGradient)" />
-                            <circle cx="-2" cy="-5" r="2" fill="#D1D5DB" />
-                            <circle cx="-2" cy="-15" r="2" fill="#D1D5DB" />
-                            <circle cx="-2" cy="-25" r="2" fill="#D1D5DB" />
-                        </g>
-                    </g>
-
-                     {/* Diamond */}
-                    <g transform="translate(50, 20)">
-                        <path d="M 0,-5 L 8,5 L -8,5 Z" fill="url(#goldGradient)" />
-                        <path d="M 0,-5 L 4,5 L 0,8 L -4,5 Z" fill="#FBBF24" opacity="0.7"/>
-                        <path d="M 0,-5 L -8,5 L -4,5 L 0, -1 Z" fill="#BFA15C" opacity="0.7"/>
-                        <path d="M 0,-5 L 8,5 L 4,5 L 0, -1 Z" fill="#BFA15C" opacity="0.7"/>
-                        {/* Sparkle */}
-                        <path d="M 0,-6 L 1,-4 L 3,-5 L 1,-3 L 2,-1 L 0,0 L -2,-1 L -1,-3 L -3,-5 L -1,-4 Z" fill="#FFFFFF" filter="url(#glow)"/>
+                    {/* Knife 2 */}
+                    <g transform="rotate(45 50 60)">
+                        <rect x="47" y="35" width="6" height="50" rx="3" fill="#9CA3AF"/>
+                        <rect x="45" y="85" width="10" height="15" rx="3" fill="#1F2937"/>
                     </g>
                 </svg>
                 <h1 className="text-2xl font-bold text-white tracking-wider">ChefXOps</h1>
