@@ -1,4 +1,5 @@
 
+
 import React, { useState, useEffect, useMemo, useRef, Suspense, createContext, useContext } from 'react';
 import ReactDOM from 'react-dom/client';
 import { GoogleGenAI, Type } from '@google/genai';
@@ -239,7 +240,9 @@ const OneDriveIcon = (props) => (
 
 const DropboxIcon = (props) => (
     <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 24 24" fill="currentColor" {...props}>
-      <path d="M12 4L4 9l8 5 8-5-8-5zm0 6.5L4 15l8 5 8-5-8-5z"/>
+        <path fillRule="evenodd" d="M20.25 5.25a.75.75 0 0 0-1.5 0v1.5H18a.75.75 0 0 0 0 1.5h.75v.75a.75.75 0 0 0 1.5 0V9h.75a.75.75 0 0 0 0-1.5H20.25v-1.5Z" />
+        <path d="M4.125 4.5c-1.336 0-2.422 1.05-2.5 2.375V17.25c0 1.336 1.05 2.422 2.375 2.5h14.25c1.336 0 2.422-1.05 2.5-2.375V6.875c0-1.336-1.05-2.422-2.375-2.5H4.125ZM3 17.25V6.875c0-.726.544-1.33 1.25-1.375h14.5c.706.046 1.25.65 1.25 1.375V17.25c0 .726-.544 1.33-1.25 1.375H4.25c-.706-.045-1.25-.65-1.25-1.375Z" />
+        <path d="M12 8.25a.75.75 0 0 0-1.06-.05L6.47 11.97a.75.75 0 0 0 1.11 1.01l3.37-3.255v8.525a.75.75 0 0 0 1.5 0V9.725l3.37 3.255a.75.75 0 0 0 1.11-1.01l-4.47-4.235a.75.75 0 0 0-.44-.18Z" />
     </svg>
 );
 
@@ -295,6 +298,28 @@ const SettingsIcon = (props) => (
     </svg>
 );
 
+const UploadIcon = (props) => (
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" className="w-5 h-5" {...props}>
+      <path d="M9.25 13.25a.75.75 0 0 0 1.5 0V4.636l2.955 3.129a.75.75 0 0 0 1.09-1.03l-4.25-4.5a.75.75 0 0 0-1.09 0l-4.25 4.5a.75.75 0 1 0 1.09 1.03L9.25 4.636v8.614Z" />
+      <path d="M3.5 12.75a.75.75 0 0 0-1.5 0v2.5A2.75 2.75 0 0 0 4.75 18h10.5A2.75 2.75 0 0 0 18 15.25v-2.5a.75.75 0 0 0-1.5 0v2.5c0 .69-.56 1.25-1.25 1.25H4.75c-.69 0-1.25-.56-1.25-1.25v-2.5Z" />
+    </svg>
+);
+
+const VideoIcon = (props) => (
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" className="w-5 h-5" {...props}>
+        <path d="M3.5 2.75a.75.75 0 0 0-1.5 0v14.5a.75.75 0 0 0 1.5 0v-4.323a.75.75 0 0 0-.475-.695L2.5 12.016v-4.032l.525-.21a.75.75 0 0 0 .475-.695V2.75Z" />
+        <path d="M18 8.073a.75.75 0 0 0-1.225-.546l-5.138 5.138A.75.75 0 0 0 12 13.25v2.5A2.25 2.25 0 0 0 14.25 18h1.5A2.25 2.25 0 0 0 18 15.75v-7.677Z" />
+        <path d="M12 4.25a.75.75 0 0 1 .75-.75h3A2.25 2.25 0 0 1 18 5.75v1.323a.75.75 0 0 0 1.225.546l-5.138-5.138A.75.75 0 0 0 12 2.75v1.5Z" />
+        <path d="M11.25 8.75a.75.75 0 0 1-.75.75H8.25A2.25 2.25 0 0 0 6 11.75v1.5A2.25 2.25 0 0 0 8.25 15.5h.5a.75.75 0 0 0 0-1.5H8.25a.75.75 0 0 1-.75-.75v-1.5a.75.75 0 0 1 .75-.75h2.25a.75.75 0 0 1 .75.75Z" />
+    </svg>
+);
+
+const ImageIcon = (props) => (
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" className="w-5 h-5" {...props}>
+        <path fillRule="evenodd" d="M1 5.25A2.25 2.25 0 0 1 3.25 3h13.5A2.25 2.25 0 0 1 19 5.25v9.5A2.25 2.25 0 0 1 16.75 17H3.25A2.25 2.25 0 0 1 1 14.75v-9.5Zm1.5 5.81v3.69c0 .414.336.75.75.75h13.5a.75.75 0 0 0 .75-.75v-2.86l-2.62-2.62a.75.75 0 0 0-1.06 0L12 11.03l-1.72-1.72a.75.75 0 0 0-1.06 0L6.31 12.25l-1.03-1.03a.75.75 0 0 0-1.06 0L2.5 12.81Z" clipRule="evenodd" />
+        <path d="M10 10a.75.75 0 1 0 0-1.5.75.75 0 0 0 0 1.5Z" />
+    </svg>
+);
 // --- END: From components/icons.js ---
 
 // --- START: From services/geminiService.js ---
@@ -815,6 +840,12 @@ const Leads = ({ leads, onLeadsGenerated, showToast }) => {
     const handleSearchNearby = (lead) => {
         if (!map || !window.google) return;
         
+        // Load places library if not already available
+        if (!window.google.maps.places) {
+            showToast("Places library not loaded.", "error");
+            return;
+        }
+
         const service = new window.google.maps.places.PlacesService(map);
         const request = {
             location: { lat: lead.lat, lng: lead.lng },
@@ -882,18 +913,21 @@ const Leads = ({ leads, onLeadsGenerated, showToast }) => {
             });
             
             window.google.maps.event.addListener(infoWindowRef.current, 'domready', () => {
-                const currentLeadId = infoWindowRef.current.getContent().match(/id="viewDetails-(\d+)"/)[1];
-                const currentLead = leads.find(l => l.id == currentLeadId);
-                
-                if(currentLead){
-                    const viewDetailsBtn = document.getElementById(`viewDetails-${currentLead.id}`);
-                    const searchNearbyBtn = document.getElementById(`searchNearby-${currentLead.id}`);
+                const contentMatch = infoWindowRef.current.getContent().match(/id="viewDetails-(\d+)"/);
+                if (contentMatch && contentMatch[1]) {
+                    const currentLeadId = contentMatch[1];
+                    const currentLead = leads.find(l => l.id == currentLeadId);
+                    
+                    if(currentLead){
+                        const viewDetailsBtn = document.getElementById(`viewDetails-${currentLead.id}`);
+                        const searchNearbyBtn = document.getElementById(`searchNearby-${currentLead.id}`);
 
-                    if(viewDetailsBtn){
-                         viewDetailsBtn.onclick = () => setSelectedLead(currentLead);
-                    }
-                    if(searchNearbyBtn){
-                        searchNearbyBtn.onclick = () => handleSearchNearby(currentLead);
+                        if(viewDetailsBtn){
+                             viewDetailsBtn.onclick = () => setSelectedLead(currentLead);
+                        }
+                        if(searchNearbyBtn){
+                            searchNearbyBtn.onclick = () => handleSearchNearby(currentLead);
+                        }
                     }
                 }
             });
@@ -1164,30 +1198,29 @@ const MenuGenerator = () => {
                 <label className="text-sm font-medium text-heather-gray" htmlFor="mg-covers">Est. Covers</label>
                 <input id="mg-covers" type="number" value={covers} onChange={e => setCovers(e.target.value)} className="w-full bg-charcoal border border-white/10 rounded-md p-2 mt-1 text-white focus:outline-none focus:ring-2 focus:ring-gold" />
             </div>
-             <div>
-                <label className="text-sm font-medium text-heather-gray" htmlFor="mg-cuisine">Cuisine Style (optional)</label>
-                <input id="mg-cuisine" type="text" value={cuisine} onChange={e => setCuisine(e.target.value)} placeholder="e.g., Italian, Pacific Northwest" className="w-full bg-charcoal border border-white/10 rounded-md p-2 mt-1 text-white focus:outline-none focus:ring-2 focus:ring-gold" />
-            </div>
-             <div>
-                <label className="text-sm font-medium text-heather-gray" htmlFor="mg-dietary">Dietary Restrictions (optional)</label>
+            <div>
+                <label className="text-sm font-medium text-heather-gray" htmlFor="mg-dietary">Dietary Restrictions</label>
                 <input id="mg-dietary" type="text" value={dietary} onChange={e => setDietary(e.target.value)} placeholder="e.g., gluten-free, vegan" className="w-full bg-charcoal border border-white/10 rounded-md p-2 mt-1 text-white focus:outline-none focus:ring-2 focus:ring-gold" />
             </div>
-            <button onClick={handleGenerate} disabled={isLoading || !isApiConfigured} className="w-full mt-2 bg-gradient-to-r from-gold to-bright-yellow text-glossy-black font-bold py-3 px-4 rounded-lg shadow-glow-yellow hover:opacity-90 transition-opacity disabled:opacity-50">
-                {isLoading ? 'Generating...' : 'Generate Menu'}
-            </button>
+            <div>
+                <label className="text-sm font-medium text-heather-gray" htmlFor="mg-cuisine">Cuisine Style</label>
+                <input id="mg-cuisine" type="text" value={cuisine} onChange={e => setCuisine(e.target.value)} placeholder="e.g., Italian, Pacific Northwest" className="w-full bg-charcoal border border-white/10 rounded-md p-2 mt-1 text-white focus:outline-none focus:ring-2 focus:ring-gold" />
+            </div>
           </div>
+          <button onClick={handleGenerate} disabled={isLoading || !isApiConfigured} className="w-full mt-6 bg-gradient-to-r from-gold to-bright-yellow text-glossy-black font-bold py-3 px-4 rounded-lg shadow-glow-yellow hover:opacity-90 transition-opacity disabled:opacity-50">
+            {isLoading ? 'Generating...' : 'Generate Menu'}
+          </button>
         </div>
         <div className="md:col-span-2">
-            {isLoading && <div className="bg-card-black p-6 rounded-lg border border-white/10 h-full flex items-center justify-center"><Spinner text="Crafting your menu..."/></div>}
-            {error && <div className="bg-red-900/50 p-6 rounded-lg text-red-300 border border-red-700">{error}</div>}
+            {isLoading && <Spinner text="Crafting your menu..." />}
+            {error && <p className="text-red-500">{error}</p>}
             {menu && (
                 <div className="bg-card-black p-6 rounded-lg border border-white/10 fade-in">
-                    <h2 className="text-3xl font-serif font-bold text-white text-center mb-2">{menu.menuTitle}</h2>
-                    <div className="border-b-2 border-gold w-24 mx-auto mb-6"></div>
+                    <h2 className="text-3xl font-serif font-bold text-center text-gold mb-6">{menu.menuTitle}</h2>
                     <div className="space-y-4">
-                       <MenuCard title="Appetizer" course={menu.appetizer} />
-                       <MenuCard title="Main Course" course={menu.mainCourse} />
-                       <MenuCard title="Dessert" course={menu.dessert} />
+                        <MenuCard title="Appetizer" course={menu.appetizer} />
+                        <MenuCard title="Main Course" course={menu.mainCourse} />
+                        <MenuCard title="Dessert" course={menu.dessert} />
                     </div>
                 </div>
             )}
@@ -1199,34 +1232,25 @@ const MenuGenerator = () => {
 // --- END: From components/MenuGenerator.js ---
 
 // --- START: From components/EventPlanner.js ---
-const EventPlanner = ({ onEventSaved, showToast }) => {
+const EventPlanner = () => {
     const { ai, isApiConfigured } = useContext(ApiContext);
-    const [formDetails, setFormDetails] = useState({
-        eventName: '',
-        clientName: '',
-        guestCount: '50',
-        eventDate: new Date().toISOString().split('T')[0],
-        budget: '10000',
-        notes: ''
-    });
+    const [details, setDetails] = useState({ eventName: '', clientName: '', date: '', guests: '', notes: '' });
     const [plan, setPlan] = useState(null);
-    const [isLoading, setIsLoading] =useState(false);
+    const [isLoading, setIsLoading] = useState(false);
     const [error, setError] = useState('');
-    const [eventSaved, setEventSaved] = useState(false);
 
     const handleInputChange = (e) => {
-        const { id, value } = e.target;
-        setFormDetails(prev => ({...prev, [id]: value }));
+        const { name, value } = e.target;
+        setDetails(prev => ({ ...prev, [name]: value }));
     };
 
     const handleGenerate = async () => {
         setIsLoading(true);
         setError('');
         setPlan(null);
-        setEventSaved(false);
         try {
-            const responseText = await generateEventPlan(ai, formDetails);
-            setPlan(JSON.parse(responseText));
+            const response = await generateEventPlan(ai, details);
+            setPlan(JSON.parse(response));
         } catch (e) {
             setError(e.message);
         } finally {
@@ -1234,53 +1258,84 @@ const EventPlanner = ({ onEventSaved, showToast }) => {
         }
     };
     
-    const handleSaveEvent = () => {
-        if (!plan) return;
-        const newEvent = {
-            name: plan.eventName,
-            date: new Date(formDetails.eventDate).toISOString(),
-            guests: parseInt(formDetails.guestCount, 10),
-        };
-        onEventSaved(newEvent);
-        setEventSaved(true);
-        showToast('Event plan saved to dashboard!', 'success');
-    };
-
     return (
         <div>
-            <PageHeader title="Event Planning" subtitle="Generate comprehensive event plans from basic details." />
-             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                <div className="md:col-span-1 bg-card-black p-6 rounded-lg border border-white/10">
+            <PageHeader title="Event Planner" subtitle="Generate comprehensive event plans in seconds." />
+            <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+                <div className="lg:col-span-1 bg-card-black p-6 rounded-lg border border-white/10">
                     <h3 className="text-lg font-semibold text-white mb-4">Event Details</h3>
                     <div className="space-y-4">
-                        <input id="eventName" value={formDetails.eventName} onChange={handleInputChange} placeholder="Event Name (e.g., Smith Wedding)" className="w-full bg-charcoal border border-white/10 rounded-md p-2 text-white" />
-                        <input id="clientName" value={formDetails.clientName} onChange={handleInputChange} placeholder="Client Name" className="w-full bg-charcoal border border-white/10 rounded-md p-2 text-white" />
-                        <input id="guestCount" type="number" value={formDetails.guestCount} onChange={handleInputChange} placeholder="Guest Count" className="w-full bg-charcoal border border-white/10 rounded-md p-2 text-white" />
-                        <input id="eventDate" type="date" value={formDetails.eventDate} onChange={handleInputChange} className="w-full bg-charcoal border border-white/10 rounded-md p-2 text-white" />
-                        <textarea id="notes" value={formDetails.notes} onChange={handleInputChange} placeholder="Additional Notes (e.g., allergies, preferences)" rows="3" className="w-full bg-charcoal border border-white/10 rounded-md p-2 text-white"></textarea>
-                         <button onClick={handleGenerate} disabled={isLoading || !isApiConfigured} className="w-full mt-2 bg-gradient-to-r from-gold to-bright-yellow text-glossy-black font-bold py-3 px-4 rounded-lg shadow-glow-yellow hover:opacity-90 transition-opacity disabled:opacity-50">
-                            {isLoading ? 'Generating Plan...' : 'Generate AI Event Plan'}
-                        </button>
+                        <input type="text" name="eventName" placeholder="Event Name (e.g., 'Smith Wedding')" value={details.eventName} onChange={handleInputChange} className="w-full bg-charcoal border border-white/10 rounded-md p-2 text-white focus:outline-none focus:ring-2 focus:ring-gold" />
+                        <input type="text" name="clientName" placeholder="Client Name" value={details.clientName} onChange={handleInputChange} className="w-full bg-charcoal border border-white/10 rounded-md p-2 text-white focus:outline-none focus:ring-2 focus:ring-gold" />
+                        <input type="date" name="date" value={details.date} onChange={handleInputChange} className="w-full bg-charcoal border border-white/10 rounded-md p-2 text-white focus:outline-none focus:ring-2 focus:ring-gold" />
+                        <input type="number" name="guests" placeholder="Number of Guests" value={details.guests} onChange={handleInputChange} className="w-full bg-charcoal border border-white/10 rounded-md p-2 text-white focus:outline-none focus:ring-2 focus:ring-gold" />
+                        <textarea name="notes" placeholder="Additional Notes (e.g., allergies, theme ideas)" value={details.notes} onChange={handleInputChange} rows="4" className="w-full bg-charcoal border border-white/10 rounded-md p-2 text-white focus:outline-none focus:ring-2 focus:ring-gold" />
                     </div>
+                    <button onClick={handleGenerate} disabled={isLoading || !isApiConfigured} className="w-full mt-6 bg-gradient-to-r from-gold to-bright-yellow text-glossy-black font-bold py-3 px-4 rounded-lg shadow-glow-yellow hover:opacity-90 transition-opacity disabled:opacity-50">
+                        {isLoading ? 'Planning...' : 'Generate Plan'}
+                    </button>
                 </div>
-                <div className="md:col-span-2">
-                    {isLoading && <div className="bg-card-black p-6 rounded-lg border border-white/10 h-full flex items-center justify-center"><Spinner text="Building your event plan..."/></div>}
-                    {error && <div className="bg-red-900/50 p-6 rounded-lg text-red-300 border border-red-700">{error}</div>}
+                <div className="lg:col-span-2">
+                    {isLoading && <Spinner text="Generating your event plan..." />}
+                    {error && <p className="text-red-500">{error}</p>}
                     {plan && (
-                        <div className="bg-card-black p-6 rounded-lg border border-white/10 fade-in">
-                            <h2 className="text-2xl font-bold text-white mb-2">{plan.eventName}</h2>
-                            <div className="mb-6 p-4 bg-charcoal rounded-md border-l-4 border-gold">
-                                <h3 className="font-semibold text-gold">{plan.theme.title}</h3>
-                                <p className="text-sm text-heather-gray-light">{plan.theme.description}</p>
+                        <div className="bg-card-black p-6 rounded-lg border border-white/10 space-y-6 fade-in">
+                            <h2 className="text-3xl font-serif font-bold text-gold text-center">{plan.eventName}</h2>
+                            
+                            {/* Theme Section */}
+                            <div>
+                                <h3 className="text-xl font-semibold text-white mb-3 border-b-2 border-gold/30 pb-2">Event Theme</h3>
+                                <div className="bg-charcoal p-4 rounded-md">
+                                    <h4 className="text-lg font-bold text-gold">{plan.theme.title}</h4>
+                                    <p className="text-heather-gray-light">{plan.theme.description}</p>
+                                </div>
+                            </div>
+
+                            {/* Menu Section */}
+                            <div>
+                                <h3 className="text-xl font-semibold text-white mb-3 border-b-2 border-gold/30 pb-2">Proposed Menu</h3>
+                                <div className="space-y-3">
+                                    <div className="p-4 bg-charcoal rounded-md">
+                                        <p className="text-sm font-semibold text-gold tracking-widest uppercase">Appetizer</p>
+                                        <p className="font-bold text-white">{plan.menu.appetizer.name}</p>
+                                    </div>
+                                    <div className="p-4 bg-charcoal rounded-md">
+                                        <p className="text-sm font-semibold text-gold tracking-widest uppercase">Main</p>
+                                        <p className="font-bold text-white">{plan.menu.mainCourse.name}</p>
+                                    </div>
+                                    <div className="p-4 bg-charcoal rounded-md">
+                                        <p className="text-sm font-semibold text-gold tracking-widest uppercase">Dessert</p>
+                                        <p className="font-bold text-white">{plan.menu.dessert.name}</p>
+                                    </div>
+                                </div>
                             </div>
                             
-                            { /* Staffing & Timeline Sections could be added here for full display */ }
-                            
-                            <div className="mt-6 text-right">
-                               <button onClick={handleSaveEvent} disabled={eventSaved} className="flex items-center gap-2 bg-gold text-glossy-black font-bold py-2 px-4 rounded-lg shadow-glow-yellow hover:opacity-90 transition-opacity disabled:opacity-50 disabled:bg-green-600 disabled:text-white">
-                                   <SaveIcon />
-                                   {eventSaved ? 'Saved!' : 'Save Event Plan'}
-                               </button>
+                            {/* Staffing Section */}
+                            <div>
+                                <h3 className="text-xl font-semibold text-white mb-3 border-b-2 border-gold/30 pb-2">Staffing Plan</h3>
+                                <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
+                                    {plan.staffing.map(staff => (
+                                        <div key={staff.role} className="p-4 bg-charcoal rounded-md text-center">
+                                            <p className="text-2xl font-bold text-gold">{staff.count}</p>
+                                            <p className="font-semibold text-white">{staff.role}</p>
+                                        </div>
+                                    ))}
+                                </div>
+                            </div>
+
+                            {/* Timeline Section */}
+                            <div>
+                                <h3 className="text-xl font-semibold text-white mb-3 border-b-2 border-gold/30 pb-2">Prep Timeline</h3>
+                                <div className="space-y-4">
+                                    {plan.timeline.map(time => (
+                                        <div key={time.timeFrame} className="flex items-start space-x-4">
+                                            <div className="bg-gold text-glossy-black font-bold rounded-md px-3 py-1 text-sm whitespace-nowrap">{time.timeFrame}</div>
+                                            <ul className="list-disc list-inside text-heather-gray-light pl-2">
+                                                {time.tasks.map((task, i) => <li key={i}>{task}</li>)}
+                                            </ul>
+                                        </div>
+                                    ))}
+                                </div>
                             </div>
                         </div>
                     )}
@@ -1292,48 +1347,33 @@ const EventPlanner = ({ onEventSaved, showToast }) => {
 // --- END: From components/EventPlanner.js ---
 
 // --- START: From components/ExportCenter.js ---
-const ExportCenter = () => (
-    <div>
-        <PageHeader title="Export Center" subtitle="Download your data in various formats." />
-        <div className="bg-card-black p-6 rounded-lg border border-white/10">
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-                {['Leads', 'Events', 'Menus', 'Invoices'].map(item => (
-                    <div key={item} className="bg-charcoal p-4 rounded-md border border-white/10 text-center">
-                        <h3 className="text-lg font-semibold text-white mb-4">{item} Data</h3>
-                        <div className="flex justify-center space-x-2">
-                            <button className="bg-gold/20 text-gold font-semibold py-2 px-4 rounded-md text-sm hover:bg-gold hover:text-black transition-colors">CSV</button>
-                            <button className="bg-gold/20 text-gold font-semibold py-2 px-4 rounded-md text-sm hover:bg-gold hover:text-black transition-colors">PDF</button>
-                        </div>
-                    </div>
-                ))}
+const ExportCenter = () => {
+    return (
+        <div>
+            <PageHeader title="Export Center" subtitle="Download your menus, plans, and reports." />
+             <div className="text-center p-20 bg-card-black rounded-lg border-2 border-dashed border-white/10">
+                <h2 className="text-2xl font-semibold text-white">Coming Soon</h2>
+                <p className="text-heather-gray mt-2">This feature is under development. Soon you'll be able to export your generated content as PDFs and other formats.</p>
             </div>
         </div>
-    </div>
-);
+    );
+};
 // --- END: From components/ExportCenter.js ---
 
 // --- START: From components/Integrations.js ---
-const IntegrationCard = ({ icon, name, description, onConnect }) => {
-    const [isConnected, setIsConnected] = useState(false);
-    const handleConnect = () => {
-        setIsConnected(!isConnected);
-        onConnect(name, !isConnected);
-    };
-
+const IntegrationCard = ({ icon, name, description, isConnected, onToggle }) => {
     return (
-        <div className="bg-charcoal p-4 rounded-lg border border-white/10 flex items-center space-x-4">
-            <div className="text-gold">{icon}</div>
-            <div className="flex-1">
-                <h3 className="font-semibold text-white">{name}</h3>
-                <p className="text-xs text-heather-gray">{description}</p>
+        <div className={`bg-charcoal p-6 rounded-lg border ${isConnected ? 'border-gold/50' : 'border-white/10'} transition-colors flex items-center justify-between`}>
+            <div className="flex items-center space-x-4">
+                <div className="text-gold">{icon}</div>
+                <div>
+                    <h3 className="font-semibold text-white">{name}</h3>
+                    <p className="text-sm text-heather-gray-dark">{description}</p>
+                </div>
             </div>
             <button
-                onClick={handleConnect}
-                className={`px-4 py-1.5 rounded-md text-sm font-semibold transition-colors ${
-                    isConnected
-                        ? 'bg-green-500/20 text-green-400 hover:bg-red-500/20 hover:text-red-400'
-                        : 'bg-gold/20 text-gold hover:bg-gold hover:text-black'
-                }`}
+                onClick={onToggle}
+                className={`px-4 py-2 rounded-md font-semibold text-sm transition-colors ${isConnected ? 'bg-heather-gray/20 text-heather-gray-light hover:bg-red-900/50 hover:text-white' : 'bg-gold/20 text-gold hover:bg-gold/30'}`}
             >
                 {isConnected ? 'Disconnect' : 'Connect'}
             </button>
@@ -1342,27 +1382,54 @@ const IntegrationCard = ({ icon, name, description, onConnect }) => {
 };
 
 const Integrations = ({showToast}) => {
-    const handleConnect = (name, connected) => {
-        showToast(`${name} has been ${connected ? 'connected' : 'disconnected'}.`, 'success');
+    const [integrations, setIntegrations] = useState({
+        outlookCalendar: JSON.parse(localStorage.getItem('chefxops_integration_outlook') || 'false'),
+        oneDrive: JSON.parse(localStorage.getItem('chefxops_integration_onedrive') || 'false'),
+        dropbox: JSON.parse(localStorage.getItem('chefxops_integration_dropbox') || 'false'),
+        googleCalendar: JSON.parse(localStorage.getItem('chefxops_integration_gcal') || 'false'),
+    });
+    
+    const toggleIntegration = (key, name) => {
+      setIntegrations(prev => {
+        const newState = !prev[key];
+        localStorage.setItem(`chefxops_integration_${key.replace(/([A-Z])/g, '_$1').toLowerCase().substring(1)}`, JSON.stringify(newState));
+        showToast(`${name} ${newState ? 'connected' : 'disconnected'} successfully.`, 'success');
+        return { ...prev, [key]: newState };
+      });
     };
-
-    const integrationList = [
-        { icon: <GCalendarIcon />, name: "Google Calendar", description: "Sync events and bookings." },
-        { icon: <OutlookIcon />, name: "Outlook Calendar", description: "Sync with your Microsoft calendar." },
-        { icon: <OneDriveIcon />, name: "OneDrive", description: "Access documents from OneDrive." },
-        { icon: <DropboxIcon />, name: "Dropbox", description: "Link and manage files from Dropbox." },
-    ];
 
     return (
         <div>
             <PageHeader title="Integrations" subtitle="Connect ChefXOps with your favorite tools." />
-             <div className="bg-card-black p-6 rounded-lg border border-white/10">
-                <h3 className="text-lg font-semibold text-white mb-4">Available Integrations</h3>
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    {integrationList.map(item => (
-                        <IntegrationCard key={item.name} {...item} onConnect={handleConnect} />
-                    ))}
-                </div>
+            <div className="space-y-4">
+                <IntegrationCard
+                    icon={<OutlookIcon className="w-8 h-8" />}
+                    name="Outlook Calendar"
+                    description="Sync your event schedule and generate post ideas from your calendar."
+                    isConnected={integrations.outlookCalendar}
+                    onToggle={() => toggleIntegration('outlookCalendar', 'Outlook Calendar')}
+                />
+                 <IntegrationCard
+                    icon={<DropboxIcon className="w-8 h-8" />}
+                    name="Dropbox"
+                    description="Access your stored images and videos for social media posts."
+                    isConnected={integrations.dropbox}
+                    onToggle={() => toggleIntegration('dropbox', 'Dropbox')}
+                />
+                <IntegrationCard
+                    icon={<GCalendarIcon className="w-8 h-8" />}
+                    name="Google Calendar"
+                    description="Sync with your Google account for event management."
+                    isConnected={integrations.googleCalendar}
+                    onToggle={() => toggleIntegration('googleCalendar', 'Google Calendar')}
+                />
+                <IntegrationCard
+                    icon={<OneDriveIcon className="w-8 h-8" />}
+                    name="OneDrive"
+                    description="Access documents and files from Microsoft OneDrive."
+                    isConnected={integrations.oneDrive}
+                    onToggle={() => toggleIntegration('oneDrive', 'OneDrive')}
+                />
             </div>
         </div>
     );
@@ -1371,157 +1438,210 @@ const Integrations = ({showToast}) => {
 
 // --- START: From components/ChefTools.js ---
 const ChefTools = () => {
-  const tools = [
-    { name: "Unit Converter", description: "Convert between metric and imperial units.", icon: <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4" /></svg> },
-    { name: "Costing Calculator", description: "Calculate food cost percentage for menu items.", icon: <RevenueIcon className="h-6 w-6" /> },
-    { name: "Scaling Tool", description: "Scale recipes up or down for different yields.", icon: <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 8V4m0 0h4M4 4l5 5m11-1V4m0 0h-4m4 0l-5 5M4 16v4m0 0h4m-4 0l5-5m11 5v4m0 0h-4m4 0l-5-5" /></svg> },
-    { name: "Inventory Tracker", description: "Keep track of stock levels and ingredients.", icon: <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 10h16M4 14h16M4 18h16" /></svg> },
-  ];
-  return (
-    <div>
-      <PageHeader title="Chef Tools" subtitle="A suite of utilities to streamline your kitchen operations." />
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-        {tools.map(tool => (
-          <div key={tool.name} className="bg-card-black p-6 rounded-lg border border-white/10 hover:border-gold transition-colors">
-            <div className="flex items-center space-x-4">
-              <div className="text-gold">{tool.icon}</div>
-              <div>
-                <h3 className="text-lg font-semibold text-white">{tool.name}</h3>
-                <p className="text-sm text-heather-gray">{tool.description}</p>
-              </div>
+    return (
+        <div>
+            <PageHeader title="Chef Tools" subtitle="Essential utilities for the modern chef." />
+             <div className="text-center p-20 bg-card-black rounded-lg border-2 border-dashed border-white/10">
+                <h2 className="text-2xl font-semibold text-white">Coming Soon</h2>
+                <p className="text-heather-gray mt-2">A suite of tools including unit converters, costing calculators, and more will be available here.</p>
             </div>
-          </div>
-        ))}
-      </div>
-    </div>
-  );
+        </div>
+    );
 };
 // --- END: From components/ChefTools.js ---
 
-// --- START: From components/SocialMedia.js ---
-const SocialMedia = ({showToast}) => {
-    const { ai, isApiConfigured } = useContext(ApiContext);
-    const [platform, setPlatform] = useState('Instagram');
-    const [topic, setTopic] = useState('');
-    const [post, setPost] = useState(null);
-    const [imagePrompt, setImagePrompt] = useState('');
-    const [imageUrl, setImageUrl] = useState('');
-    const [isLoading, setIsLoading] = useState(false);
-    const [isImageLoading, setIsImageLoading] = useState(false);
-    const [error, setError] = useState('');
-    
-    const platforms = [
-        { name: 'Instagram', icon: <InstagramIcon />},
-        { name: 'Facebook', icon: <FacebookIcon /> },
-        { name: 'Twitter', icon: <TwitterIcon /> },
-        { name: 'LinkedIn', icon: <LinkedInIcon /> },
+// --- START: Component: DropboxPickerModal ---
+const DropboxPickerModal = ({ isOpen, onClose, onSelect }) => {
+    if (!isOpen) return null;
+
+    const mockFiles = [
+        { id: 1, name: "Gala Dinner Plating.jpg", type: "image", url: "https://picsum.photos/seed/gala/400/300" },
+        { id: 2, name: "Wedding Appetizer Prep.mp4", type: "video", url: "https://storage.googleapis.com/gtv-videos-bucket/sample/ForBiggerFun.mp4", thumbnailUrl: "https://picsum.photos/seed/wedding_prep/400/300" },
+        { id: 3, name: "Sous Vide Steak.jpg", type: "image", url: "https://picsum.photos/seed/steak/400/300" },
+        { id: 4, name: "Plating Dessert.jpg", type: "image", url: "https://picsum.photos/seed/dessert/400/300" },
+        { id: 5, name: "Market Research.jpg", type: "image", url: "https://picsum.photos/seed/market/400/300" },
+        { id: 6, name: "Kitchen Action.mp4", type: "video", url: "https://storage.googleapis.com/gtv-videos-bucket/sample/ForBiggerJoyrides.mp4", thumbnailUrl: "https://picsum.photos/seed/kitchen_action/400/300" },
     ];
 
-    const handleGeneratePost = async () => {
-        if (!topic) return;
-        setIsLoading(true);
-        setError('');
-        setPost(null);
-        setImageUrl('');
-        try {
-            const prompt = `Create a compelling social media post for ${platform} about "${topic}". The post should be engaging, professional, and tailored for a culinary business. Include relevant hashtags. Also, provide a short, vivid prompt for an AI image generator to create a stunning accompanying photo, formatted as "Image Prompt: [prompt here]".`;
-            const responseText = await getAIResponse(ai, prompt);
-            const imagePromptRegex = /Image Prompt: (.*)/;
-            const match = responseText.match(imagePromptRegex);
-            
-            if (match) {
-                const extractedPrompt = match[1];
-                const postText = responseText.replace(imagePromptRegex, '').trim();
-                setPost(postText);
-                setImagePrompt(extractedPrompt);
-                handleGenerateImage(extractedPrompt);
-            } else {
-                setPost(responseText);
-                setImagePrompt('');
-            }
-        } catch (e) {
-            setError(e.message);
-        } finally {
-            setIsLoading(false);
-        }
-    };
-    
-    const handleGenerateImage = async (promptToUse) => {
-        setIsImageLoading(true);
-        try {
-            const imageData = await generateImageFromPrompt(ai, promptToUse);
-            setImageUrl(`data:image/jpeg;base64,${imageData}`);
-        } catch (e) {
-            setError(e.message || "Failed to generate image.");
-        } finally {
-            setIsImageLoading(false);
-        }
+    const handleSelect = (file) => {
+        onSelect({
+            src: file.url,
+            type: file.type,
+        });
+        onClose();
     };
 
     return (
-        <div>
-            <PageHeader title="Social Media Assistant" subtitle="Generate engaging posts and images for your brand." />
-            <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-                <div className="lg:col-span-1 space-y-6">
-                    <div className="bg-card-black p-6 rounded-lg border border-white/10">
-                        <h3 className="text-lg font-semibold text-white mb-4">Post Details</h3>
-                        <div>
-                            <label className="text-sm font-medium text-heather-gray">Platform</label>
-                            <div className="flex space-x-2 mt-2">
-                                {platforms.map(p => (
-                                    <button
-                                        key={p.name}
-                                        onClick={() => setPlatform(p.name)}
-                                        className={`flex-1 p-2 rounded-md border-2 transition-colors ${platform === p.name ? 'border-gold bg-gold/10' : 'border-transparent bg-charcoal'}`}
-                                    >
-                                        <div className={`mx-auto ${platform === p.name ? 'text-gold' : 'text-heather-gray'}`}>{p.icon}</div>
-                                    </button>
-                                ))}
-                            </div>
-                        </div>
-                        <div className="mt-4">
-                            <label htmlFor="topic" className="text-sm font-medium text-heather-gray">Topic or Idea</label>
-                            <textarea
-                                id="topic"
-                                value={topic}
-                                onChange={e => setTopic(e.target.value)}
-                                rows="3"
-                                placeholder="e.g., A new seasonal tasting menu, behind the scenes of an event..."
-                                className="w-full mt-1 bg-charcoal border border-white/10 rounded-md p-2 text-white focus:outline-none focus:ring-2 focus:ring-gold"
-                            />
-                        </div>
-                         <button onClick={handleGeneratePost} disabled={isLoading || !isApiConfigured} className="w-full mt-4 bg-gradient-to-r from-gold to-bright-yellow text-glossy-black font-bold py-3 px-4 rounded-lg shadow-glow-yellow hover:opacity-90 transition-opacity disabled:opacity-50">
-                            {isLoading ? 'Generating...' : 'Generate Post'}
-                        </button>
-                    </div>
+        <div className="fixed inset-0 bg-black/70 z-40 flex items-center justify-center p-4 backdrop-blur-sm" onClick={onClose}>
+            <div className="bg-card-black rounded-lg border border-gold/50 shadow-glow-gold w-full max-w-4xl h-[80vh] flex flex-col relative fade-in" onClick={e => e.stopPropagation()}>
+                <div className="p-4 border-b border-white/10 flex items-center justify-between">
+                    <h2 className="text-xl font-semibold text-white flex items-center"><DropboxIcon className="w-6 h-6 mr-2 text-blue-400" /> Select from Dropbox</h2>
+                    <button onClick={onClose} className="text-heather-gray hover:text-white transition-colors">
+                        <XIcon />
+                    </button>
                 </div>
-                <div className="lg:col-span-2">
-                    {(isLoading || post) && (
-                        <div className="bg-card-black p-6 rounded-lg border border-white/10">
-                            {isLoading && <Spinner text="Generating social media content..." />}
-                            {error && <p className="text-red-400">{error}</p>}
-                            {post && (
-                                <div className="flex flex-col md:flex-row gap-6">
-                                    <div className="md:w-1/2">
-                                        <h4 className="font-semibold text-gold mb-2">Generated Post for {platform}</h4>
-                                        <div className="bg-charcoal p-4 rounded-md whitespace-pre-wrap text-heather-gray-light text-sm">{post}</div>
-                                    </div>
-                                    <div className="md:w-1/2">
-                                        <h4 className="font-semibold text-gold mb-2">Generated Image</h4>
-                                        <div className="aspect-square bg-charcoal rounded-md flex items-center justify-center">
-                                            {isImageLoading ? <Spinner text="Generating Image..." /> : (imageUrl ? <img src={imageUrl} className="w-full h-full object-cover rounded-md"/> : <p className="text-heather-gray-dark text-sm">Image will appear here</p>)}
-                                        </div>
-                                         <div className="flex items-center justify-between mt-2">
-                                            <p className="text-xs text-heather-gray truncate italic pr-2">Prompt: "{imagePrompt}"</p>
-                                            <button onClick={() => handleGenerateImage(imagePrompt)} disabled={isImageLoading || !imagePrompt} className="text-gold hover:text-bright-yellow disabled:opacity-50 flex-shrink-0">
-                                                <RegenerateIcon />
-                                            </button>
-                                         </div>
+                <div className="p-4 flex-1 overflow-y-auto">
+                    <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+                        {mockFiles.map(file => (
+                            <div key={file.id} onClick={() => handleSelect(file)} className="bg-charcoal rounded-md overflow-hidden cursor-pointer group border-2 border-transparent hover:border-gold transition-colors">
+                                <div className="relative aspect-video bg-glossy-black flex items-center justify-center">
+                                    <img src={file.type === 'image' ? file.url : file.thumbnailUrl} alt={file.name} className="w-full h-full object-cover group-hover:opacity-75 transition-opacity" />
+                                    <div className="absolute inset-0 flex items-center justify-center text-white text-4xl opacity-0 group-hover:opacity-100 transition-opacity">
+                                        {file.type === 'video' ? <VideoIcon className="w-12 h-12" /> : <ImageIcon className="w-12 h-12" />}
                                     </div>
                                 </div>
-                            )}
+                                <div className="p-2 text-xs text-heather-gray-light truncate">
+                                    {file.name}
+                                </div>
+                            </div>
+                        ))}
+                    </div>
+                </div>
+            </div>
+        </div>
+    );
+};
+// --- END: Component: DropboxPickerModal ---
+
+
+// --- START: From components/SocialMedia.js ---
+const SocialMedia = ({ showToast }) => {
+    const { ai, isApiConfigured } = useContext(ApiContext);
+    const [topic, setTopic] = useState('');
+    const [platform, setPlatform] = useState('Instagram');
+    const [generatedText, setGeneratedText] = useState('');
+    const [generatedImage, setGeneratedImage] = useState(null);
+    const [uploadedMedia, setUploadedMedia] = useState(null);
+    const [isLoadingText, setIsLoadingText] = useState(false);
+    const [isLoadingImage, setIsLoadingImage] = useState(false);
+    const [error, setError] = useState('');
+    const fileInputRef = useRef(null);
+    const [isDropboxPickerOpen, setIsDropboxPickerOpen] = useState(false);
+
+    const isDropboxConnected = useMemo(() => JSON.parse(localStorage.getItem('chefxops_integration_dropbox') || 'false'), []);
+
+    const handleGenerateContent = async () => {
+        setIsLoadingText(true);
+        setError('');
+        try {
+            const prompt = `Generate a compelling social media post for ${platform} about: "${topic}". Include relevant hashtags.`;
+            const responseText = await getAIResponse(ai, prompt);
+            setGeneratedText(responseText);
+        } catch (e) {
+            setError(e.message);
+            showToast(e.message, 'error');
+        }
+        setIsLoadingText(false);
+    };
+
+    const handleGenerateImage = async () => {
+        setIsLoadingImage(true);
+        setError('');
+        setUploadedMedia(null);
+        try {
+            const imagePrompt = `A social media photo about: ${topic}`;
+            const imageBytes = await generateImageFromPrompt(ai, imagePrompt);
+            setGeneratedImage(`data:image/jpeg;base64,${imageBytes}`);
+        } catch (e) {
+            setError(e.message);
+            showToast(e.message, 'error');
+        }
+        setIsLoadingImage(false);
+    };
+
+    const handleLocalMediaUpload = (event) => {
+        const file = event.target.files[0];
+        if (file) {
+            if (file.type.startsWith('image/') || file.type.startsWith('video/')) {
+                const reader = new FileReader();
+                reader.onloadend = () => {
+                    setUploadedMedia({
+                        src: reader.result,
+                        type: file.type.startsWith('image/') ? 'image' : 'video'
+                    });
+                    setGeneratedImage(null); // Clear AI image when user uploads
+                };
+                reader.readAsDataURL(file);
+            } else {
+                showToast("Please select a valid image or video file.", 'error');
+            }
+        }
+    };
+
+    const platformIcons = {
+        'Facebook': <FacebookIcon />,
+        'Instagram': <InstagramIcon />,
+        'Twitter': <TwitterIcon />,
+        'LinkedIn': <LinkedInIcon />,
+    };
+    
+    return (
+        <div>
+            <PageHeader title="Social Media Assistant" subtitle="Generate engaging content for your online platforms." />
+            <DropboxPickerModal isOpen={isDropboxPickerOpen} onClose={() => setIsDropboxPickerOpen(false)} onSelect={setUploadedMedia} />
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                <div className="bg-card-black p-6 rounded-lg border border-white/10 space-y-4">
+                    <div>
+                        <label className="text-sm font-medium text-heather-gray" htmlFor="sm-topic">Post Topic</label>
+                        <input id="sm-topic" type="text" value={topic} onChange={e => setTopic(e.target.value)} placeholder="e.g., Behind the scenes of a wedding catering" className="w-full bg-charcoal border border-white/10 rounded-md p-2 mt-1 text-white focus:outline-none focus:ring-2 focus:ring-gold" />
+                    </div>
+                    <div>
+                        <label className="text-sm font-medium text-heather-gray">Platform</label>
+                        <div className="flex space-x-2 mt-2">
+                            {Object.keys(platformIcons).map(p => (
+                                <button key={p} onClick={() => setPlatform(p)} className={`p-3 rounded-lg transition-colors ${platform === p ? 'bg-gold text-glossy-black' : 'bg-charcoal text-heather-gray hover:bg-white/10'}`}>
+                                    {platformIcons[p]}
+                                </button>
+                            ))}
                         </div>
-                    )}
+                    </div>
+                    <div className="flex flex-col sm:flex-row space-y-2 sm:space-y-0 sm:space-x-2">
+                        <button onClick={handleGenerateContent} disabled={isLoadingText || !topic.trim() || !isApiConfigured} className="flex-1 bg-heather-gray/20 text-heather-gray-light font-bold py-3 px-4 rounded-lg hover:bg-heather-gray/30 transition-colors disabled:opacity-50">
+                            {isLoadingText ? 'Generating Text...' : 'Generate Post Text'}
+                        </button>
+                        <button onClick={handleGenerateImage} disabled={isLoadingImage || !topic.trim() || !isApiConfigured} className="flex-1 bg-heather-gray/20 text-heather-gray-light font-bold py-3 px-4 rounded-lg hover:bg-heather-gray/30 transition-colors disabled:opacity-50">
+                             {isLoadingImage ? 'Generating Image...' : 'Generate AI Image'}
+                        </button>
+                    </div>
+                     <div>
+                        <p className="text-center text-xs text-heather-gray-dark my-2">OR</p>
+                        <div className="flex flex-col sm:flex-row space-y-2 sm:space-y-0 sm:space-x-2">
+                           <input type="file" ref={fileInputRef} onChange={handleLocalMediaUpload} accept="image/*,video/*" className="hidden" />
+                           <button onClick={() => fileInputRef.current.click()} className="flex-1 flex items-center justify-center gap-2 bg-charcoal text-heather-gray-light font-bold py-3 px-4 rounded-lg hover:bg-white/10 transition-colors">
+                                <UploadIcon/> Upload from Device
+                           </button>
+                           <button onClick={() => setIsDropboxPickerOpen(true)} disabled={!isDropboxConnected} className="flex-1 flex items-center justify-center gap-2 bg-charcoal text-heather-gray-light font-bold py-3 px-4 rounded-lg hover:bg-white/10 transition-colors disabled:opacity-50 disabled:cursor-not-allowed" title={!isDropboxConnected ? "Connect Dropbox in Integrations" : ""}>
+                                <DropboxIcon/> Select from Dropbox
+                           </button>
+                        </div>
+                    </div>
+                </div>
+                <div className="bg-card-black p-6 rounded-lg border border-white/10">
+                    <h3 className="text-lg font-semibold text-white mb-4">Post Preview</h3>
+                    <div className="bg-charcoal rounded-lg p-4">
+                        <div className="flex items-center mb-3">
+                            <div className="w-10 h-10 rounded-full bg-gold/20 flex items-center justify-center"><UserIcon className="w-6 h-6 text-gold"/></div>
+                            <span className="ml-3 font-semibold text-white">Your Business Name</span>
+                        </div>
+                        <div className="text-white text-sm mb-4 min-h-[80px]">
+                            {isLoadingText ? <Spinner text="Generating..." /> : generatedText || "Your generated post text will appear here..."}
+                        </div>
+                         <div className="aspect-square bg-glossy-black rounded-md flex items-center justify-center overflow-hidden">
+                            {isLoadingImage ? <Spinner text="Generating image..." /> : 
+                             uploadedMedia ? (
+                                uploadedMedia.type === 'image' ? (
+                                    <img src={uploadedMedia.src} alt="User upload" className="w-full h-full object-cover" />
+                                ) : (
+                                    <video src={uploadedMedia.src} controls className="w-full h-full object-cover"></video>
+                                )
+                             ) :
+                             generatedImage ? (
+                                <img src={generatedImage} alt="AI generated" className="w-full h-full object-cover" />
+                             ) : (
+                                <span className="text-heather-gray-dark text-sm">Image or video will appear here</span>
+                             )}
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -1531,122 +1651,165 @@ const SocialMedia = ({showToast}) => {
 
 // --- START: From components/Invoicing.js ---
 const Invoicing = () => {
-  return (
-    <div>
-      <PageHeader title="Invoicing" subtitle="Create, send, and track professional invoices." />
-      <div className="flex flex-col items-center justify-center text-center bg-card-black border-2 border-dashed border-white/10 rounded-lg p-12 h-[60vh]">
-        <InvoicingIcon className="w-16 h-16 text-gold mb-4" />
-        <h2 className="text-2xl font-bold text-white mb-2">Coming Soon!</h2>
-        <p className="text-heather-gray max-w-md">
-          Our full-featured invoicing module is under development. Soon, you'll be able to seamlessly manage your client billing directly within ChefXOps.
-        </p>
-      </div>
-    </div>
-  );
+    return (
+        <div>
+            <PageHeader title="Invoicing" subtitle="Create, send, and track client invoices." />
+             <div className="text-center p-20 bg-card-black rounded-lg border-2 border-dashed border-white/10">
+                <h2 className="text-2xl font-semibold text-white">Coming Soon</h2>
+                <p className="text-heather-gray mt-2">A full-featured invoicing system is in the works to help you manage your billing seamlessly.</p>
+            </div>
+        </div>
+    );
 };
 // --- END: From components/Invoicing.js ---
 
+// --- START: Component: Sidebar ---
+const NavLink = ({ icon, label, active, onClick }) => (
+  <button
+    onClick={onClick}
+    className={`flex items-center w-full px-4 py-3 text-left transition-colors duration-200 rounded-lg ${
+      active
+        ? 'bg-gradient-to-r from-gold/20 to-gold/5 text-gold font-semibold shadow-inner'
+        : 'text-heather-gray hover:bg-white/5 hover:text-white'
+    }`}
+  >
+    {React.cloneElement(icon, { className: 'h-6 w-6 mr-4 flex-shrink-0' })}
+    <span className="flex-1">{label}</span>
+  </button>
+);
+
+const Sidebar = ({ activePage, setActivePage }) => {
+    const { profile } = useContext(ProfileContext);
+
+    const navItems = [
+      { id: 'dashboard', label: 'Dashboard', icon: <DashboardIcon /> },
+      { id: 'leads', label: 'Lead Generation', icon: <LeadsIcon /> },
+      { id: 'aiAssistant', label: 'Onboard Culinary Agent', icon: <AiAssistantIcon /> },
+      { id: 'knowledgeBase', label: 'Knowledge Base', icon: <KnowledgeIcon /> },
+      { id: 'menuGenerator', label: 'Menu Generator', icon: <MenuIcon /> },
+      { id: 'eventPlanner', label: 'Event Planner', icon: <EventIcon /> },
+      { id: 'socialMedia', label: 'Social Media', icon: <SocialMediaIcon /> },
+      { id: 'invoicing', label: 'Invoicing', icon: <InvoicingIcon /> },
+      { id: 'chefTools', label: 'Chef Tools', icon: <ChefToolsIcon /> },
+      { id: 'exportCenter', label: 'Export Center', icon: <ExportIcon /> },
+      { id: 'integrations', label: 'Integrations', icon: <IntegrationIcon /> },
+    ];
+    
+    return (
+        <div className="bg-glossy-black w-72 flex flex-col p-4 border-r border-white/10">
+            <div className="flex items-center space-x-2 px-4 py-2 mb-6">
+                <svg width="40" height="40" viewBox="0 0 100 100" className="text-gold">
+                    <defs>
+                        <linearGradient id="logoGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                            <stop offset="0%" style={{stopColor: '#FBBF24'}} />
+                            <stop offset="100%" style={{stopColor: '#BFA15C'}} />
+                        </linearGradient>
+                         <filter id="logoGlow" x="-50%" y="-50%" width="200%" height="200%">
+                            <feGaussianBlur stdDeviation="5" result="coloredBlur"/>
+                            <feMerge>
+                                <feMergeNode in="coloredBlur"/>
+                                <feMergeNode in="SourceGraphic"/>
+                            </feMerge>
+                        </filter>
+                    </defs>
+                    <g transform="translate(50, 50)" filter="url(#logoGlow)">
+                         <path d="M-5, -40 L5, -40 L5, 40 L-5, 40 Z" fill="url(#logoGradient)" transform="rotate(45)"/>
+                         <path d="M-5, -40 L5, -40 L5, 40 L-5, 40 Z" fill="url(#logoGradient)" transform="rotate(-45)"/>
+                         <path d="M0 -15 L10 0 L0 15 L-10 0 Z" fill="white" />
+                    </g>
+                </svg>
+                <h1 className="text-2xl font-bold text-white tracking-wider">ChefXOps</h1>
+            </div>
+            <nav className="flex-1 space-y-1.5 overflow-y-auto pr-2">
+                {navItems.map(item => (
+                    <NavLink
+                        key={item.id}
+                        icon={item.icon}
+                        label={item.label}
+                        active={activePage === item.id}
+                        onClick={() => setActivePage(item.id)}
+                    />
+                ))}
+            </nav>
+            <div className="mt-auto pt-4 border-t border-white/10">
+                <NavLink
+                    icon={<SettingsIcon />}
+                    label="Settings"
+                    active={activePage === 'settings'}
+                    onClick={() => setActivePage('settings')}
+                />
+                 <button onClick={() => setActivePage('profile')} className="w-full flex items-center space-x-3 p-3 mt-2 rounded-lg hover:bg-white/5 transition-colors">
+                    <img src={profile.imageUrl} alt="Chef" className="w-10 h-10 rounded-full object-cover border-2 border-gold/50" />
+                    <div className="text-left flex-1">
+                        <p className="font-semibold text-white text-sm">{profile.chefName}</p>
+                        <p className="text-xs text-heather-gray-dark">{profile.businessName}</p>
+                    </div>
+                 </button>
+            </div>
+        </div>
+    );
+};
+// --- END: Component: Sidebar ---
+
 // --- START: Component: Settings ---
-const Settings = ({ showToast, onApiConfigChange }) => {
-    const UPDATE_URL_KEY = 'chefxops_update_url';
-    const API_KEY_KEY = 'chefxops_api_key';
-    const MAP_ID_KEY = 'chefxops_map_id';
-
-    const [updateUrl, setUpdateUrl] = useState('');
-    const [apiKey, setApiKey] = useState('');
-    const [mapId, setMapId] = useState('');
-
-    useEffect(() => {
-        setUpdateUrl(localStorage.getItem(UPDATE_URL_KEY) || '');
-        setApiKey(localStorage.getItem(API_KEY_KEY) || '');
-        setMapId(localStorage.getItem(MAP_ID_KEY) || '');
-    }, []);
+const Settings = ({ showToast }) => {
+    const { apiKey, setApiKey, mapId, setMapId } = useContext(ApiContext);
+    const [localApiKey, setLocalApiKey] = useState(apiKey || '');
+    const [localMapId, setLocalMapId] = useState(mapId || '');
+    const [updateUrl, setUpdateUrl] = useState(localStorage.getItem('chefxops_update_url') || '');
 
     const handleSave = () => {
-        try {
-            if (updateUrl && updateUrl.trim() !== '') {
-                new URL(updateUrl);
-            }
-            localStorage.setItem(UPDATE_URL_KEY, updateUrl.trim());
-            localStorage.setItem(API_KEY_KEY, apiKey.trim());
-            localStorage.setItem(MAP_ID_KEY, mapId.trim());
-            showToast('Settings saved successfully! Restart the app for all changes to take effect.', 'success');
-            onApiConfigChange();
-        } catch (e) {
-            showToast('Invalid Update URL. Please enter a valid URL or leave blank.', 'error');
-        }
-    };
-
-    const handleClearUpdate = () => {
-        localStorage.removeItem(UPDATE_URL_KEY);
-        setUpdateUrl('');
-        showToast('Update source reset to local version. Restart required.', 'success');
+        setApiKey(localApiKey);
+        setMapId(localMapId);
+        localStorage.setItem('chefxops_update_url', updateUrl);
+        showToast('Settings saved successfully!', 'success');
     };
 
     return (
         <div>
-            <PageHeader title="Settings" subtitle="Configure application settings and preferences." />
-            <div className="bg-card-black p-6 rounded-lg border border-white/10 space-y-8">
-
-                <div>
-                    <h3 className="text-xl font-semibold text-white mb-2">API Configuration</h3>
-                    <p className="text-sm text-heather-gray mb-4">
-                        Enter your Google Cloud credentials here. These are stored securely in your browser and are required for all AI and Map features.
-                    </p>
-                    <div className="max-w-2xl space-y-4">
-                        <div>
-                            <label htmlFor="apiKey" className="text-sm font-medium text-heather-gray">Google Cloud API Key</label>
-                            <input
-                                id="apiKey"
-                                type="password"
-                                value={apiKey}
-                                onChange={e => setApiKey(e.target.value)}
-                                placeholder="Enter your API Key"
-                                className="w-full mt-1 bg-charcoal border border-white/10 rounded-md p-2 text-white focus:outline-none focus:ring-2 focus:ring-gold"
-                            />
-                        </div>
-                        <div>
-                            <label htmlFor="mapId" className="text-sm font-medium text-heather-gray">Google Maps Map ID</label>
-                            <input
-                                id="mapId"
-                                type="text"
-                                value={mapId}
-                                onChange={e => setMapId(e.target.value)}
-                                placeholder="Enter your Map ID for custom map styles"
-                                className="w-full mt-1 bg-charcoal border border-white/10 rounded-md p-2 text-white focus:outline-none focus:ring-2 focus:ring-gold"
-                            />
-                        </div>
-                    </div>
-                </div>
-
-                <div className="border-t border-white/10 pt-8">
-                    <h3 className="text-xl font-semibold text-white mb-2">Remote Application Updates</h3>
-                    <p className="text-sm text-heather-gray mb-4">
-                        Configure a remote URL to automatically receive the latest application updates. Leave this blank to use the default version.
-                        <br />
-                        <strong className="text-gold">Changes will only take effect after you restart the application.</strong>
-                    </p>
-                    <div className="max-w-2xl">
-                        <label htmlFor="updateUrl" className="text-sm font-medium text-heather-gray">Update Server URL</label>
-                        <input
-                            id="updateUrl"
-                            type="text"
-                            value={updateUrl}
-                            onChange={e => setUpdateUrl(e.target.value)}
-                            placeholder="https://example.com/latest/app.js"
-                            className="w-full mt-1 bg-charcoal border border-white/10 rounded-md p-2 text-white focus:outline-none focus:ring-2 focus:ring-gold"
-                        />
-                         <p className="text-xs text-heather-gray-dark mt-2">
-                            Enter the full URL to the `app.js` file provided by your administrator.
-                        </p>
-                    </div>
-                     <button onClick={handleClearUpdate} className="mt-4 bg-heather-gray/20 text-heather-gray-light font-bold py-2 px-6 rounded-lg hover:bg-heather-gray/30 transition-colors text-sm">
-                        Reset to Local Version
-                    </button>
-                </div>
+            <PageHeader title="Settings" subtitle="Configure your application and API keys." />
+            <div className="bg-card-black p-6 rounded-lg border border-white/10 max-w-3xl mx-auto space-y-8">
                 
-                <div className="border-t border-white/10 pt-8">
-                     <button onClick={handleSave} className="bg-gold text-glossy-black font-bold py-3 px-8 rounded-lg shadow-glow-yellow hover:opacity-90 transition-opacity">
+                {/* API Configuration Section */}
+                <div>
+                    <h3 className="text-xl font-semibold text-white mb-1">API Configuration</h3>
+                    <p className="text-sm text-heather-gray-dark mb-4">Enter your API keys from Google Cloud to enable AI and Map features.</p>
+                    <div className="space-y-4">
+                        <div>
+                            <label className="text-sm font-medium text-heather-gray" htmlFor="api-key">Google Cloud API Key</label>
+                            <input id="api-key" type="password" value={localApiKey} onChange={e => setLocalApiKey(e.target.value)} placeholder="Enter your Google Cloud API Key" className="w-full bg-charcoal border border-white/10 rounded-md p-2 mt-1 text-white focus:outline-none focus:ring-2 focus:ring-gold" />
+                        </div>
+                        <div>
+                            <label className="text-sm font-medium text-heather-gray" htmlFor="map-id">Google Maps Map ID</label>
+                            <input id="map-id" type="text" value={localMapId} onChange={e => setLocalMapId(e.target.value)} placeholder="Enter your Google Maps ID" className="w-full bg-charcoal border border-white/10 rounded-md p-2 mt-1 text-white focus:outline-none focus:ring-2 focus:ring-gold" />
+                        </div>
+                    </div>
+                </div>
+
+                {/* Remote Updates Section */}
+                <div>
+                    <h3 className="text-xl font-semibold text-white mb-1">Remote Application Updates</h3>
+                    <p className="text-sm text-heather-gray-dark mb-4">Configure a URL to receive live updates for the application.</p>
+                     <div>
+                        <label className="text-sm font-medium text-heather-gray" htmlFor="update-url">Update Server URL</label>
+                        <input id="update-url" type="text" value={updateUrl} onChange={e => setUpdateUrl(e.target.value)} placeholder="https://your-host.com/app.js" className="w-full bg-charcoal border border-white/10 rounded-md p-2 mt-1 text-white focus:outline-none focus:ring-2 focus:ring-gold" />
+                    </div>
+                </div>
+
+                {/* Data & Privacy Section */}
+                <div>
+                     <h3 className="text-xl font-semibold text-white mb-1 flex items-center">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" className="w-5 h-5 mr-2 text-gold"><path fillRule="evenodd" d="M10 1a.75.75 0 0 1 .75.75v1.5a.75.75 0 0 1-1.5 0v-1.5A.75.75 0 0 1 10 1ZM10 15a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5Zm0 1.5a4 4 0 1 0 0-8 4 4 0 0 0 0 8ZM8.05 5.05a.75.75 0 0 1 0 1.06l-.72.72a.75.75 0 0 1-1.06-1.06l.72-.72a.75.75 0 0 1 1.06 0Zm-2.47 5.95a.75.75 0 0 1 1.06 0l.72.72a.75.75 0 1 1-1.06 1.06l-.72-.72a.75.75 0 0 1 0-1.06Zm8.94-4.89a.75.75 0 0 1 1.06 0l.72.72a.75.75 0 0 1-1.06 1.06l-.72-.72a.75.75 0 0 1 0-1.06ZM14.45 12a.75.75 0 0 1 0 1.06l-.72.72a.75.75 0 0 1-1.06-1.06l.72-.72a.75.75 0 0 1 1.06 0ZM17 9.25a.75.75 0 0 1 1.5 0v1.5a.75.75 0 0 1-1.5 0v-1.5ZM2.75 11a.75.75 0 0 1 0-1.5h-1.5a.75.75 0 0 1 0-3h1.5a.75.75 0 0 1 0-1.5h-1.5A.75.75 0 0 1 1 5.75v8.5c0 .414.336.75.75.75h1.5a.75.75 0 0 1 0-1.5h-1.5a.75.75 0 0 1 0-3h1.5Zm12.5 4.5a.75.75 0 0 1 1.5 0v1.5a.75.75 0 0 1-1.5 0v-1.5Z" clipRule="evenodd" /></svg>
+                        Data & Privacy
+                    </h3>
+                    <div className="mt-4 bg-charcoal p-4 rounded-md border border-white/10 text-sm text-heather-gray">
+                        <p>Your API keys, profile information, and other settings are stored securely and privately in your browser's local storage. This data never leaves your device and is not uploaded to any server.</p>
+                    </div>
+                </div>
+
+
+                <div className="border-t border-white/10 pt-6">
+                    <button onClick={handleSave} className="w-full bg-gradient-to-r from-gold to-bright-yellow text-glossy-black font-bold py-3 px-4 rounded-lg shadow-glow-yellow hover:opacity-90 transition-opacity">
                         Save All Settings
                     </button>
                 </div>
@@ -1657,298 +1820,176 @@ const Settings = ({ showToast, onApiConfigChange }) => {
 // --- END: Component: Settings ---
 
 // --- START: Component: Profile ---
-const Profile = ({ showToast }) => {
-    const { profile, setProfile } = useContext(ProfileContext);
-    const [formData, setFormData] = useState(profile);
-
-    const handleInputChange = (e) => {
-        const { id, value } = e.target;
-        setFormData(prev => ({ ...prev, [id]: value }));
-    };
+const Profile = ({ onSave }) => {
+    const { profile } = useContext(ProfileContext);
+    const [localProfile, setLocalProfile] = useState(profile);
 
     const handleSave = () => {
-        setProfile(formData);
-        showToast('Profile updated successfully!', 'success');
+        onSave(localProfile);
     };
+
+    const handleChange = (e) => {
+        const { name, value } = e.target;
+        setLocalProfile(prev => ({...prev, [name]: value}));
+    }
 
     return (
         <div>
             <PageHeader title="My Profile" subtitle="Manage your personal and business information." />
-            <div className="bg-card-black p-6 rounded-lg border border-white/10 max-w-3xl mx-auto">
-                <div className="flex flex-col md:flex-row gap-8">
-                    <div className="md:w-1/3 text-center">
-                        <img src={formData.profileImage || 'https://i.pravatar.cc/300'} alt="Profile" className="w-40 h-40 rounded-full mx-auto mb-4 border-4 border-gold/50 object-cover" />
-                        <label htmlFor="profileImage" className="text-sm font-medium text-heather-gray">Profile Image URL</label>
-                        <input
-                            id="profileImage"
-                            type="text"
-                            value={formData.profileImage}
-                            onChange={handleInputChange}
-                            placeholder="https://example.com/image.png"
-                            className="w-full mt-1 bg-charcoal border border-white/10 rounded-md p-2 text-white text-xs focus:outline-none focus:ring-2 focus:ring-gold"
-                        />
+            <div className="bg-card-black p-6 rounded-lg border border-white/10 max-w-3xl mx-auto space-y-8">
+                <div className="flex items-center space-x-6">
+                    <img src={localProfile.imageUrl} alt="Chef" className="w-24 h-24 rounded-full object-cover border-4 border-gold/50" />
+                    <div className="flex-1">
+                         <label className="text-sm font-medium text-heather-gray" htmlFor="imageUrl">Profile Picture URL</label>
+                         <input id="imageUrl" name="imageUrl" type="text" value={localProfile.imageUrl} onChange={handleChange} placeholder="https://..." className="w-full bg-charcoal border border-white/10 rounded-md p-2 mt-1 text-white focus:outline-none focus:ring-2 focus:ring-gold" />
                     </div>
-                    <div className="md:w-2/3 space-y-6">
+                </div>
+                 <div>
+                    <h3 className="text-xl font-semibold text-white mb-4">Business Details</h3>
+                    <div className="space-y-4">
                         <div>
-                            <label htmlFor="chefName" className="text-sm font-medium text-heather-gray">Your Name</label>
-                            <input
-                                id="chefName"
-                                type="text"
-                                value={formData.chefName}
-                                onChange={handleInputChange}
-                                className="w-full mt-1 bg-charcoal border border-white/10 rounded-md p-2 text-white focus:outline-none focus:ring-2 focus:ring-gold"
-                            />
+                            <label className="text-sm font-medium text-heather-gray" htmlFor="chefName">Your Name</label>
+                            <input id="chefName" name="chefName" type="text" value={localProfile.chefName} onChange={handleChange} placeholder="e.g., John Doe" className="w-full bg-charcoal border border-white/10 rounded-md p-2 mt-1 text-white focus:outline-none focus:ring-2 focus:ring-gold" />
                         </div>
                          <div>
-                            <label htmlFor="businessName" className="text-sm font-medium text-heather-gray">Business Name</label>
-                            <input
-                                id="businessName"
-                                type="text"
-                                value={formData.businessName}
-                                onChange={handleInputChange}
-                                className="w-full mt-1 bg-charcoal border border-white/10 rounded-md p-2 text-white focus:outline-none focus:ring-2 focus:ring-gold"
-                            />
-                        </div>
-                        <div className="pt-2">
-                             <button onClick={handleSave} className="bg-gold text-glossy-black font-bold py-2 px-6 rounded-lg shadow-glow-yellow hover:opacity-90 transition-opacity">
-                                Save Changes
-                            </button>
+                            <label className="text-sm font-medium text-heather-gray" htmlFor="businessName">Business Name</label>
+                            <input id="businessName" name="businessName" type="text" value={localProfile.businessName} onChange={handleChange} placeholder="e.g., Culinary Creations Inc." className="w-full bg-charcoal border border-white/10 rounded-md p-2 mt-1 text-white focus:outline-none focus:ring-2 focus:ring-gold" />
                         </div>
                     </div>
                 </div>
-            </div>
-        </div>
-    );
-};
-// --- END: Component: Profile ---
-
-// --- START: From components/Sidebar.js ---
-const NavItem = ({ icon, label, view, activeView, onClick }) => {
-  const isActive = activeView === view;
-  return (
-    <li
-      onClick={() => onClick(view)}
-      className={`relative flex items-center p-3 my-1 rounded-lg cursor-pointer transition-all duration-200 ease-in-out group ${
-        isActive ? 'bg-charcoal text-white shadow-glow-gold' : 'text-heather-gray hover:bg-white/5 hover:text-white'
-      }`}
-    >
-      {isActive && <span className="absolute left-0 top-0 bottom-0 w-1 bg-gradient-to-b from-bright-yellow to-gold rounded-r-full"></span>}
-      <span className={`mr-4 transition-colors duration-200 ${isActive ? 'text-gold' : ''}`}>{icon}</span>
-      <span className="font-semibold">{label}</span>
-    </li>
-  );
-};
-
-const Clock = () => {
-    const [time, setTime] = useState(new Date());
-    useEffect(() => {
-        const timerId = setInterval(() => setTime(new Date()), 1000);
-        return () => clearInterval(timerId);
-    }, []);
-    return (
-        <div className="flex items-center justify-center space-x-2 text-heather-gray-dark p-4">
-            <ClockIcon className="w-5 h-5 text-gold"/>
-            <span className="font-mono text-lg font-semibold text-heather-gray">
-                {time.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: false })}
-            </span>
-        </div>
-    );
-};
-
-const Sidebar = ({ activeView, setActiveView }) => {
-  const { profile } = useContext(ProfileContext);
-  const navItems = [
-    { icon: <DashboardIcon />, label: 'Dashboard', view: 'dashboard' },
-    { icon: <LeadsIcon />, label: 'Lead Generation', view: 'leads' },
-    { icon: <AiAssistantIcon />, label: 'Onboard Culinary Agent', view: 'ai-assistant' },
-    { icon: <SocialMediaIcon />, label: 'Social Media', view: 'social-media' },
-    { icon: <KnowledgeIcon />, label: 'Knowledge Base', view: 'knowledge-base' },
-    { icon: <MenuIcon />, label: 'Menu Generator', view: 'menu-generator' },
-    { icon: <ChefToolsIcon />, label: 'Chef Tools', view: 'chef-tools' },
-    { icon: <EventIcon />, label: 'Event Planning', view: 'event-planner' },
-    { icon: <InvoicingIcon />, label: 'Invoicing', view: 'invoicing' },
-    { icon: <IntegrationIcon />, label: 'Integrations', view: 'integrations' },
-    { icon: <ExportIcon />, label: 'Export Center', view: 'export-center' },
-    { icon: <SettingsIcon />, label: 'Settings', view: 'settings' },
-  ];
-  return (
-    <aside className="w-72 bg-glossy-black border-r border-white/10 flex flex-col p-4">
-      <div className="text-center py-4 mb-4">
-        <h1 className="text-3xl font-serif font-bold text-white tracking-wider">Chef<span className="text-gold">X</span>Ops</h1>
-        <p className="text-xs text-heather-gray-dark mt-1 tracking-widest">By SPITFIREXMEDIA</p>
-      </div>
-      <nav className="flex-1 overflow-y-auto">
-        <ul>
-          {navItems.map((item) => (
-            <NavItem key={item.view} {...item} activeView={activeView} onClick={setActiveView} />
-          ))}
-        </ul>
-      </nav>
-      <div>
-        <div onClick={() => setActiveView('profile')} className="p-4 my-2 bg-charcoal rounded-lg border border-white/10 flex items-center justify-between cursor-pointer hover:border-gold transition-colors">
-            <div className="flex items-center">
-                <img src={profile.profileImage || 'https://i.pravatar.cc/150'} alt="User" className="w-10 h-10 rounded-full mr-3 object-cover" />
-                <div>
-                    <p className="font-semibold text-white">{profile.chefName}</p>
-                    <p className="text-xs text-heather-gray-dark">{profile.businessName}</p>
+                 <div className="border-t border-white/10 pt-6">
+                    <button onClick={handleSave} className="w-full bg-gradient-to-r from-gold to-bright-yellow text-glossy-black font-bold py-3 px-4 rounded-lg shadow-glow-yellow hover:opacity-90 transition-opacity">
+                        Save Profile
+                    </button>
                 </div>
             </div>
         </div>
-        <Clock />
-      </div>
-    </aside>
-  );
+    );
 };
-// --- END: From components/Sidebar.js ---
 
+// --- END: Component: Profile ---
+
+
+// --- START: Main App Component ---
 const App = () => {
-    const [activeView, setActiveView] = useState('dashboard');
-    const [toast, setToast] = useState(null);
-    
-    const [apiConfig, setApiConfig] = useState({
-        apiKey: null,
-        mapId: null,
-        ai: null,
-        isApiConfigured: false
-    });
-    
-    const PROFILE_KEY = 'chefxops_profile';
-    
-    const [profile, setProfile] = useState(() => {
-        try {
-            const storedProfile = localStorage.getItem(PROFILE_KEY);
-            return storedProfile ? JSON.parse(storedProfile) : {
-                chefName: "Chef Terry Port",
-                businessName: "Elite Chef Events",
-                profileImage: "https://picsum.photos/seed/chef/40/40"
-            };
-        } catch (e) {
-            console.error("Failed to parse profile from localStorage", e);
-            return { // fallback
-                chefName: "Chef Terry Port",
-                businessName: "Elite Chef Events",
-                profileImage: "https://picsum.photos/seed/chef/40/40"
-            };
-        }
-    });
-
-    const loadApiConfig = () => {
-        const apiKey = localStorage.getItem('chefxops_api_key');
-        const mapId = localStorage.getItem('chefxops_map_id');
-        
-        if (apiKey) {
-            setApiConfig({
-                apiKey,
-                mapId,
-                ai: new GoogleGenAI({ apiKey }),
-                isApiConfigured: true
-            });
-            loadGoogleMapsScript(apiKey, mapId);
-        } else {
-             setApiConfig({ apiKey: null, mapId: null, ai: null, isApiConfigured: false });
-        }
-    };
-    
-    const loadGoogleMapsScript = (apiKey, mapId) => {
-        if (document.getElementById('google-maps-script')) return;
-
-        const script = document.createElement('script');
-        script.id = 'google-maps-script';
-        script.src = `https://maps.googleapis.com/maps/api/js?key=${apiKey}&callback=initMap&libraries=places${mapId ? `&map_ids=${mapId}`: ''}`;
-        script.async = true;
-        script.defer = true;
-        script.onerror = window.mapApiError;
-        document.head.appendChild(script);
-    };
-
-    useEffect(() => {
-        loadApiConfig();
-    }, []);
-
-    useEffect(() => {
-        localStorage.setItem(PROFILE_KEY, JSON.stringify(profile));
-    }, [profile]);
-
+    // --- State Management ---
+    const [activePage, setActivePage] = useState('dashboard');
     const [leads, setLeads] = useState(initialLeads);
     const [events, setEvents] = useState(initialEvents);
+    const [toast, setToast] = useState(null);
+    const [apiKey, setApiKey] = useState(() => localStorage.getItem('chefxops_api_key'));
+    const [mapId, setMapId] = useState(() => localStorage.getItem('chefxops_map_id'));
+    const [profile, setProfile] = useState(() => {
+        const savedProfile = localStorage.getItem('chefxops_profile');
+        return savedProfile ? JSON.parse(savedProfile) : {
+            chefName: "Dirk Delton",
+            businessName: "SpitfireXmedia",
+            imageUrl: "https://images.unsplash.com/photo-1581382575275-97901c2635b7?q=80&w=1887&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+        };
+    });
 
-    const showToast = (message, type = 'success') => {
+    // --- API & Context Setup ---
+    const ai = useMemo(() => {
+        if (apiKey) {
+            try {
+                return new GoogleGenAI({ apiKey });
+            } catch (e) {
+                console.error("Failed to initialize GoogleGenAI:", e);
+                showToast("Failed to initialize AI. API Key might be invalid.", "error");
+                return null;
+            }
+        }
+        return null;
+    }, [apiKey]);
+    
+    const isApiConfigured = useMemo(() => !!apiKey, [apiKey]);
+
+    // --- Effects ---
+    useEffect(() => {
+        if (apiKey && !document.getElementById('google-maps-script')) {
+            const script = document.createElement('script');
+            script.id = 'google-maps-script';
+            script.src = `https://maps.googleapis.com/maps/api/js?key=${apiKey}&callback=initMap&libraries=places&v=weekly`;
+            script.async = true;
+            script.defer = true;
+            script.onerror = window.mapApiError;
+            document.head.appendChild(script);
+        }
+    }, [apiKey]);
+    
+    useEffect(() => {
+        localStorage.setItem('chefxops_api_key', apiKey || '');
+    }, [apiKey]);
+    
+    useEffect(() => {
+        localStorage.setItem('chefxops_map_id', mapId || '');
+    }, [mapId]);
+
+    useEffect(() => {
+        localStorage.setItem('chefxops_profile', JSON.stringify(profile));
+    }, [profile]);
+
+
+    // --- Handlers ---
+    const handleLeadsGenerated = (newLeads) => {
+        const newLeadsWithIds = newLeads.map((lead, index) => ({
+            ...lead,
+            id: Date.now() + index // Simple unique ID generation
+        }));
+        setLeads(prev => [...newLeadsWithIds, ...prev]);
+    };
+    
+    const showToast = (message, type) => {
         setToast({ message, type, id: Date.now() });
     };
 
-    const handleAddLeads = (newLeads) => {
-        const maxId = leads.reduce((max, l) => Math.max(l.id || 0, max), 0);
-        const processedLeads = newLeads.map((lead, index) => ({
-            ...lead,
-            id: maxId + index + 1,
-        }));
-        setLeads(prevLeads => [...processedLeads, ...prevLeads]);
-    };
+    const handleProfileSave = (newProfile) => {
+        setProfile(newProfile);
+        showToast('Profile updated successfully!', 'success');
+        setActivePage('dashboard');
+    }
 
-    const handleAddEvent = (newEvent) => {
-        setEvents(prevEvents => [{ ...newEvent, id: Date.now() }, ...prevEvents]);
-    };
-    
-    const renderContent = () => {
-        switch (activeView) {
-            case 'dashboard':
-                return <Dashboard leads={leads} events={events} />;
-            case 'leads':
-                return <Leads leads={leads} onLeadsGenerated={handleAddLeads} showToast={showToast} />;
-            case 'ai-assistant':
-                return <AIAssistant />;
-            case 'knowledge-base':
-                return <KnowledgeBase />;
-            case 'menu-generator':
-                return <MenuGenerator />;
-            case 'event-planner':
-                return <EventPlanner onEventSaved={handleAddEvent} showToast={showToast} />;
-            case 'export-center':
-                return <ExportCenter />;
-            case 'integrations':
-                return <Integrations showToast={showToast} />;
-            case 'chef-tools':
-                return <ChefTools />;
-            case 'social-media':
-                return <SocialMedia showToast={showToast} />;
-            case 'invoicing':
-                return <Invoicing />;
-            case 'settings':
-                return <Settings showToast={showToast} onApiConfigChange={loadApiConfig} />;
-            case 'profile':
-                return <Profile showToast={showToast} />;
-            default:
-                return <Dashboard leads={leads} events={events} />;
+    // --- Page Rendering ---
+    const renderPage = () => {
+        switch (activePage) {
+            case 'dashboard': return <Dashboard leads={leads} events={events} />;
+            case 'leads': return <Leads leads={leads} onLeadsGenerated={handleLeadsGenerated} showToast={showToast} />;
+            case 'aiAssistant': return <AIAssistant />;
+            case 'knowledgeBase': return <KnowledgeBase />;
+            case 'menuGenerator': return <MenuGenerator />;
+            case 'eventPlanner': return <EventPlanner />;
+            case 'exportCenter': return <ExportCenter />;
+            case 'integrations': return <Integrations showToast={showToast} />;
+            case 'chefTools': return <ChefTools />;
+            case 'socialMedia': return <SocialMedia showToast={showToast} />;
+            case 'invoicing': return <Invoicing />;
+            case 'settings': return <Settings showToast={showToast} />;
+            case 'profile': return <Profile onSave={handleProfileSave} />;
+            default: return <Dashboard leads={leads} events={events} />;
         }
     };
-
-    const ApiWarningBanner = () => (
-        <div className="bg-red-800/90 text-white p-3 text-center text-sm font-semibold flex items-center justify-center gap-4">
-            <InfoIcon className="w-5 h-5 flex-shrink-0" />
-            <span>API Key not configured. AI and Map features are disabled.</span>
-            <button onClick={() => setActiveView('settings')} className="underline font-bold hover:text-gold transition-colors">Go to Settings</button>
-        </div>
-    );
-
+    
     return (
-        <ApiContext.Provider value={apiConfig}>
-            <ProfileContext.Provider value={{ profile, setProfile }}>
-                <div className="flex h-screen bg-charcoal text-white">
-                    {toast && <ToastNotification message={toast.message} type={toast.type} onClose={() => setToast(null)} />}
-                    <Sidebar activeView={activeView} setActiveView={setActiveView} />
-                    <main className="flex-1 flex flex-col overflow-hidden">
-                        {!apiConfig.isApiConfigured && <ApiWarningBanner />}
-                        <div className="flex-1 p-8 overflow-y-auto">
-                            <div className="fade-in">
-                              {renderContent()}
-                            </div>
+        <ApiContext.Provider value={{ ai, apiKey, setApiKey, mapId, setMapId, isApiConfigured }}>
+        <ProfileContext.Provider value={{ profile, setProfile }}>
+            <div className="flex h-screen bg-charcoal text-white">
+                <Sidebar activePage={activePage} setActivePage={setActivePage} />
+                <main className="flex-1 p-8 overflow-y-auto">
+                    {!isApiConfigured && (
+                        <div className="bg-red-900/50 border border-red-700 text-red-200 px-4 py-3 rounded-lg mb-6 flex justify-between items-center">
+                            <p><strong>Action Required:</strong> Please configure your Google API Key in the Settings to enable AI and Map features.</p>
+                            <button onClick={() => setActivePage('settings')} className="bg-red-700 text-white font-bold py-1 px-3 rounded hover:bg-red-600">Go to Settings</button>
                         </div>
-                    </main>
-                </div>
-            </ProfileContext.Provider>
+                    )}
+                    {toast && <ToastNotification key={toast.id} message={toast.message} type={toast.type} onClose={() => setToast(null)} />}
+                    {renderPage()}
+                </main>
+            </div>
+        </ProfileContext.Provider>
         </ApiContext.Provider>
     );
 };
+// --- END: Main App Component ---
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(<App />);
