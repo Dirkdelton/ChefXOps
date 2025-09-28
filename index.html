@@ -66,7 +66,8 @@
     "zod": "https://esm.sh/zod@3.23.8",
     "recharts": "https://esm.sh/recharts@2.12.7",
     "@babel/standalone": "https://esm.sh/@babel/standalone@7.24.8",
-    "react-dom/": "https://aistudiocdn.com/react-dom@^19.1.1/"
+    "react-dom/": "https://aistudiocdn.com/react-dom@^19.1.1/",
+    "react/": "https://aistudiocdn.com/react@^19.1.1/"
   }
 }
 </script>
@@ -88,72 +89,110 @@
     <script type="module">
       const root = document.getElementById('root');
       const UPDATE_URL_KEY = 'chefxops_update_url';
+      const transpilationCache = new Map();
 
       function showBootError(error) {
           console.error('Failed to load the application:', error);
           root.innerHTML = `<div style="padding: 2rem; color: #f87171; font-family: sans-serif;">
-            <h1 style="font-size: 1.5rem; font-weight: bold;">Application failed to start</h1>
-            <p style="margin-top: 1rem; color: #d1d5db;">There was an error loading the main application script. Please check the console for details.</p>
-            <pre style="margin-top: 1rem; padding: 1rem; background-color: #1f2937; border-radius: 0.5rem; color: #f9fafb; white-space: pre-wrap; word-break: break-all;">${error.stack || error}</pre>
+              <h1 style="font-size: 1.5rem; font-weight: bold;">Application failed to start</h1>
+              <p style="margin-top: 1rem; color: #d1d5db;">There was an error loading or running the application. Please check the console for details.</p>
+              <pre style="margin-top: 1rem; padding: 1rem; background-color: #1f2937; border-radius: 0.5rem; color: #f9fafb; white-space: pre-wrap; word-break: break-all;">${error.stack || error}</pre>
           </div>`;
       }
 
-      async function transpileAndRunRemote(sourceUrl) {
-        try {
-            const Babel = (await import('@babel/standalone')).default;
-            const response = await fetch(sourceUrl);
-            if (!response.ok) {
-               throw new Error(`HTTP error! status: ${response.status} for URL ${sourceUrl}`);
-            }
-            const source = await response.text();
-            if (source.trim().startsWith('<')) {
-                throw new Error(`Failed to load script from "${sourceUrl}". The server returned an HTML page instead of JavaScript. This usually means the file is missing or not deployed correctly.`);
-            }
-            const { code } = Babel.transform(source, {
+      async function resolveAndTranspile(sourceUrl) {
+          if (transpilationCache.has(sourceUrl)) {
+              return transpilationCache.get(sourceUrl);
+          }
+          
+          const Babel = (await import('@babel/standalone')).default;
+          
+          const response = await fetch(sourceUrl);
+          if (!response.ok) {
+              throw new Error(`Failed to fetch script from "${sourceUrl}". Status: ${response.status}`);
+          }
+          let sourceCode = await response.text();
+          if (sourceCode.trim().startsWith('<')) {
+              throw new Error(`Failed to load script from "${sourceUrl}". The server returned an HTML page instead of JavaScript. This usually means the file is missing or not deployed correctly.`);
+          }
+
+          const dependencySpecifiers = new Set();
+          const discoverImportsPlugin = () => ({
+              visitor: {
+                  "ImportDeclaration|ExportNamedDeclaration"(path) {
+                      if (path.node.source && path.node.source.value.startsWith('.')) {
+                          dependencySpecifiers.add(path.node.source.value);
+                      }
+                  },
+              },
+          });
+          
+          Babel.transform(sourceCode, {
+              presets: [['typescript', { allExtensions: true, isTSX: true }]],
+              plugins: [discoverImportsPlugin],
+              filename: sourceUrl,
+          });
+
+          const resolvedDependencies = new Map();
+          const dependencyPromises = Array.from(dependencySpecifiers).map(async (specifier) => {
+              const dependencyUrl = new URL(specifier, sourceUrl).href;
+              const blobUrl = await resolveAndTranspile(dependencyUrl);
+              resolvedDependencies.set(specifier, blobUrl);
+          });
+          await Promise.all(dependencyPromises);
+          
+          const rewriteImportsPlugin = () => ({
+              visitor: {
+                  "ImportDeclaration|ExportNamedDeclaration"(path) {
+                      if (path.node.source && resolvedDependencies.has(path.node.source.value)) {
+                          path.node.source.value = resolvedDependencies.get(path.node.source.value);
+                      }
+                  },
+              },
+          });
+
+          const { code } = Babel.transform(sourceCode, {
               presets: ['react', ['typescript', { allExtensions: true, isTSX: true }]],
-              filename: sourceUrl.substring(sourceUrl.lastIndexOf('/') + 1)
-            });
-            const blob = new Blob([code], { type: 'application/javascript' });
-            const url = URL.createObjectURL(blob);
-            await import(url);
-        } catch (error) {
-            console.error(`Failed to load remote script from ${sourceUrl}. Falling back to local version.`, error);
-            await loadLocal(); // Attempt to load local as a fallback
-        }
+              plugins: [rewriteImportsPlugin],
+              filename: sourceUrl,
+          });
+
+          const blob = new Blob([code], { type: 'application/javascript' });
+          const blobUrl = URL.createObjectURL(blob);
+          transpilationCache.set(sourceUrl, blobUrl);
+          return blobUrl;
       }
 
-      async function loadLocal() {
-          console.log("Loading and transpiling local application from: ./index.tsx");
+      (async () => {
           try {
-              const Babel = (await import('@babel/standalone')).default;
-              const response = await fetch('./index.tsx');
-              if (!response.ok) {
-                 throw new Error(`HTTP error! status: ${response.status} for local file ./index.tsx`);
+              const remoteUrl = localStorage.getItem(UPDATE_URL_KEY);
+              let entryPoint = './src/index.tsx';
+              if (remoteUrl) {
+                  console.log(`Attempting to load remote application from: ${remoteUrl}`);
+                  entryPoint = remoteUrl;
+              } else {
+                  console.log("Loading local application from: ./src/index.tsx");
               }
-              const source = await response.text();
-              const { code } = Babel.transform(source, {
-                presets: ['react', ['typescript', { allExtensions: true, isTSX: true }]],
-                filename: 'index.tsx'
-              });
-              const blob = new Blob([code], { type: 'application/javascript' });
-              const url = URL.createObjectURL(blob);
-              await import(url);
-          } catch (error) {
-              showBootError(new Error("The primary source file 'index.tsx' failed to load or transpile. " + error.message));
-          }
-      }
+              
+              const absoluteEntryPointUrl = new URL(entryPoint, document.baseURI).href;
+              const entryBlobUrl = await resolveAndTranspile(absoluteEntryPointUrl);
+              await import(entryBlobUrl);
 
-      try {
-          const remoteUrl = localStorage.getItem(UPDATE_URL_KEY);
-          if (remoteUrl) {
-              console.log(`Attempting to load remote application from: ${remoteUrl}`);
-              transpileAndRunRemote(remoteUrl);
-          } else {
-              loadLocal();
+          } catch (e) {
+              if (localStorage.getItem(UPDATE_URL_KEY)) {
+                  console.warn("Remote update failed. Attempting to load local version.");
+                  try {
+                      const localEntryPointUrl = new URL('./src/index.tsx', document.baseURI).href;
+                      const localEntryBlobUrl = await resolveAndTranspile(localEntryPointUrl);
+                      await import(localEntryBlobUrl);
+                  } catch (localError) {
+                      showBootError(new Error(`Remote update failed, and the local fallback also failed.\n\nMain error: ${e.message}\n\nFallback error: ${localError.message}`));
+                  }
+              } else {
+                 showBootError(e);
+              }
           }
-      } catch(e) {
-          showBootError(e);
-      }
+      })();
     </script>
   </body>
 </html>
