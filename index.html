@@ -87,91 +87,72 @@
     </script>
     <script type="module">
       const root = document.getElementById('root');
+      const UPDATE_URL_KEY = 'chefxops_update_url';
 
       function showBootError(error) {
           console.error('Failed to load the application:', error);
           root.innerHTML = `<div style="padding: 2rem; color: #f87171; font-family: sans-serif;">
             <h1 style="font-size: 1.5rem; font-weight: bold;">Application failed to start</h1>
-            <p style="margin-top: 1rem; color: #d1d5db;">This is often caused by a problem with the deployed files on the server.</p>
+            <p style="margin-top: 1rem; color: #d1d5db;">There was an error loading the main application script. Please check the console for details.</p>
             <pre style="margin-top: 1rem; padding: 1rem; background-color: #1f2937; border-radius: 0.5rem; color: #f9fafb; white-space: pre-wrap; word-break: break-all;">${error.stack || error}</pre>
           </div>`;
       }
 
-      function showUpdateNotification(message, isError = false) {
-          const notificationDiv = document.createElement('div');
-          const bgColor = isError ? '#7f1d1d' : '#047857';
-          const borderColor = isError ? '#f87171' : '#34d399';
-          notificationDiv.style.cssText = `position: fixed; top: 1rem; right: 1rem; background-color: ${bgColor}; color: white; padding: 1rem; border-radius: 0.5rem; z-index: 1000; border: 1px solid ${borderColor}; box-shadow: 0 10px 15px -3px rgba(0,0,0,0.1), 0 4px 6px -2px rgba(0,0,0,0.05);`;
-          notificationDiv.textContent = message;
-          document.body.appendChild(notificationDiv);
-          setTimeout(() => {
-              notificationDiv.remove();
-          }, 8000);
-      }
-      
-      async function fetchWithFallback(primaryUrl, fallbackUrl) {
-        const cacheBuster = `?v=${new Date().getTime()}`;
+      async function transpileAndRunRemote(sourceUrl) {
         try {
-            const response = await fetch(primaryUrl + cacheBuster);
-            if (!response.ok) throw new Error(`Status ${response.status}`);
-            console.log(`Successfully fetched primary source: ${primaryUrl}`);
-            return { response, url: primaryUrl };
-        } catch (e) {
-            console.warn(`Could not load from ${primaryUrl}, trying fallback ${fallbackUrl}.`);
-            const response = await fetch(fallbackUrl + cacheBuster);
-            if (!response.ok) throw new Error(`HTTP error on fallback: status ${response.status} for URL ${fallbackUrl}`);
-            console.log(`Successfully fetched fallback source: ${fallbackUrl}`);
-            return { response, url: fallbackUrl };
+            const Babel = (await import('@babel/standalone')).default;
+            const response = await fetch(sourceUrl);
+            if (!response.ok) {
+               throw new Error(`HTTP error! status: ${response.status} for URL ${sourceUrl}`);
+            }
+            const source = await response.text();
+            if (source.trim().startsWith('<')) {
+                throw new Error(`Failed to load script from "${sourceUrl}". The server returned an HTML page instead of JavaScript. This usually means the file is missing or not deployed correctly.`);
+            }
+            const { code } = Babel.transform(source, {
+              presets: ['react', ['typescript', { allExtensions: true, isTSX: true }]],
+              filename: sourceUrl.substring(sourceUrl.lastIndexOf('/') + 1)
+            });
+            const blob = new Blob([code], { type: 'application/javascript' });
+            const url = URL.createObjectURL(blob);
+            await import(url);
+        } catch (error) {
+            console.error(`Failed to load remote script from ${sourceUrl}. Falling back to local version.`, error);
+            await loadLocal(); // Attempt to load local as a fallback
         }
+      }
+
+      async function loadLocal() {
+          console.log("Loading and transpiling local application from: ./index.tsx");
+          try {
+              const Babel = (await import('@babel/standalone')).default;
+              const response = await fetch('./index.tsx');
+              if (!response.ok) {
+                 throw new Error(`HTTP error! status: ${response.status} for local file ./index.tsx`);
+              }
+              const source = await response.text();
+              const { code } = Babel.transform(source, {
+                presets: ['react', ['typescript', { allExtensions: true, isTSX: true }]],
+                filename: 'index.tsx'
+              });
+              const blob = new Blob([code], { type: 'application/javascript' });
+              const url = URL.createObjectURL(blob);
+              await import(url);
+          } catch (error) {
+              showBootError(new Error("The primary source file 'index.tsx' failed to load or transpile. " + error.message));
+          }
       }
 
       try {
-        const Babel = (await import('@babel/standalone')).default;
-        
-        const UPDATE_URL_KEY = 'chefxops_update_url';
-        const remoteUrlRaw = localStorage.getItem(UPDATE_URL_KEY);
-        let response, loadedUrl;
-
-        if (remoteUrlRaw && remoteUrlRaw.trim() !== '') {
-            let remoteUrl = remoteUrlRaw.trim();
-            const primaryRemote = remoteUrl.endsWith('.js') ? remoteUrl.replace('.js', '.tsx') : (remoteUrl.endsWith('/') ? remoteUrl + 'index.tsx' : remoteUrl);
-            const fallbackRemote = primaryRemote.replace('.tsx', '.js');
-
-            try {
-                const result = await fetchWithFallback(primaryRemote, fallbackRemote);
-                response = result.response;
-                loadedUrl = result.url;
-                showUpdateNotification(`Application loaded from remote source: ${loadedUrl.split('/').pop()}`, false);
-            } catch (remoteError) {
-                showUpdateNotification(`Failed to load from remote URL. Falling back to local version.`, true);
-                console.error(`Remote fetch failed: ${remoteError}. Falling back to local.`);
-                const localResult = await fetchWithFallback('./index.tsx', './app.js');
-                response = localResult.response;
-                loadedUrl = localResult.url;
-            }
-        } else {
-            const localResult = await fetchWithFallback('./index.tsx', './app.js');
-            response = localResult.response;
-            loadedUrl = localResult.url;
-        }
-
-        const source = await response.text();
-        
-        if (source.trim().startsWith('<')) {
-            throw new Error(`Failed to load script from "${loadedUrl}". The server returned an HTML page instead of JavaScript. This usually means the file is missing or not deployed correctly.`);
-        }
-
-        const { code } = Babel.transform(source, {
-          presets: ['react', ['typescript', { allExtensions: true, isTSX: true }]],
-          filename: loadedUrl
-        });
-        
-        const blob = new Blob([code], { type: 'application/javascript' });
-        const url = URL.createObjectURL(blob);
-        await import(url);
-
-      } catch (error) {
-        showBootError(error);
+          const remoteUrl = localStorage.getItem(UPDATE_URL_KEY);
+          if (remoteUrl) {
+              console.log(`Attempting to load remote application from: ${remoteUrl}`);
+              transpileAndRunRemote(remoteUrl);
+          } else {
+              loadLocal();
+          }
+      } catch(e) {
+          showBootError(e);
       }
     </script>
   </body>
